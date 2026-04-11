@@ -15,7 +15,7 @@ const Dashboard = () => {
                 const config = {
                     headers: { Authorization: `Bearer ${user.token}` }
                 };
-                const { data } = await axios.get('http://localhost:5000/api/reports', config);
+                const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/reports`, config);
                 setReports(data);
             } catch (error) {
                 console.error("Error fetching reports", error);

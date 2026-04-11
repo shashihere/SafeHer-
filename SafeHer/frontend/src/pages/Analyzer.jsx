@@ -14,7 +14,7 @@ const Analyzer = () => {
         setLoading(true);
         try {
             const config = { headers: { Authorization: `Bearer ${user.token}` } };
-            const { data } = await axios.post('http://localhost:5000/api/analyze', { text }, config);
+            const { data } = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/analyze`, { text }, config);
             setResult(data);
         } catch (error) {
             console.error("Analysis error", error);

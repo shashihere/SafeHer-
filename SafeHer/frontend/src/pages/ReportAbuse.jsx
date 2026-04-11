@@ -21,10 +21,11 @@ const ReportAbuse = () => {
         setAnalyzing(true);
         try {
             const config = { headers: { Authorization: `Bearer ${user.token}` } };
-            const { data } = await axios.post('http://localhost:5000/api/analyze', { text: content }, config);
+            const { data } = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/analyze`, { text: content }, config);
             setAiResult(data);
         } catch (error) {
             console.error("Analysis error", error);
+            alert(error.response?.data?.message || "Analysis failed. Please log out and log back in to refresh your session.");
         } finally {
             setAnalyzing(false);
         }
@@ -56,10 +57,11 @@ const ReportAbuse = () => {
                 } 
             };
             
-            await axios.post('http://localhost:5000/api/reports', formData, config);
+            await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/reports`, formData, config);
             navigate('/dashboard');
         } catch (error) {
             console.error(error);
+            alert(error.response?.data?.message || "Failed to submit report. Please log out and log back in.");
         } finally {
             setSubmitting(false);
         }
