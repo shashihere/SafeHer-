@@ -25,7 +25,7 @@ function App() {
         <BrowserRouter>
             <div className="min-h-screen flex flex-col bg-transparent text-[#615e5f] font-sans selection:bg-black selection:text-white">
                 <Navbar />
-                <main className="flex-grow flex flex-col relative bg-white">
+                <main className="flex-grow flex flex-col relative bg-transparent">
                     <div className="relative z-10 flex-grow flex flex-col">
                         <Routes>
                             <Route path="/" element={<Home />} />

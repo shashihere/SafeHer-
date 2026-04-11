@@ -5,9 +5,9 @@ const Home = () => {
     return (
         <div className="flex flex-col items-center bg-transparent min-h-screen">
             {/* Hero Section based on First Image */}
-            <section className="w-full relative flex flex-col items-center justify-start pb-16 bg-white overflow-hidden relative">
+            <section className="w-full relative flex flex-col items-center justify-start pb-16 bg-transparent overflow-hidden relative">
                 {/* Full Width Edge-to-Edge Image without distortion */}
-                <div className="w-full max-w-full flex justify-center bg-white">
+                <div className="w-full max-w-full flex justify-center bg-transparent">
                     <img 
                         src="/images/landing.png" 
                         alt="Safe Her Landing" 

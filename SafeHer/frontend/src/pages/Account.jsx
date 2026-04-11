@@ -80,7 +80,7 @@ const Account = () => {
     };
 
     return (
-        <div className="bg-white min-h-[calc(100vh-80px)] text-[#615e5f] pt-24 pb-20 px-4">
+        <div className="bg-transparent min-h-[calc(100vh-80px)] text-[#615e5f] pt-24 pb-20 px-4">
             <div className="max-w-5xl mx-auto">
                 <div className="mb-16">
                     <h1 className="text-5xl md:text-7xl font-cursive mb-6">Your Sanctuary</h1>

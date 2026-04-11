@@ -21,7 +21,7 @@ const Login = () => {
     };
 
     return (
-        <div className="flex-grow flex items-center justify-center p-4 bg-white min-h-[calc(100vh-80px)]">
+        <div className="flex-grow flex items-center justify-center p-4 bg-transparent min-h-[calc(100vh-80px)]">
             <div className="w-full max-w-lg bg-white border border-[#c4b7b1] hover:border-[#615e5f] p-10 md:p-14 relative overflow-hidden transition-all duration-700 group hover:shadow-[0_0_40px_rgba(255,255,255,0.1)]">
                 
                 {/* Decorative Elements */}
