@@ -22,74 +22,72 @@ const Register = () => {
     };
 
     return (
-        <div className="flex-grow flex items-center justify-center p-4 min-h-[calc(100vh-80px)] py-12 bg-gradient-to-tl from-purple-50/50 via-white to-pink-50/50 text-slate-800 relative overflow-hidden">
-            
-            {/* Soft Ambient Bubbles */}
-            <div className="absolute top-[10%] left-[-5%] w-96 h-96 bg-pink-200/30 blur-[100px] rounded-full pointer-events-none -z-10"></div>
-            <div className="absolute bottom-[0%] right-[-5%] w-96 h-96 bg-purple-200/30 blur-[100px] rounded-full pointer-events-none -z-10"></div>
-
-            <div className="w-full max-w-lg bg-white/80 backdrop-blur-xl border border-purple-100 p-10 md:p-14 relative overflow-hidden transition-all duration-700 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgba(167,139,250,0.1)] rounded-3xl group">
+        <div className="flex-grow flex items-center justify-center p-4 bg-black min-h-[calc(100vh-80px)] py-12">
+            <div className="w-full max-w-lg bg-black border border-gray-800 hover:border-white p-10 md:p-14 relative overflow-hidden transition-all duration-700 group hover:shadow-[0_0_40px_rgba(255,255,255,0.1)]">
+                
+                {/* Decorative Elements */}
+                <div className="absolute bottom-0 left-0 w-40 h-40 border-l border-b border-gray-800 group-hover:border-white transition-all duration-700 opacity-50 -mb-20 -ml-20 rotate-45 transform group-hover:rotate-12"></div>
                 
                 <div className="relative z-10">
                     <div className="flex justify-center mb-8">
-                        <div className="p-5 bg-purple-50 border border-purple-100 text-purple-500 rounded-full inline-block transform group-hover:rotate-12 transition-all duration-500">
+                        <div className="p-4 bg-white text-black inline-block transform group-hover:-translate-y-2 transition-transform duration-500">
                             <ShieldCheck className="w-10 h-10" />
                         </div>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-playfair text-center mb-4 tracking-wide text-purple-900 font-bold">Join SafeHer</h2>
-                    <p className="text-center text-slate-500 mb-10 font-sans tracking-wide text-sm font-medium">Your safety matters. Create a secure account.</p>
+                    <h2 className="text-5xl font-cursive text-center mb-3 tracking-wide">Join SafeHer</h2>
+                    <p className="text-center text-gray-400 mb-10 font-sans tracking-widest uppercase text-xs">Your safety matters. Create a secure account.</p>
 
                     {error && (
-                        <div className="bg-red-50 border border-red-100 px-4 py-3 mb-8 text-red-600 tracking-wide text-xs font-bold text-center animate-fadeIn rounded-2xl shadow-sm">
+                        <div className="bg-transparent border-2 border-white px-4 py-3 mb-8 text-white uppercase tracking-widest text-xs font-bold text-center animate-pulse">
                             {error}
                         </div>
                     )}
 
                     <form onSubmit={handleSubmit} className="space-y-6">
-                        <div className="group/input space-y-2">
-                            <label className="block text-xs font-bold text-purple-500 uppercase tracking-widest pl-2">Full Name</label>
+                        <div className="group/input">
+                            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 group-focus-within/input:text-white transition-colors">Full Name</label>
                             <input 
                                 type="text" 
-                                className="w-full bg-slate-50/50 border border-purple-100 rounded-2xl px-5 py-4 text-slate-700 focus:outline-none focus:border-pink-300 focus:ring-4 focus:ring-pink-100/50 transition-all placeholder:text-slate-400 font-medium"
+                                className="w-full bg-transparent border-b-2 border-gray-800 rounded-none px-0 py-3 text-white focus:outline-none focus:border-white transition-all"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 required
                                 placeholder="Ava Vanguard"
                             />
                         </div>
-                        <div className="group/input space-y-2">
-                            <label className="block text-xs font-bold text-purple-500 uppercase tracking-widest pl-2">Email Address</label>
+                        <div className="group/input">
+                            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 group-focus-within/input:text-white transition-colors">Email Address</label>
                             <input 
                                 type="email" 
-                                className="w-full bg-slate-50/50 border border-purple-100 rounded-2xl px-5 py-4 text-slate-700 focus:outline-none focus:border-pink-300 focus:ring-4 focus:ring-pink-100/50 transition-all placeholder:text-slate-400 font-medium"
+                                className="w-full bg-transparent border-b-2 border-gray-800 rounded-none px-0 py-3 text-white focus:outline-none focus:border-white transition-all"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
                                 placeholder="name@example.com"
                             />
                         </div>
-                        <div className="group/input space-y-2">
-                            <label className="block text-xs font-bold text-purple-500 uppercase tracking-widest pl-2">Password</label>
+                        <div className="group/input">
+                            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 group-focus-within/input:text-white transition-colors">Password</label>
                             <input 
                                 type="password" 
-                                className="w-full bg-slate-50/50 border border-purple-100 rounded-2xl px-5 py-4 text-slate-700 focus:outline-none focus:border-pink-300 focus:ring-4 focus:ring-pink-100/50 transition-all placeholder:text-slate-400 font-medium"
+                                className="w-full bg-transparent border-b-2 border-gray-800 rounded-none px-0 py-3 text-white focus:outline-none focus:border-white transition-all"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                                 placeholder="••••••••"
                             />
                         </div>
-                        <div className="pt-6">
-                            <button type="submit" className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4.5 px-4 rounded-full transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-2 hover:shadow-[0_8px_20px_rgba(244,114,182,0.3)] hover:-translate-y-0.5">
-                                Create Identity
+                        <div className="pt-4">
+                            <button type="submit" className="w-full bg-white text-black font-bold py-5 px-4 rounded-none hover:bg-gray-200 transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-2 group/btn">
+                                Create Identity <div className="h-1 w-0 bg-black transition-all group-hover/btn:w-6"></div>
                             </button>
                         </div>
                     </form>
                     
-                    <div className="mt-10 border-t border-purple-50 pt-8 text-center text-sm font-medium">
-                        <p className="text-slate-500 tracking-wide">
+                    <div className="mt-10 border-t border-gray-900 pt-8 text-center">
+                        <p className="text-gray-500 uppercase tracking-widest text-xs">
                             Already have an account? 
-                            <Link to="/login" className="ml-2 text-purple-600 font-bold hover:text-pink-600 transition-colors">Log in</Link>
+                            <Link to="/login" className="ml-2 text-white font-bold border-b border-transparent hover:border-white pb-1 transition-all">Log in</Link>
                         </p>
                     </div>
                 </div>
