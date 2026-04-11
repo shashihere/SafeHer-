@@ -78,9 +78,6 @@ const Navbar = () => {
                                     <Link to="/account" className="text-gray-400 hover:text-white transition-colors" title="Account Settings">
                                         <Settings className="w-4 h-4" />
                                     </Link>
-                                    <button onClick={handleLogout} className="text-gray-400 hover:text-white transition-colors" title="Logout">
-                                        <LogOut className="w-4 h-4" />
-                                    </button>
                                 </div>
 
                                 <button onClick={handleSOS} className="ml-1 md:ml-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 font-bold tracking-widest text-xs flex items-center gap-1.5 animate-pulse rounded-md shadow-[0_0_10px_rgba(220,38,38,0.4)] whitespace-nowrap">

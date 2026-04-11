@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { User, ShieldAlert, Key, Settings, Trash2, CheckCircle2, Lock, EyeOff } from 'lucide-react';
+import { User, ShieldAlert, Key, Settings, Trash2, CheckCircle2, Lock, EyeOff, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -91,25 +91,36 @@ const Account = () => {
 
                 <div className="grid md:grid-cols-4 gap-12">
                     {/* Sidebar / Nav */}
-                    <div className="md:col-span-1 space-y-2 font-sans tracking-widest uppercase text-xs font-bold">
-                        <button 
-                            onClick={() => setActiveTab('profile')}
-                            className={`w-full text-left px-6 py-4 flex items-center gap-3 transition-all ${activeTab === 'profile' ? 'bg-white text-black' : 'bg-black text-white border border-gray-800 hover:border-white hover:pl-8'}`}
-                        >
-                            <User className="w-4 h-4" /> Profile Info
-                        </button>
-                        <button 
-                            onClick={() => setActiveTab('security')}
-                            className={`w-full text-left px-6 py-4 flex items-center gap-3 transition-all ${activeTab === 'security' ? 'bg-white text-black' : 'bg-black text-white border border-gray-800 hover:border-white hover:pl-8'}`}
-                        >
-                            <Key className="w-4 h-4" /> Security
-                        </button>
-                        <button 
-                            onClick={() => setActiveTab('preferences')}
-                            className={`w-full text-left px-6 py-4 flex items-center gap-3 transition-all ${activeTab === 'preferences' ? 'bg-white text-black' : 'bg-black text-white border border-gray-800 hover:border-white hover:pl-8'}`}
-                        >
-                            <Settings className="w-4 h-4" /> Preferences
-                        </button>
+                    <div className="md:col-span-1 border border-gray-900 bg-black/50 p-4 space-y-2 font-sans tracking-widest uppercase text-xs font-bold flex flex-col justify-between" style={{ minHeight: '300px' }}>
+                        <div className="space-y-2">
+                            <button 
+                                onClick={() => setActiveTab('profile')}
+                                className={`w-full text-left px-6 py-4 flex items-center gap-3 transition-all ${activeTab === 'profile' ? 'bg-white text-black' : 'bg-black text-white border border-gray-800 hover:border-white hover:pl-8'}`}
+                            >
+                                <User className="w-4 h-4" /> Profile Info
+                            </button>
+                            <button 
+                                onClick={() => setActiveTab('security')}
+                                className={`w-full text-left px-6 py-4 flex items-center gap-3 transition-all ${activeTab === 'security' ? 'bg-white text-black' : 'bg-black text-white border border-gray-800 hover:border-white hover:pl-8'}`}
+                            >
+                                <Key className="w-4 h-4" /> Security
+                            </button>
+                            <button 
+                                onClick={() => setActiveTab('preferences')}
+                                className={`w-full text-left px-6 py-4 flex items-center gap-3 transition-all ${activeTab === 'preferences' ? 'bg-white text-black' : 'bg-black text-white border border-gray-800 hover:border-white hover:pl-8'}`}
+                            >
+                                <Settings className="w-4 h-4" /> Preferences
+                            </button>
+                        </div>
+
+                        <div className="pt-8 mt-auto">
+                            <button 
+                                onClick={handleLogout}
+                                className="w-full text-left px-6 py-4 flex items-center gap-3 transition-all bg-black text-gray-500 border border-gray-800 hover:text-white hover:border-gray-500 hover:pl-8"
+                            >
+                                <LogOut className="w-4 h-4" /> Sign Out
+                            </button>
+                        </div>
                     </div>
 
                     {/* Main Content Area */}
