@@ -34,56 +34,63 @@ const Navbar = () => {
 
     return (
         <nav className="bg-black border-b border-gray-800 sticky top-0 z-50">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-16">
-                    <div className="flex items-center">
+            <div className="max-w-screen-2xl mx-auto px-4 sm:px-6">
+                <div className="flex justify-between items-center h-16">
+                    <div className="flex items-center shrink-0">
                         <Link to="/" className="flex items-center gap-2 group">
-                            <div className="p-2 bg-white rounded-lg transition-all group-hover:bg-gray-200">
-                                <ShieldCheck className="w-6 h-6 text-black" />
+                            <div className="p-1.5 bg-white rounded-lg transition-all group-hover:bg-gray-200">
+                                <ShieldCheck className="w-5 h-5 text-black" />
                             </div>
-                            <span className="font-cursive font-bold text-3xl tracking-wide text-white transition-colors">
+                            <span className="font-cursive font-bold text-2xl tracking-wide text-white transition-colors">
                                 SafeHer
                             </span>
                         </Link>
                     </div>
 
-                    <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-3 md:gap-4 lg:gap-5">
                         {user ? (
                             <>
-                                <Link to="/dashboard" className="text-gray-300 hover:text-white flex items-center gap-2 transition-colors">
-                                    <LayoutDashboard className="w-4 h-4" /> Dashboard
-                                </Link>
-                                <Link to="/report" className="text-white hover:text-gray-300 font-medium flex items-center gap-2 transition-colors">
-                                    <FileWarning className="w-4 h-4" /> Report Abuse
-                                </Link>
-                                <Link to="/analyzer" className="text-gray-300 hover:text-white flex items-center gap-2 transition-colors">
-                                    <Search className="w-4 h-4" /> AI Analyzer
-                                </Link>
-                                <Link to="/vault" className="text-gray-300 hover:text-white flex items-center gap-2 transition-colors">
-                                    <FolderLock className="w-4 h-4" /> Vault
-                                </Link>
-                                <Link to="/forum" className="text-gray-300 hover:text-white flex items-center gap-2 transition-colors">
-                                    <MessageCircle className="w-4 h-4" /> Forum
-                                </Link>
-                                <Link to="/laws" className="text-gray-300 hover:text-white flex items-center gap-2 transition-colors">
-                                    <Scale className="w-4 h-4" /> Cyber Law
-                                </Link>
-                                <div className="h-6 w-px bg-gray-700 mx-2"></div>
-                                <span className="text-sm text-gray-400">Hi, {user.name}</span>
-                                <Link to="/account" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors title='Account Settings'">
-                                    <Settings className="w-4 h-4" />
-                                </Link>
-                                <button onClick={handleLogout} className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors" title="Logout">
-                                    <LogOut className="w-4 h-4" />
-                                </button>
-                                <button onClick={handleSOS} className="ml-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 font-bold tracking-widest text-sm flex items-center gap-2 animate-pulse rounded-md shadow-[0_0_15px_rgba(220,38,38,0.4)]">
-                                    <AlertTriangle className="w-5 h-5" /> SOS
+                                <div className="hidden md:flex items-center gap-3 lg:gap-4 text-xs lg:text-sm">
+                                    <Link to="/dashboard" className="text-gray-300 hover:text-white flex items-center gap-1.5 transition-colors" title="Dashboard">
+                                        <LayoutDashboard className="w-4 h-4" /> <span className="hidden xl:inline">Dashboard</span>
+                                    </Link>
+                                    <Link to="/report" className="text-white hover:text-gray-300 font-bold flex items-center gap-1.5 transition-colors" title="Report Abuse">
+                                        <FileWarning className="w-4 h-4" /> <span className="hidden xl:inline">Report Abuse</span>
+                                    </Link>
+                                    <Link to="/analyzer" className="text-gray-300 hover:text-white flex items-center gap-1.5 transition-colors" title="AI Analyzer">
+                                        <Search className="w-4 h-4" /> <span className="hidden xl:inline">Analyzer</span>
+                                    </Link>
+                                    <Link to="/vault" className="text-gray-300 hover:text-white flex items-center gap-1.5 transition-colors" title="Evidence Vault">
+                                        <FolderLock className="w-4 h-4" /> <span className="hidden xl:inline">Vault</span>
+                                    </Link>
+                                    <Link to="/forum" className="text-gray-300 hover:text-white flex items-center gap-1.5 transition-colors" title="Anonymous Forum">
+                                        <MessageCircle className="w-4 h-4" /> <span className="hidden xl:inline">Forum</span>
+                                    </Link>
+                                    <Link to="/laws" className="text-gray-300 hover:text-white flex items-center gap-1.5 transition-colors" title="Cyber Laws">
+                                        <Scale className="w-4 h-4" /> <span className="hidden xl:inline">Laws</span>
+                                    </Link>
+                                </div>
+                                
+                                <div className="h-6 w-px bg-gray-700 mx-1 hidden md:block"></div>
+                                
+                                <div className="flex items-center gap-3">
+                                    <span className="text-xs text-gray-400 hidden lg:inline">Hi, {user.name}</span>
+                                    <Link to="/account" className="text-gray-400 hover:text-white transition-colors" title="Account Settings">
+                                        <Settings className="w-4 h-4" />
+                                    </Link>
+                                    <button onClick={handleLogout} className="text-gray-400 hover:text-white transition-colors" title="Logout">
+                                        <LogOut className="w-4 h-4" />
+                                    </button>
+                                </div>
+
+                                <button onClick={handleSOS} className="ml-1 md:ml-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 font-bold tracking-widest text-xs flex items-center gap-1.5 animate-pulse rounded-md shadow-[0_0_10px_rgba(220,38,38,0.4)] whitespace-nowrap">
+                                    <AlertTriangle className="w-4 h-4" /> SOS
                                 </button>
                             </>
                         ) : (
                             <>
-                                <Link to="/login" className="text-gray-300 hover:text-white transition-colors">Login</Link>
-                                <Link to="/register" className="bg-white hover:bg-gray-200 text-black px-4 py-2 rounded-none font-bold transition-colors uppercase tracking-widest text-sm border-2 border-white">
+                                <Link to="/login" className="text-gray-300 hover:text-white transition-colors text-sm">Login</Link>
+                                <Link to="/register" className="bg-white hover:bg-gray-200 text-black px-4 py-2 rounded-none font-bold transition-colors uppercase tracking-widest text-xs border-2 border-white whitespace-nowrap">
                                     Sign Up Free
                                 </Link>
                             </>
