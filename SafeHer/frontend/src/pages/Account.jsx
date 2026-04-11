@@ -1,31 +1,82 @@
 import { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { User, ShieldAlert, Key, Settings, Trash2, CheckCircle2, Lock, Smartphone, Bell, EyeOff, ShieldCheck } from 'lucide-react';
+import { User, ShieldAlert, Key, Settings, Trash2, CheckCircle2, Lock, EyeOff } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Account = () => {
-    const { user, logout } = useContext(AuthContext);
+    const { user, setUser, logout } = useContext(AuthContext);
     const navigate = useNavigate();
+    
+    const [activeTab, setActiveTab] = useState('profile');
+    
+    // Auth URL Base
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+    // Password Update States
+    const [pwdData, setPwdData] = useState({ currentPassword: '', newPassword: '' });
+    const [pwdStatus, setPwdStatus] = useState({ loading: false, success: null, error: null });
+
+    // Preference Update States
+    const [filterUpdating, setFilterUpdating] = useState(false);
+
+    // Delete Account States
     const [isDeleting, setIsDeleting] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
-    const [activeTab, setActiveTab] = useState('profile');
 
     const handleLogout = () => {
         logout();
         navigate('/');
     };
 
-    const handleDeleteAccount = () => {
+    const handleDeleteAccount = async () => {
+        if (!window.confirm("Are you entirely sure you want to permanently delete your data?")) return;
         setIsDeleting(true);
-        // Mock delete action
-        setTimeout(() => {
-            setIsDeleting(false);
+        try {
+            await axios.delete(`${API_URL}/api/auth/delete`, {
+                headers: { Authorization: `Bearer ${user.token}` }
+            });
             setShowSuccess(true);
             setTimeout(() => {
                 logout();
                 navigate('/');
             }, 2000);
-        }, 1500);
+        } catch (error) {
+            alert('Failed to erase account. Please try again.');
+            setIsDeleting(false);
+        }
+    };
+
+    const handlePasswordUpdate = async (e) => {
+        e.preventDefault();
+        setPwdStatus({ loading: true, success: null, error: null });
+        try {
+            await axios.put(`${API_URL}/api/auth/update-password`, pwdData, {
+                headers: { Authorization: `Bearer ${user.token}` }
+            });
+            setPwdStatus({ loading: false, success: 'Sanctuary gates resecured. Password updated.', error: null });
+            setPwdData({ currentPassword: '', newPassword: '' });
+        } catch (error) {
+            setPwdStatus({ loading: false, success: null, error: error.response?.data?.message || 'Password update failed' });
+        }
+    };
+
+    const handleStrictFilterToggle = async () => {
+        setFilterUpdating(true);
+        try {
+            const newFilterState = !(user?.strictAIFilter || false);
+            const { data } = await axios.put(`${API_URL}/api/auth/preferences`, 
+                { strictAIFilter: newFilterState },
+                { headers: { Authorization: `Bearer ${user.token}` } }
+            );
+            // Update local user state Context
+            setUser(data);
+            localStorage.setItem('user', JSON.stringify(data));
+        } catch (error) {
+            alert('Could not update AI preferences.');
+        } finally {
+            setFilterUpdating(false);
+        }
     };
 
     return (
@@ -89,7 +140,7 @@ const Account = () => {
                                 <section className="bg-black border border-gray-800 p-8 md:p-12 hover:border-red-900 transition-colors duration-500">
                                     <h2 className="text-3xl font-cursive mb-4 tracking-wide text-white flex items-center gap-3"><ShieldAlert className="w-6 h-6 text-red-500"/> Danger Zone</h2>
                                     <p className="text-gray-400 text-sm mb-8 leading-relaxed">
-                                        Erasing your account will permanently delete your identity and wipe all securely stored evidence from the SafeHer Vault. This action cannot be reversed.
+                                        Erasing your account will permanently delete your identity and wipe all securely stored evidence from the SafeHer vault. This action cannot be reversed.
                                     </p>
                                     {showSuccess ? (
                                         <div className="flex items-center justify-center gap-3 bg-white text-black p-4 uppercase tracking-widest text-xs font-bold animate-pulse">
@@ -113,43 +164,42 @@ const Account = () => {
                         {activeTab === 'security' && (
                             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
                                 <section className="bg-black border border-gray-800 p-8 md:p-12">
-                                    <h2 className="text-3xl font-cursive mb-8 tracking-wide flex items-center gap-3"><Lock className="w-6 h-6"/> Password & Authentication</h2>
+                                    <h2 className="text-3xl font-cursive mb-8 tracking-wide flex items-center gap-3"><Lock className="w-6 h-6"/> Password Modification</h2>
                                     
-                                    <div className="space-y-6">
-                                        <div className="border border-gray-800 p-6 flex flex-col md:flex-row justify-between md:items-center gap-6">
-                                            <div>
-                                                <h3 className="font-bold text-lg mb-1">Update Password</h3>
-                                                <p className="text-sm text-gray-500">Ensure your account is protected with a strong passphrase.</p>
-                                            </div>
-                                            <button className="bg-white text-black font-bold uppercase tracking-widest text-xs px-6 py-3 whitespace-nowrap hover:bg-gray-200">
-                                                Change Password
-                                            </button>
+                                    <form onSubmit={handlePasswordUpdate} className="space-y-6">
+                                        <div>
+                                            <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Current Password</label>
+                                            <input 
+                                                type="password" 
+                                                required
+                                                value={pwdData.currentPassword}
+                                                onChange={(e) => setPwdData({...pwdData, currentPassword: e.target.value})}
+                                                className="w-full border border-gray-800 bg-black px-4 py-4 text-white font-sans focus:outline-none focus:border-white transition-colors" 
+                                            />
                                         </div>
-
-                                        <div className="border border-green-900/30 bg-green-950/10 p-6 flex flex-col md:flex-row justify-between md:items-center gap-6 relative overflow-hidden">
-                                            <div className="absolute top-0 right-0 p-4 opacity-5"><ShieldCheck className="w-32 h-32"/></div>
-                                            <div className="relative z-10">
-                                                <h3 className="font-bold text-lg mb-1 flex items-center gap-2"><Smartphone className="w-5 h-5 text-green-500"/> Two-Factor Authentication (2FA)</h3>
-                                                <p className="text-sm text-gray-500">Extra layer of security. Use an authenticator app to log in.</p>
-                                            </div>
-                                            <div className="relative z-10 flex items-center gap-3">
-                                                <span className="text-xs font-bold text-green-500 uppercase tracking-widest">Active</span>
-                                                <button className="border border-gray-700 text-white font-bold uppercase tracking-widest text-xs px-6 py-3 hover:border-gray-500 transition-colors">
-                                                    Configure
-                                                </button>
-                                            </div>
+                                        <div>
+                                            <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">New Password</label>
+                                            <input 
+                                                type="password" 
+                                                required
+                                                minLength="6"
+                                                value={pwdData.newPassword}
+                                                onChange={(e) => setPwdData({...pwdData, newPassword: e.target.value})}
+                                                className="w-full border border-gray-800 bg-black px-4 py-4 text-white font-sans focus:outline-none focus:border-white transition-colors" 
+                                            />
                                         </div>
                                         
-                                        <div className="border border-gray-800 p-6 flex flex-col md:flex-row justify-between md:items-center gap-6">
-                                            <div>
-                                                <h3 className="font-bold text-lg mb-1 text-red-400">Emergency Disconnect</h3>
-                                                <p className="text-sm text-gray-500">Instantly sign out of all devices to protect your accounts from intrusion.</p>
-                                            </div>
-                                            <button className="bg-red-600 text-white font-bold uppercase tracking-widest text-xs px-6 py-3 whitespace-nowrap hover:bg-red-700">
-                                                Sign out of all sessions
-                                            </button>
-                                        </div>
-                                    </div>
+                                        {pwdStatus.error && <p className="text-red-500 text-sm mt-2">{pwdStatus.error}</p>}
+                                        {pwdStatus.success && <p className="text-green-500 text-sm mt-2">{pwdStatus.success}</p>}
+
+                                        <button 
+                                            type="submit" 
+                                            disabled={pwdStatus.loading}
+                                            className="w-full sm:w-auto bg-white text-black font-bold uppercase tracking-widest text-xs px-8 py-4 hover:bg-gray-200 transition-colors disabled:opacity-50"
+                                        >
+                                            {pwdStatus.loading ? 'Updating...' : 'Ensure Password Security'}
+                                        </button>
+                                    </form>
                                 </section>
                             </div>
                         )}
@@ -160,35 +210,28 @@ const Account = () => {
                                 <section className="bg-black border border-gray-800 p-8 md:p-12">
                                     <h2 className="text-3xl font-cursive mb-8 tracking-wide flex items-center gap-3"><Settings className="w-6 h-6"/> Platform Preferences</h2>
                                     
-                                    <div className="grid md:grid-cols-2 gap-6">
-                                        <div className="border border-gray-800 p-6 hover:border-gray-600 transition-colors cursor-pointer group">
-                                            <Bell className="w-6 h-6 mb-4 text-gray-400 group-hover:text-white" />
-                                            <h3 className="font-bold text-lg mb-2">SOS Notifications</h3>
-                                            <p className="text-sm text-gray-500 mb-4">Manage who receives alerts when the panic button is pressed.</p>
-                                            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-400">
-                                                Manage Contacts →
-                                            </div>
-                                        </div>
+                                    <div className="grid grid-cols-1 gap-6">
                                         
-                                        <div className="border border-gray-800 p-6 hover:border-gray-600 transition-colors cursor-pointer group">
-                                            <EyeOff className="w-6 h-6 mb-4 text-gray-400 group-hover:text-white" />
-                                            <h3 className="font-bold text-lg mb-2">Incognito Mode</h3>
-                                            <p className="text-sm text-gray-500 mb-4">Automatically clear traces of SafeHer from browser history when logging out.</p>
-                                            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white">
-                                                <span className="w-8 h-4 bg-white rounded-full flex items-center p-0.5 justify-end"><span className="w-3 h-3 bg-black rounded-full"></span></span> Enabled
-                                            </div>
-                                        </div>
-                                        
-                                        <div className="border border-gray-800 p-6 md:col-span-2 flex items-center justify-between">
+                                        <div className="border border-gray-800 p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 cursor-pointer hover:border-gray-600 transition-colors" onClick={handleStrictFilterToggle}>
                                             <div>
-                                                <h3 className="font-bold text-lg mb-1">Strict AI Filtering</h3>
-                                                <p className="text-sm text-gray-500">Aggressively block and flag texts in the Analyzer component.</p>
+                                                <h3 className="font-bold text-lg mb-1 flex items-center gap-2">Strict AI Formatting <EyeOff className="w-4 h-4 text-gray-500"/></h3>
+                                                <p className="text-sm text-gray-500">
+                                                    Aggressive heuristic shielding. Re-calibrates the toxicity analyzer to maximize threat detection precision.
+                                                </p>
                                             </div>
-                                            <div className="w-12 h-6 bg-gray-800 rounded-full flex items-center p-1 cursor-pointer hover:bg-gray-700">
-                                                <div className="w-4 h-4 bg-gray-400 rounded-full"></div>
+                                            <div className="shrink-0 flex items-center gap-3">
+                                                <span className={`text-xs font-bold uppercase tracking-widest ${user?.strictAIFilter ? 'text-green-500' : 'text-gray-600'}`}>
+                                                    {filterUpdating ? 'Saving...' : user?.strictAIFilter ? 'Enabled' : 'Disabled'}
+                                                </span>
+                                                <div className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${user?.strictAIFilter ? 'bg-white' : 'bg-gray-800'}`}>
+                                                    <div className={`w-4 h-4 rounded-full transition-transform ${user?.strictAIFilter ? 'bg-black translate-x-6' : 'bg-gray-400'}`}></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <p className="text-xs text-gray-600 mt-6 mt-4 italic">
+                                        Note: We have strictly removed unnecessary UI bloat (such as non-serviceable SMS routing and un-syncable modules) to maintain maximum lightweight and robust security operation.
+                                    </p>
                                 </section>
                             </div>
                         )}
