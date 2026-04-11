@@ -1,38 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #ffffff;
-  --color-primary-dark: #cccccc;
-  --color-secondary: #aaaaaa;
-  --color-danger: #ef4444;
+  --color-primary: #A78BFA;
+  --color-primary-dark: #8B5CF6;
+  --color-secondary: #F472B6;
+  --color-danger: #F87171;
   --color-warning: #f59e0b;
   --color-success: #10b981;
   
-  --color-bg-dark: #000000;
-  --color-bg-card: #111111;
+  --color-bg-base: #FDF4FF;
+  --color-bg-secondary: #FAF5FF;
+  
+  --color-text-primary: #1E293B;
+  --color-text-secondary: #64748B;
+  
+  --color-border-soft: #E9D5FF;
+  --color-card-white: #FFFFFF;
 }
 
 body {
-  background-color: var(--color-bg-dark);
-  color: #ffffff;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg-base);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(249, 168, 212, 0.15) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, rgba(167, 139, 250, 0.15) 0, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(244, 114, 182, 0.1) 0, transparent 50%);
+  background-attachment: fixed;
+  color: var(--color-text-primary);
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
 }
 
 .font-cursive {
   font-family: 'Great Vibes', cursive;
 }
 
-/* Custom scrollbar for dark theme */
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Custom scrollbar for soft theme */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-dark); 
+  background: transparent; 
 }
 ::-webkit-scrollbar-thumb {
-  background: #333333; 
+  background: #E9D5FF; 
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #555555; 
+  background: #D8B4FE; 
 }
