@@ -9,6 +9,7 @@ dotenv.config();
 const authRoutes = require('./routes/authRoutes');
 const reportRoutes = require('./routes/reportRoutes');
 const analyzeRoutes = require('./routes/analyzeRoutes');
+const forumRoutes = require('./routes/forumRoutes');
 
 const app = express();
 
@@ -20,7 +21,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/reports', reportRoutes);
-app.use('/api/analyze', analyzeRoutes); // Includes file upload via multer in specific controller if needed, or in reportRoutes
+app.use('/api/analyze', analyzeRoutes);
+app.use('/api/forum', forumRoutes); // Includes file upload via multer in specific controller if needed, or in reportRoutes
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)

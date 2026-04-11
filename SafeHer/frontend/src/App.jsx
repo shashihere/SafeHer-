@@ -11,6 +11,8 @@ import Analyzer from './pages/Analyzer';
 import EvidenceVault from './pages/EvidenceVault';
 import Premium from './pages/Premium';
 import Account from './pages/Account';
+import CyberLaw from './pages/CyberLaw';
+import Forum from './pages/Forum';
 
 const ProtectedRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
@@ -34,6 +36,8 @@ function App() {
                             <Route path="/report" element={<ProtectedRoute><ReportAbuse /></ProtectedRoute>} />
                             <Route path="/analyzer" element={<ProtectedRoute><Analyzer /></ProtectedRoute>} />
                             <Route path="/vault" element={<ProtectedRoute><EvidenceVault /></ProtectedRoute>} />
+                            <Route path="/laws" element={<CyberLaw />} />
+                            <Route path="/forum" element={<ProtectedRoute><Forum /></ProtectedRoute>} />
                             <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
                         </Routes>
                     </div>

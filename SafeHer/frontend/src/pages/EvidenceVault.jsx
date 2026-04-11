@@ -1,7 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
-import { FolderLock, Image as ImageIcon, ExternalLink, Download } from 'lucide-react';
+import { FolderLock, Image as ImageIcon, ExternalLink, Download, FileText } from 'lucide-react';
+import jsPDF from 'jspdf';
 
 const EvidenceVault = () => {
     const { user } = useContext(AuthContext);
@@ -24,6 +25,40 @@ const EvidenceVault = () => {
     }, [user]);
 
     if (loading) return <div className="p-8 text-center text-gray-400 font-sans tracking-wide">Decrypting vault...</div>;
+
+    const generatePDF = (report) => {
+        const doc = new jsPDF();
+        
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(22);
+        doc.setTextColor(220, 38, 38);
+        doc.text('SAFEHER CYBER REPORT', 20, 20);
+
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0);
+
+        doc.text(`Incident ID: ${report._id}`, 20, 35);
+        doc.text(`Date & Time: ${new Date(report.createdAt).toLocaleString()}`, 20, 45);
+        doc.text(`Platform: ${report.platform || 'General'}`, 20, 55);
+        doc.text(`AI Toxicity Score: ${report.aiScore || report.toxicityScore || 'N/A'}%`, 20, 65);
+        doc.text(`Assigned Severity: ${report.severity}`, 20, 75);
+
+        doc.setFont('helvetica', 'bold');
+        doc.text('Incident Description / Evidence Text:', 20, 95);
+        
+        doc.setFont('helvetica', 'normal');
+        const splitText = doc.splitTextToSize(`"${report.content}"`, 170);
+        doc.text(splitText, 20, 105);
+
+        doc.setFont('helvetica', 'italic');
+        doc.setTextColor(150, 150, 150);
+        doc.setFontSize(10);
+        doc.text('* This is an auto-generated formal report by the SafeHer Platform *', 20, 280);
+        doc.text('* Please attach any external image/video media alongside this document. *', 20, 285);
+
+        doc.save(`SafeHer_Report_${report._id.substring(0,6)}.pdf`);
+    };
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-12 w-full min-h-screen bg-black text-white">
@@ -51,9 +86,14 @@ const EvidenceVault = () => {
                         <div key={report._id} className="bg-black border border-gray-700 overflow-hidden hover:border-white transition-all group rounded-none">
                             <div className="p-4 bg-gray-900 border-b border-gray-800 flex justify-between items-center">
                                 <span className="text-xs text-gray-400 tracking-widest uppercase">Report from {new Date(report.createdAt).toLocaleDateString()}</span>
-                                <span className="text-xs bg-white text-black font-bold uppercase tracking-widest px-2 py-1">
-                                    {report.platform || 'General'}
-                                </span>
+                                <div className="flex items-center gap-2">
+                                    <span className="text-xs bg-white text-black font-bold uppercase tracking-widest px-2 py-1">
+                                        {report.platform || 'General'}
+                                    </span>
+                                    <button onClick={() => generatePDF(report)} className="flex items-center gap-1 text-xs text-white bg-red-600 hover:bg-red-700 px-2 py-1 font-bold tracking-wider transition-colors">
+                                        <FileText className="w-3 h-3"/> PDF
+                                    </button>
+                                </div>
                             </div>
                             
                             <div className="p-4 flex flex-col gap-4">

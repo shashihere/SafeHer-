@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { ShieldCheck, LogOut, LayoutDashboard, FileWarning, Search, FolderLock, Settings } from 'lucide-react';
+import { ShieldCheck, LogOut, LayoutDashboard, FileWarning, Search, FolderLock, Settings, AlertTriangle, Scale, MessageCircle } from 'lucide-react';
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
@@ -10,6 +10,26 @@ const Navbar = () => {
     const handleLogout = () => {
         logout();
         navigate('/');
+    };
+
+    const handleSOS = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    const message = `🚨 EMERGENCY SOS 🚨\nI need help immediately. Here is my live location coordinates:\nhttps://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+                    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+                    
+                    window.open(whatsappUrl, '_blank');
+                    alert(`🚨 SECURE ALERT TRIGGERED 🚨\n\nYour precise location (${latitude.toFixed(4)}, ${longitude.toFixed(4)}) has been locked.\n\nPlease send the auto-generated WhatsApp message to your emergency contacts or local authorities.`);
+                },
+                (error) => {
+                    alert("⚠️ SOS WARNING: Please enable Location Services in your browser to broadcast your coordinates.");
+                }
+            );
+        } else {
+            alert("Geolocation is not supported by your browser.");
+        }
     };
 
     return (
@@ -42,6 +62,12 @@ const Navbar = () => {
                                 <Link to="/vault" className="text-gray-300 hover:text-white flex items-center gap-2 transition-colors">
                                     <FolderLock className="w-4 h-4" /> Vault
                                 </Link>
+                                <Link to="/forum" className="text-gray-300 hover:text-white flex items-center gap-2 transition-colors">
+                                    <MessageCircle className="w-4 h-4" /> Forum
+                                </Link>
+                                <Link to="/laws" className="text-gray-300 hover:text-white flex items-center gap-2 transition-colors">
+                                    <Scale className="w-4 h-4" /> Cyber Law
+                                </Link>
                                 <div className="h-6 w-px bg-gray-700 mx-2"></div>
                                 <span className="text-sm text-gray-400">Hi, {user.name}</span>
                                 <Link to="/account" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors title='Account Settings'">
@@ -49,6 +75,9 @@ const Navbar = () => {
                                 </Link>
                                 <button onClick={handleLogout} className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors" title="Logout">
                                     <LogOut className="w-4 h-4" />
+                                </button>
+                                <button onClick={handleSOS} className="ml-4 bg-red-600 hover:bg-red-700 text-white px-4 py-2 font-bold tracking-widest text-sm flex items-center gap-2 animate-pulse rounded-md shadow-[0_0_15px_rgba(220,38,38,0.4)]">
+                                    <AlertTriangle className="w-5 h-5" /> SOS
                                 </button>
                             </>
                         ) : (
