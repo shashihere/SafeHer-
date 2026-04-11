@@ -24,7 +24,7 @@ const Analyzer = () => {
     };
 
     return (
-        <div className="max-w-4xl mx-auto px-4 py-12 w-full bg-white min-h-screen text-black">
+        <div className="max-w-4xl mx-auto px-4 py-12 w-full bg-white min-h-screen text-[#615e5f]">
             <div className="text-center mb-12">
                 <div className="inline-block p-4 bg-black rounded-2xl mb-4">
                     <Search className="w-8 h-8 text-white" />
@@ -33,14 +33,14 @@ const Analyzer = () => {
                 <p className="text-gray-600 max-w-xl mx-auto font-sans">
                     Unsure if a message crosses the line? Paste it below. Our SafeHer AI will analyze it for toxicity, harassment, and threats.
                 </p>
-                <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 bg-white text-black border border-black text-sm uppercase tracking-widest font-bold font-sans">
-                    <Shield className="w-4 h-4 text-black" /> AI is Watching Out for You.
+                <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 bg-white text-[#615e5f] border border-[#615e5f] text-sm uppercase tracking-widest font-bold font-sans">
+                    <Shield className="w-4 h-4 text-[#615e5f]" /> AI is Watching Out for You.
                 </div>
             </div>
 
-            <div className="bg-white border border-gray-700 rounded-none p-6 mb-8 group hover:border-black transition-colors">
+            <div className="bg-white border border-gray-700 rounded-none p-6 mb-8 group hover:border-[#615e5f] transition-colors">
                 <textarea 
-                    className="w-full bg-white border border-gray-700 rounded-none p-6 text-xl text-black placeholder-gray-600 focus:outline-none focus:border-black resize-none transition-colors"
+                    className="w-full bg-white border border-gray-700 rounded-none p-6 text-xl text-[#615e5f] placeholder-gray-600 focus:outline-none focus:border-[#615e5f] resize-none transition-colors"
                     rows="4"
                     placeholder="Paste the suspicious message here..."
                     value={text}
@@ -50,7 +50,7 @@ const Analyzer = () => {
                     <button 
                         onClick={handleAnalyze}
                         disabled={loading || !text}
-                        className="bg-black hover:bg-gray-200 text-white px-8 py-3 rounded-none font-bold transition-colors disabled:opacity-50 uppercase tracking-widest text-sm border-2 border-black"
+                        className="bg-black hover:bg-[#4a4748] text-white px-8 py-3 rounded-none font-bold transition-colors disabled:opacity-50 uppercase tracking-widest text-sm border-2 border-[#615e5f]"
                     >
                         {loading ? 'Analyzing...' : 'Analyze Message'}
                     </button>
@@ -58,9 +58,9 @@ const Analyzer = () => {
             </div>
 
             {result && (
-                <div className="p-8 rounded-none border-2 bg-white border-black transition-all">
+                <div className="p-8 rounded-none border-2 bg-white border-[#615e5f] transition-all">
                     <div className="flex items-center gap-4 mb-6">
-                        <AlertTriangle className="w-8 h-8 text-black" />
+                        <AlertTriangle className="w-8 h-8 text-[#615e5f]" />
                         <h2 className="text-2xl font-bold font-cursive tracking-widest">Analysis Complete</h2>
                     </div>
                     
@@ -75,7 +75,7 @@ const Analyzer = () => {
                             </div>
                             
                             {/* Visual Progress Bar - B&W */}
-                            <div className="w-full h-3 bg-gray-100 rounded-none mt-4 overflow-hidden border border-gray-700">
+                            <div className="w-full h-3 bg-[#ffffff]/90 rounded-none mt-4 overflow-hidden border border-gray-700">
                                 <div 
                                     className="h-full bg-black"
                                     style={{ width: `${Math.max(result.toxicityScore, 5)}%` }}
@@ -85,7 +85,7 @@ const Analyzer = () => {
                         
                         <div>
                             <p className="text-gray-600 mb-1 uppercase tracking-widest text-sm font-bold">Suggested Action</p>
-                            <p className="text-xl font-medium text-black p-4 border border-gray-200 bg-gray-100/50">{result.suggestedAction}</p>
+                            <p className="text-xl font-medium text-[#615e5f] p-4 border border-[#c4b7b1] bg-[#ffffff]/90/50">{result.suggestedAction}</p>
                         </div>
                     </div>
                 </div>

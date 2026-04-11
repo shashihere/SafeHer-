@@ -68,7 +68,7 @@ const ReportAbuse = () => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-8 w-full flex gap-8 bg-white min-h-screen text-black">
+        <div className="max-w-7xl mx-auto px-4 py-8 w-full flex gap-8 bg-white min-h-screen text-[#615e5f]">
             <div className="flex-grow max-w-2xl">
                 <header className="mb-8">
                     <h1 className="text-5xl font-bold font-cursive tracking-widest mb-2">Report Abuse.</h1>
@@ -77,10 +77,10 @@ const ReportAbuse = () => {
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="bg-white border border-gray-700 p-6 rounded-none shadow-none">
-                        <label className="block text-sm font-bold uppercase tracking-widest text-black mb-4">Describe the Incident (or paste text)</label>
+                        <label className="block text-sm font-bold uppercase tracking-widest text-[#615e5f] mb-4">Describe the Incident (or paste text)</label>
                         <textarea 
                             rows="4" 
-                            className="w-full bg-white border border-gray-700 rounded-none px-4 py-3 text-black focus:outline-none focus:border-black mb-4 transition-colors"
+                            className="w-full bg-white border border-gray-700 rounded-none px-4 py-3 text-[#615e5f] focus:outline-none focus:border-[#615e5f] mb-4 transition-colors"
                             value={content}
                             onChange={(e) => { setContent(e.target.value); setAiResult(null); }}
                             placeholder="Paste the abusive message, comment, or describe what happened..."
@@ -91,13 +91,13 @@ const ReportAbuse = () => {
                             type="button" 
                             onClick={handleAnalyze} 
                             disabled={!content || analyzing}
-                            className="text-sm border-2 border-black hover:bg-black hover:text-white px-4 py-2 rounded-none font-bold uppercase tracking-widest transition-colors disabled:opacity-50"
+                            className="text-sm border-2 border-[#615e5f] hover:bg-black hover:text-white px-4 py-2 rounded-none font-bold uppercase tracking-widest transition-colors disabled:opacity-50"
                         >
                             {analyzing ? 'Analyzing with AI...' : 'Run Analysis Check'}
                         </button>
 
                         {aiResult && (
-                            <div className="mt-6 p-4 rounded-none border border-black text-black">
+                            <div className="mt-6 p-4 rounded-none border border-[#615e5f] text-[#615e5f]">
                                 <div className="flex items-start gap-3">
                                     <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
                                     <div>
@@ -110,17 +110,17 @@ const ReportAbuse = () => {
                     </div>
 
                     <div className="bg-white border border-gray-700 p-6 rounded-none shadow-none">
-                        <label className="block text-sm font-bold uppercase tracking-widest text-black mb-4">Platform (Optional)</label>
+                        <label className="block text-sm font-bold uppercase tracking-widest text-[#615e5f] mb-4">Platform (Optional)</label>
                         <input 
                             type="text" 
-                            className="w-full bg-white border border-gray-700 rounded-none px-4 py-3 text-black focus:outline-none focus:border-black mb-8 transition-colors"
+                            className="w-full bg-white border border-gray-700 rounded-none px-4 py-3 text-[#615e5f] focus:outline-none focus:border-[#615e5f] mb-8 transition-colors"
                             value={platform}
                             onChange={(e) => setPlatform(e.target.value)}
                             placeholder="e.g., Instagram, Twitter, SMS"
                         />
 
-                        <label className="block text-sm font-bold uppercase tracking-widest text-black mb-4">Upload Evidence (Screenshots/Images)</label>
-                        <div className="relative border-2 border-dashed border-gray-600 rounded-none p-8 hover:border-black hover:bg-gray-100 transition-all text-center">
+                        <label className="block text-sm font-bold uppercase tracking-widest text-[#615e5f] mb-4">Upload Evidence (Screenshots/Images)</label>
+                        <div className="relative border-2 border-dashed border-gray-600 rounded-none p-8 hover:border-[#615e5f] hover:bg-[#ffffff]/90 transition-all text-center">
                             <input 
                                 type="file" 
                                 multiple 
@@ -128,9 +128,9 @@ const ReportAbuse = () => {
                                 onChange={handleFileChange}
                                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                             />
-                            <UploadCloud className="w-8 h-8 text-black mx-auto mb-2" />
+                            <UploadCloud className="w-8 h-8 text-[#615e5f] mx-auto mb-2" />
                             <p className="text-sm text-gray-600 font-bold uppercase tracking-widest">Click or drag files to upload</p>
-                            {evidence.length > 0 && <p className="text-sm text-black mt-4 font-bold border-t border-gray-700 pt-4"><span className="text-lg">{evidence.length}</span> file(s) selected</p>}
+                            {evidence.length > 0 && <p className="text-sm text-[#615e5f] mt-4 font-bold border-t border-gray-700 pt-4"><span className="text-lg">{evidence.length}</span> file(s) selected</p>}
                         </div>
                     </div>
 
@@ -138,7 +138,7 @@ const ReportAbuse = () => {
                         <button 
                             type="submit" 
                             disabled={submitting}
-                            className="flex-1 bg-black text-white font-extrabold py-4 rounded-none transition-all hover:bg-gray-200 disabled:opacity-75 uppercase tracking-widest"
+                            className="flex-1 bg-[#615e5f] text-white hover:bg-[#4a4748] font-extrabold py-4 rounded-none transition-all hover:bg-[#4a4748] disabled:opacity-75 uppercase tracking-widest"
                         >
                             {submitting ? 'Submitting Securely...' : 'Submit Report'}
                         </button>
@@ -147,7 +147,7 @@ const ReportAbuse = () => {
             </div>
 
             <div className="hidden lg:block w-[400px]">
-                <div className="sticky top-24 bg-white border border-gray-200 rounded-none p-6">
+                <div className="sticky top-24 bg-white border border-[#c4b7b1] rounded-none p-6">
                     <img 
                         src="/images/first_image.jpg"
                         alt="Support" 
@@ -156,7 +156,7 @@ const ReportAbuse = () => {
                     />
                     <h3 className="font-bold text-2xl font-cursive tracking-widest mb-4">Support</h3>
                     <p className="text-gray-600 text-sm mb-6 leading-relaxed">Your report will be completely encrypted and saved locally as evidence. We prioritize your privacy and do not automatically notify the abuser.</p>
-                    <button className="w-full bg-white border-2 border-black text-black font-bold uppercase tracking-widest text-xs py-4 rounded-none hover:bg-black hover:text-white transition-colors">
+                    <button className="w-full bg-white border-2 border-[#615e5f] text-[#615e5f] font-bold uppercase tracking-widest text-xs py-4 rounded-none hover:bg-black hover:text-white transition-colors">
                         Alert Contact
                     </button>
                 </div>

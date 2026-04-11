@@ -2,7 +2,7 @@ import { ShieldCheck, Anchor, BookOpen, AlertCircle } from 'lucide-react';
 
 const Premium = () => {
     return (
-        <div className="bg-white min-h-screen text-black pt-24 pb-20">
+        <div className="min-h-screen bg-transparent text-[#615e5f] pt-24 pb-20">
             <div className="max-w-7xl mx-auto px-4">
                 <div className="text-center mb-24">
                     <h1 className="text-6xl md:text-8xl font-cursive mb-6">Gain Your Trust</h1>
@@ -17,10 +17,10 @@ const Premium = () => {
                     <section className="grid lg:grid-cols-2 gap-16 items-center">
                         <div className="order-2 lg:order-1 space-y-8">
                             <h2 className="text-5xl font-cursive">The Unseen Threat</h2>
-                            <p className="text-gray-700 leading-relaxed text-lg">
+                            <p className="text-[#615e5f] leading-relaxed text-lg">
                                 Not every danger makes a sound. Cyberbullies often lurk behind the veil of anonymity, waiting to intrude upon your peace. Recognize the signs of unseen predators. You are not alone against the invisible shadows — SafeHer is your shield.
                             </p>
-                            <div className="inline-flex items-center gap-3 border-b-2 border-black pb-2 font-bold uppercase tracking-widest text-sm">
+                            <div className="inline-flex items-center gap-3 border-b-2 border-[#615e5f] pb-2 font-bold uppercase tracking-widest text-sm">
                                 <ShieldCheck className="w-5 h-5" /> Be Vigilant
                             </div>
                         </div>
@@ -28,7 +28,7 @@ const Premium = () => {
                             <img 
                                 src="/images/monster.png" 
                                 alt="The unseen threat monster watching a girl" 
-                                className="w-full border border-gray-200 hover:border-black transition-colors"
+                                className="w-full border border-[#c4b7b1] hover:border-[#615e5f] transition-colors"
                             />
                         </div>
                     </section>
@@ -39,15 +39,15 @@ const Premium = () => {
                             <img 
                                 src="/images/dos_donts.png" 
                                 alt="Do's and Don'ts Digital security guide" 
-                                className="w-full border border-gray-200 hover:border-black transition-colors"
+                                className="w-full border border-[#c4b7b1] hover:border-[#615e5f] transition-colors"
                             />
                         </div>
                         <div className="space-y-8">
                             <h2 className="text-5xl font-cursive">Digital Safety Guide</h2>
-                            <p className="text-gray-700 leading-relaxed text-lg">
+                            <p className="text-[#615e5f] leading-relaxed text-lg">
                                 Knowledge is power. Familiarize yourself with the crucial DOs and DON'Ts of online interactions. Protect your personal space, lock down your data, and understand that setting boundaries isn't just an option — it's a necessity.
                             </p>
-                            <div className="inline-flex items-center gap-3 border-b-2 border-black pb-2 font-bold uppercase tracking-widest text-sm">
+                            <div className="inline-flex items-center gap-3 border-b-2 border-[#615e5f] pb-2 font-bold uppercase tracking-widest text-sm">
                                 <BookOpen className="w-5 h-5" /> Know The Rules
                             </div>
                         </div>
@@ -57,10 +57,10 @@ const Premium = () => {
                     <section className="grid lg:grid-cols-2 gap-16 items-center">
                         <div className="order-2 lg:order-1 space-y-8">
                             <h2 className="text-5xl font-cursive">Unwanted Advances</h2>
-                            <p className="text-gray-700 leading-relaxed text-lg">
+                            <p className="text-[#615e5f] leading-relaxed text-lg">
                                 Unsolicited approaches and harassment can feel like an invasion. Reclaim your space from digital harassment. Your digital life belongs to you, and no one has the right to reach into your world without permission. Stay strong and speak up.
                             </p>
-                            <div className="inline-flex items-center gap-3 border-b-2 border-black pb-2 font-bold uppercase tracking-widest text-sm">
+                            <div className="inline-flex items-center gap-3 border-b-2 border-[#615e5f] pb-2 font-bold uppercase tracking-widest text-sm">
                                 <Anchor className="w-5 h-5" /> Stand Your Ground
                             </div>
                         </div>
@@ -68,7 +68,7 @@ const Premium = () => {
                             <img 
                                 src="/images/hands.png" 
                                 alt="Hands grabbing a girl" 
-                                className="w-full border border-gray-200 hover:border-black transition-colors"
+                                className="w-full border border-[#c4b7b1] hover:border-[#615e5f] transition-colors"
                             />
                         </div>
                     </section>
@@ -79,15 +79,15 @@ const Premium = () => {
                             <img 
                                 src="/images/cyberbully.png" 
                                 alt="Sad girl with hate texts" 
-                                className="w-full border border-gray-200 hover:border-black transition-colors"
+                                className="w-full border border-[#c4b7b1] hover:border-[#615e5f] transition-colors"
                             />
                         </div>
                         <div className="space-y-8">
                             <h2 className="text-5xl font-cursive">The Weight of Words</h2>
-                            <p className="text-gray-700 leading-relaxed text-lg">
+                            <p className="text-[#615e5f] leading-relaxed text-lg">
                                 Words can cut deeper than we realize. The constant influx of hate and negativity on social media is designed to break your spirit. Turn the tide against cyberbullying by prioritizing your mental health and reporting systemic abuse.
                             </p>
-                            <div className="inline-flex items-center gap-3 border-b-2 border-black pb-2 font-bold uppercase tracking-widest text-sm">
+                            <div className="inline-flex items-center gap-3 border-b-2 border-[#615e5f] pb-2 font-bold uppercase tracking-widest text-sm">
                                 <AlertCircle className="w-5 h-5" /> Protect Your Peace
                             </div>
                         </div>

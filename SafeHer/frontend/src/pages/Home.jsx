@@ -18,17 +18,17 @@ const Home = () => {
                 
                 {/* Buttons Below */}
                 <div className="mt-8 flex gap-6 flex-col sm:flex-row w-full max-w-3xl px-4 z-20">
-                    <Link to="/report" className="flex-1 flex items-center justify-center gap-2 bg-black text-white px-8 py-5 rounded-none font-bold transition-all hover:bg-gray-200 border-2 border-black uppercase tracking-widest text-sm">
+                    <Link to="/report" className="flex-1 flex items-center justify-center gap-2 bg-[#615e5f] text-white hover:bg-[#4a4748] px-8 py-5 rounded-none font-bold transition-all hover:bg-[#4a4748] border-2 border-[#615e5f] uppercase tracking-widest text-sm">
                         Report Abuse <ArrowRight className="w-5 h-5" />
                     </Link>
-                    <Link to="/premium" className="flex-1 flex items-center justify-center gap-2 bg-white text-black hover:bg-gray-100 border-2 border-black px-8 py-5 rounded-none font-bold transition-all uppercase tracking-widest text-sm">
+                    <Link to="/premium" className="flex-1 flex items-center justify-center gap-2 bg-white text-[#615e5f] hover:bg-[#ffffff]/90 border-2 border-[#615e5f] px-8 py-5 rounded-none font-bold transition-all uppercase tracking-widest text-sm">
                         <Star className="w-5 h-5" /> Trust
                     </Link>
                 </div>
             </section>
 
             {/* Features Section - B&W Style */}
-            <section className="w-full bg-white border-t border-gray-200 py-24">
+            <section className="w-full bg-white border-t border-[#c4b7b1] py-24">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="text-center mb-16">
                         <h2 className="text-4xl md:text-5xl font-bold mb-4 font-cursive tracking-wide">Safety is Your Right</h2>
@@ -58,7 +58,7 @@ const Home = () => {
 };
 
 const FeatureCard = ({ icon, title, description }) => (
-    <div className="p-8 bg-white border border-gray-700 hover:border-black transition-colors group">
+    <div className="p-8 bg-white border border-gray-700 hover:border-[#615e5f] transition-colors group">
         <div className="mb-6 p-4 inline-block bg-black group-hover:scale-110 transition-transform">
             {icon}
         </div>
