@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
-import { MessageSquarePlus, MessageCircle, Heart, UserCircle, Shield, Share2, Sparkles, Wind, Feathers } from 'lucide-react';
+import { MessageSquarePlus, MessageCircle, Heart, UserCircle, Shield, Share2, Sparkles, Wind, Feather } from 'lucide-react';
 
 const DUMMY_STORIES = [
     {
@@ -210,7 +210,7 @@ const Forum = () => {
                     ))}
                     
                     <div className="py-12 flex flex-col items-center justify-center text-gray-600 space-y-4 border-t border-white/5">
-                        <Feathers className="w-8 h-8 opacity-50" />
+                        <Feather className="w-8 h-8 opacity-50" />
                         <p className="text-sm tracking-widest uppercase">End of stories</p>
                     </div>
                 </div>
