@@ -74,6 +74,11 @@ const EvidenceVault = () => {
                 </div>
             </header>
 
+            {/* Women Hero Banner */}
+            <div className="mb-12 w-full rounded-2xl overflow-hidden border border-gray-800 shadow-[0_0_40px_rgba(255,255,255,0.05)] relative bg-white">
+                <img src="/vault-hero.jpg" alt="Women Empowerment" className="w-full object-contain md:object-cover md:h-72 opacity-90 pb-8" />
+            </div>
+
             {reports.length === 0 ? (
                 <div className="bg-black border border-gray-800 p-16 text-center">
                     <ImageIcon className="w-16 h-16 text-gray-600 mx-auto mb-4" />
