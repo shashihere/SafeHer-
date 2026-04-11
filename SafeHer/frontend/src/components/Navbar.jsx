@@ -37,9 +37,9 @@ const Navbar = () => {
             <div className="max-w-screen-2xl mx-auto px-4 sm:px-6">
                 <div className="flex justify-between items-center h-16">
                     <div className="flex items-center shrink-0">
-                        <Link to="/" className="flex items-center gap-2 group">
-                            <div className="p-1.5 bg-white rounded-lg transition-all group-hover:bg-gray-200">
-                                <ShieldCheck className="w-5 h-5 text-black" />
+                        <Link to="/" className="flex items-center gap-2.5 group">
+                            <div className="p-0.5 bg-white rounded-full overflow-hidden transition-all group-hover:scale-105 border border-gray-800 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                                <img src="/logo.jpg" alt="SafeHer Logo" className="w-9 h-9 object-cover rounded-full" />
                             </div>
                             <span className="font-cursive font-bold text-2xl tracking-wide text-white transition-colors">
                                 SafeHer
