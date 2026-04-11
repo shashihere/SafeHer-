@@ -68,7 +68,7 @@ const ReportAbuse = () => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-8 w-full flex gap-8 bg-white min-h-screen text-[#615e5f]">
+        <div className="max-w-7xl mx-auto px-4 py-8 w-full flex gap-8 bg-transparent min-h-screen text-[#615e5f]">
             <div className="flex-grow max-w-2xl">
                 <header className="mb-8">
                     <h1 className="text-5xl font-bold font-cursive tracking-widest mb-2">Report Abuse.</h1>
@@ -80,7 +80,7 @@ const ReportAbuse = () => {
                         <label className="block text-sm font-bold uppercase tracking-widest text-[#615e5f] mb-4">Describe the Incident (or paste text)</label>
                         <textarea 
                             rows="4" 
-                            className="w-full bg-white border border-gray-700 rounded-none px-4 py-3 text-[#615e5f] focus:outline-none focus:border-[#615e5f] mb-4 transition-colors"
+                            className="w-full bg-transparent border border-gray-700 rounded-none px-4 py-3 text-[#615e5f] focus:outline-none focus:border-[#615e5f] mb-4 transition-colors"
                             value={content}
                             onChange={(e) => { setContent(e.target.value); setAiResult(null); }}
                             placeholder="Paste the abusive message, comment, or describe what happened..."
@@ -113,7 +113,7 @@ const ReportAbuse = () => {
                         <label className="block text-sm font-bold uppercase tracking-widest text-[#615e5f] mb-4">Platform (Optional)</label>
                         <input 
                             type="text" 
-                            className="w-full bg-white border border-gray-700 rounded-none px-4 py-3 text-[#615e5f] focus:outline-none focus:border-[#615e5f] mb-8 transition-colors"
+                            className="w-full bg-transparent border border-gray-700 rounded-none px-4 py-3 text-[#615e5f] focus:outline-none focus:border-[#615e5f] mb-8 transition-colors"
                             value={platform}
                             onChange={(e) => setPlatform(e.target.value)}
                             placeholder="e.g., Instagram, Twitter, SMS"
@@ -156,7 +156,7 @@ const ReportAbuse = () => {
                     />
                     <h3 className="font-bold text-2xl font-cursive tracking-widest mb-4">Support</h3>
                     <p className="text-gray-600 text-sm mb-6 leading-relaxed">Your report will be completely encrypted and saved locally as evidence. We prioritize your privacy and do not automatically notify the abuser.</p>
-                    <button className="w-full bg-white border-2 border-[#615e5f] text-[#615e5f] font-bold uppercase tracking-widest text-xs py-4 rounded-none hover:bg-black hover:text-white transition-colors">
+                    <button className="w-full bg-transparent border-2 border-[#615e5f] text-[#615e5f] font-bold uppercase tracking-widest text-xs py-4 rounded-none hover:bg-black hover:text-white transition-colors">
                         Alert Contact
                     </button>
                 </div>

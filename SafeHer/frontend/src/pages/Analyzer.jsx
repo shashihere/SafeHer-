@@ -24,7 +24,7 @@ const Analyzer = () => {
     };
 
     return (
-        <div className="max-w-4xl mx-auto px-4 py-12 w-full bg-white min-h-screen text-[#615e5f]">
+        <div className="max-w-4xl mx-auto px-4 py-12 w-full bg-transparent min-h-screen text-[#615e5f]">
             <div className="text-center mb-12">
                 <div className="inline-block p-4 bg-black rounded-2xl mb-4">
                     <Search className="w-8 h-8 text-white" />
@@ -40,7 +40,7 @@ const Analyzer = () => {
 
             <div className="bg-white border border-gray-700 rounded-none p-6 mb-8 group hover:border-[#615e5f] transition-colors">
                 <textarea 
-                    className="w-full bg-white border border-gray-700 rounded-none p-6 text-xl text-[#615e5f] placeholder-gray-600 focus:outline-none focus:border-[#615e5f] resize-none transition-colors"
+                    className="w-full bg-transparent border border-gray-700 rounded-none p-6 text-xl text-[#615e5f] placeholder-gray-600 focus:outline-none focus:border-[#615e5f] resize-none transition-colors"
                     rows="4"
                     placeholder="Paste the suspicious message here..."
                     value={text}

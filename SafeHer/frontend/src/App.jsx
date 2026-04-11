@@ -23,7 +23,7 @@ const ProtectedRoute = ({ children }) => {
 function App() {
     return (
         <BrowserRouter>
-            <div className="min-h-screen flex flex-col bg-white text-[#615e5f] font-sans selection:bg-black selection:text-white">
+            <div className="min-h-screen flex flex-col bg-transparent text-[#615e5f] font-sans selection:bg-black selection:text-white">
                 <Navbar />
                 <main className="flex-grow flex flex-col relative bg-white">
                     <div className="relative z-10 flex-grow flex flex-col">

@@ -31,7 +31,7 @@ const Dashboard = () => {
     const highSeverityCount = reports.filter(r => r.severity === 'High').length;
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-8 w-full bg-white min-h-screen text-[#615e5f]">
+        <div className="max-w-7xl mx-auto px-4 py-8 w-full bg-transparent min-h-screen text-[#615e5f]">
             <header className="mb-10">
                 <h1 className="text-4xl font-cursive font-bold text-[#615e5f] tracking-widest mb-2">Welcome, {user.name}</h1>
                 <p className="text-[#615e5f] uppercase tracking-widest text-sm">Your reports are secure and confidential.</p>

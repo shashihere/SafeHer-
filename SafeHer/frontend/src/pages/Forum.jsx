@@ -74,7 +74,7 @@ const Forum = () => {
     const feed = [...posts, ...DUMMY_STORIES];
 
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full min-h-screen bg-white text-[#615e5f] selection:bg-black selection:text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full min-h-screen bg-transparent text-[#615e5f] selection:bg-black selection:text-white">
             {/* Soft Ambient Glow */}
             <div className="fixed top-0 left-1/2 -translate-x-1/2 w-screen h-[500px] bg-gradient-to-b from-gray-900/50 via-black/10 to-transparent pointer-events-none -z-10"></div>
 
@@ -113,7 +113,7 @@ const Forum = () => {
                                         placeholder="E.g., I finally spoke up..."
                                         value={title}
                                         onChange={(e) => setTitle(e.target.value)}
-                                        className="w-full bg-white/50 border border-[#615e5f]/10 text-[#615e5f] px-5 py-4 focus:outline-none focus:border-[#615e5f]/40 transition-colors text-lg font-medium rounded-xl placeholder:text-[#615e5f]"
+                                        className="w-full bg-transparent/50 border border-[#615e5f]/10 text-[#615e5f] px-5 py-4 focus:outline-none focus:border-[#615e5f]/40 transition-colors text-lg font-medium rounded-xl placeholder:text-[#615e5f]"
                                         required 
                                     />
                                 </div>
@@ -125,7 +125,7 @@ const Forum = () => {
                                         placeholder="This is a safe space. No one will ever know who you are. Let it all out..."
                                         value={content}
                                         onChange={(e) => setContent(e.target.value)}
-                                        className="w-full bg-white/50 border border-[#615e5f]/10 text-[#615e5f] px-5 py-4 focus:outline-none focus:border-[#615e5f]/40 transition-colors resize-none rounded-xl leading-relaxed placeholder:text-[#615e5f]"
+                                        className="w-full bg-transparent/50 border border-[#615e5f]/10 text-[#615e5f] px-5 py-4 focus:outline-none focus:border-[#615e5f]/40 transition-colors resize-none rounded-xl leading-relaxed placeholder:text-[#615e5f]"
                                         required 
                                     ></textarea>
                                 </div>

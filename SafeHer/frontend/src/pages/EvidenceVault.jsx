@@ -61,7 +61,7 @@ const EvidenceVault = () => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-12 w-full min-h-screen bg-white text-[#615e5f]">
+        <div className="max-w-7xl mx-auto px-4 py-12 w-full min-h-screen bg-transparent text-[#615e5f]">
             <header className="mb-10 border-b border-[#c4b7b1] pb-8">
                 <div className="flex items-center gap-4 mb-4">
                     <div className="p-4 bg-black border border-[#c4b7b1] shadow-inner">

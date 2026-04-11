@@ -2,7 +2,7 @@ import { Scale, BookOpen, ShieldAlert, FileWarning, ExternalLink, ScrollText, Ch
 
 const CyberLaw = () => {
     return (
-        <div className="max-w-6xl mx-auto px-4 py-12 w-full min-h-screen bg-white text-[#615e5f]">
+        <div className="max-w-6xl mx-auto px-4 py-12 w-full min-h-screen bg-transparent text-[#615e5f]">
             <header className="mb-12 border-b border-[#c4b7b1] pb-8 text-center md:text-left">
                 <div className="flex flex-col md:flex-row items-center gap-6 mb-4">
                     <div className="p-6 bg-black border border-[#c4b7b1] inline-block">

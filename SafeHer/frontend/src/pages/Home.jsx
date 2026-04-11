@@ -3,7 +3,7 @@ import { ShieldAlert, Image, Scale, ArrowRight, HeartPulse, Star } from 'lucide-
 
 const Home = () => {
     return (
-        <div className="flex flex-col items-center bg-white min-h-screen">
+        <div className="flex flex-col items-center bg-transparent min-h-screen">
             {/* Hero Section based on First Image */}
             <section className="w-full relative flex flex-col items-center justify-start pb-16 bg-white overflow-hidden relative">
                 {/* Full Width Edge-to-Edge Image without distortion */}
@@ -28,7 +28,7 @@ const Home = () => {
             </section>
 
             {/* Features Section - B&W Style */}
-            <section className="w-full bg-white border-t border-[#c4b7b1] py-24">
+            <section className="w-full bg-transparent border-t border-[#c4b7b1] py-24">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="text-center mb-16">
                         <h2 className="text-4xl md:text-5xl font-bold mb-4 font-cursive tracking-wide">Safety is Your Right</h2>
