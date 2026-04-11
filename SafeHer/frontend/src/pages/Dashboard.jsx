@@ -26,7 +26,7 @@ const Dashboard = () => {
         fetchReports();
     }, [user]);
 
-    if (loading) return <div className="p-8 text-center text-gray-600">Loading your secure dashboard...</div>;
+    if (loading) return <div className="p-8 text-center text-gray-800">Loading your secure dashboard...</div>;
 
     const highSeverityCount = reports.filter(r => r.severity === 'High').length;
 
@@ -34,28 +34,28 @@ const Dashboard = () => {
         <div className="max-w-7xl mx-auto px-4 py-8 w-full bg-white min-h-screen text-black">
             <header className="mb-10">
                 <h1 className="text-4xl font-cursive font-bold text-black tracking-widest mb-2">Welcome, {user.name}</h1>
-                <p className="text-gray-600 uppercase tracking-widest text-sm">Your reports are secure and confidential.</p>
+                <p className="text-gray-800 uppercase tracking-widest text-sm">Your reports are secure and confidential.</p>
             </header>
 
             <div className="grid md:grid-cols-3 gap-6 mb-12">
                 <div className="bg-white border border-gray-700 p-6 rounded-none flex items-center gap-4">
                     <div className="p-4 bg-black text-white"><FileText /></div>
                     <div>
-                        <p className="text-gray-600 text-sm font-bold uppercase tracking-widest">Total Reports</p>
+                        <p className="text-gray-800 text-sm font-bold uppercase tracking-widest">Total Reports</p>
                         <h3 className="text-3xl font-extrabold font-sans text-black mt-1">{reports.length}</h3>
                     </div>
                 </div>
                 <div className="bg-white border border-gray-700 p-6 rounded-none flex items-center gap-4">
-                    <div className="p-4 bg-gray-800 text-black"><AlertTriangle /></div>
+                    <div className="p-4 bg-gray-800 text-white"><AlertTriangle /></div>
                     <div>
-                        <p className="text-gray-600 text-sm font-bold uppercase tracking-widest">High Severity</p>
+                        <p className="text-gray-800 text-sm font-bold uppercase tracking-widest">High Severity</p>
                         <h3 className="text-3xl font-extrabold font-sans text-black mt-1">{highSeverityCount}</h3>
                     </div>
                 </div>
                 <div className="bg-white border border-gray-700 p-6 rounded-none flex items-center gap-4">
-                    <div className="p-4 bg-gray-100 border border-gray-200 text-gray-600"><CheckCircle /></div>
+                    <div className="p-4 bg-gray-100 border border-gray-200 text-gray-800"><CheckCircle /></div>
                     <div>
-                        <p className="text-gray-600 text-sm font-bold uppercase tracking-widest">Resolved (Mock)</p>
+                        <p className="text-gray-800 text-sm font-bold uppercase tracking-widest">Resolved (Mock)</p>
                         <h3 className="text-3xl font-extrabold font-sans text-gray-700 mt-1">0</h3>
                     </div>
                 </div>
@@ -85,7 +85,7 @@ const Dashboard = () => {
             ) : (
                 <div className="bg-white border border-gray-700 rounded-none overflow-hidden">
                     <div className="overflow-x-auto">
-                        <table className="w-full text-left text-sm text-gray-300">
+                        <table className="w-full text-left text-sm text-gray-700">
                             <thead className="text-xs text-black uppercase tracking-widest bg-gray-100 border-b border-gray-700">
                                 <tr>
                                     <th className="px-6 py-4">Date</th>
@@ -97,17 +97,17 @@ const Dashboard = () => {
                             <tbody>
                                 {reports.map((report) => (
                                     <tr key={report._id} className="border-t border-gray-200 hover:bg-gray-100/50 transition-colors">
-                                        <td className="px-6 py-4 flex items-center gap-2 text-gray-600">
+                                        <td className="px-6 py-4 flex items-center gap-2 text-gray-800">
                                             <Clock className="w-4 h-4 text-gray-700" />
                                             {new Date(report.createdAt).toLocaleDateString()}
                                         </td>
                                         <td className="px-6 py-4 font-bold uppercase tracking-widest">{report.platform || 'General'}</td>
                                         <td className="px-6 py-4">
-                                            <span className="px-3 py-1 rounded-none text-xs font-bold uppercase tracking-widest border border-gray-600 bg-gray-800 text-black">
+                                            <span className="px-3 py-1 rounded-none text-xs font-bold uppercase tracking-widest border border-gray-600 bg-gray-800 text-white">
                                                 {report.severity}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 text-gray-600 uppercase tracking-widest text-xs font-bold">Under Review</td>
+                                        <td className="px-6 py-4 text-gray-800 uppercase tracking-widest text-xs font-bold">Under Review</td>
                                     </tr>
                                 ))}
                             </tbody>

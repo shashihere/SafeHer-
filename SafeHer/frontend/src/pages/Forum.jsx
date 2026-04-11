@@ -85,12 +85,12 @@ const Forum = () => {
                 <h1 className="text-5xl md:text-6xl font-cursive font-bold text-black tracking-widest relative z-10 drop-shadow-lg">
                     The Safe Haven
                 </h1>
-                <p className="text-gray-600 tracking-wide max-w-2xl mx-auto relative z-10 text-lg md:text-xl font-light">
+                <p className="text-gray-800 tracking-wide max-w-2xl mx-auto relative z-10 text-lg md:text-xl font-light">
                     A completely anonymous, zero-judgment sanctuary. Share your trauma, heal together, and find strength in the community.
                 </p>
                 <div className="inline-flex items-center gap-2 bg-black/5 border border-black/10 px-5 py-2 mt-6 rounded-full backdrop-blur-sm">
-                    <Shield className="w-4 h-4 text-gray-300" />
-                    <span className="text-sm font-medium tracking-widest text-gray-300">Identity Strictly Protected</span>
+                    <Shield className="w-4 h-4 text-gray-700" />
+                    <span className="text-sm font-medium tracking-widest text-gray-700">Identity Strictly Protected</span>
                 </div>
             </header>
 
@@ -102,7 +102,7 @@ const Forum = () => {
                             <div className="absolute top-0 right-0 w-64 h-64 bg-black/5 rounded-full blur-[80px] opacity-50 group-hover:opacity-70 transition-opacity"></div>
                             
                             <h3 className="text-2xl font-cursive tracking-widest mb-8 flex items-center gap-3 relative z-10 text-black">
-                                <MessageSquarePlus className="w-6 h-6 text-gray-600" /> Share Your Truth
+                                <MessageSquarePlus className="w-6 h-6 text-gray-800" /> Share Your Truth
                             </h3>
                             
                             <div className="space-y-6 relative z-10">
@@ -113,7 +113,7 @@ const Forum = () => {
                                         placeholder="E.g., I finally spoke up..."
                                         value={title}
                                         onChange={(e) => setTitle(e.target.value)}
-                                        className="w-full bg-white/50 border border-black/10 text-black px-5 py-4 focus:outline-none focus:border-black/40 transition-colors text-lg font-medium rounded-xl placeholder:text-gray-600"
+                                        className="w-full bg-white/50 border border-black/10 text-black px-5 py-4 focus:outline-none focus:border-black/40 transition-colors text-lg font-medium rounded-xl placeholder:text-gray-800"
                                         required 
                                     />
                                 </div>
@@ -125,7 +125,7 @@ const Forum = () => {
                                         placeholder="This is a safe space. No one will ever know who you are. Let it all out..."
                                         value={content}
                                         onChange={(e) => setContent(e.target.value)}
-                                        className="w-full bg-white/50 border border-black/10 text-gray-300 px-5 py-4 focus:outline-none focus:border-black/40 transition-colors resize-none rounded-xl leading-relaxed placeholder:text-gray-600"
+                                        className="w-full bg-white/50 border border-black/10 text-gray-700 px-5 py-4 focus:outline-none focus:border-black/40 transition-colors resize-none rounded-xl leading-relaxed placeholder:text-gray-800"
                                         required 
                                     ></textarea>
                                 </div>
@@ -138,7 +138,7 @@ const Forum = () => {
                                                 key={tag}
                                                 type="button"
                                                 onClick={() => setActiveTag(tag)}
-                                                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeTag === tag ? 'bg-black text-white shadow-[0_0_15px_rgba(255,255,255,0.3)]' : 'bg-white/50 text-gray-600 border border-black/10 hover:border-black/30 hover:text-gray-200'}`}
+                                                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeTag === tag ? 'bg-black text-white shadow-[0_0_15px_rgba(255,255,255,0.3)]' : 'bg-white/50 text-gray-800 border border-black/10 hover:border-black/30 hover:text-gray-900'}`}
                                             >
                                                 {tag}
                                             </button>
@@ -166,8 +166,8 @@ const Forum = () => {
                 {/* Right Side: Feed (More spacious and elegant) */}
                 <div className="lg:col-span-7 space-y-8">
                     <div className="flex items-center gap-3 border-b border-black/10 pb-4 mb-8">
-                        <Wind className="w-5 h-5 text-gray-600" />
-                        <h2 className="text-xl font-medium tracking-wider text-gray-300">
+                        <Wind className="w-5 h-5 text-gray-800" />
+                        <h2 className="text-xl font-medium tracking-wider text-gray-700">
                             Stories of Resilience
                         </h2>
                     </div>
@@ -177,20 +177,20 @@ const Forum = () => {
                             <div className="flex justify-between items-start mb-6">
                                 <div className="flex items-center gap-4">
                                     <div className="w-12 h-12 bg-gradient-to-br from-gray-800 to-black border border-black/10 rounded-full flex items-center justify-center shadow-inner">
-                                        <UserCircle className="w-8 h-8 text-gray-600" />
+                                        <UserCircle className="w-8 h-8 text-gray-800" />
                                     </div>
                                     <div>
-                                        <p className="font-bold text-gray-200 tracking-wide">Anonymous Survivor</p>
+                                        <p className="font-bold text-gray-900 tracking-wide">Anonymous Survivor</p>
                                         <p className="text-xs text-gray-700 uppercase tracking-widest mt-1">{new Date(post.createdAt).toLocaleDateString()}</p>
                                     </div>
                                 </div>
-                                <span className="bg-white/50 border border-black/10 text-gray-300 text-xs px-4 py-1.5 font-medium tracking-widest rounded-full">
+                                <span className="bg-white/50 border border-black/10 text-gray-700 text-xs px-4 py-1.5 font-medium tracking-widest rounded-full">
                                     {post.tag || 'Survival Story'}
                                 </span>
                             </div>
                             
                             <h4 className="text-3xl font-cursive font-bold tracking-wide mb-5 text-black drop-shadow-md">{post.title}</h4>
-                            <p className="text-gray-300 leading-relaxed mb-8 text-lg font-light">{post.content}</p>
+                            <p className="text-gray-700 leading-relaxed mb-8 text-lg font-light">{post.content}</p>
                             
                             <div className="flex items-center gap-8 border-t border-black/10 pt-6">
                                 <button className="flex items-center gap-2.5 text-gray-700 hover:text-black transition-all group/btn">
@@ -209,7 +209,7 @@ const Forum = () => {
                         </div>
                     ))}
                     
-                    <div className="py-12 flex flex-col items-center justify-center text-gray-600 space-y-4 border-t border-black/5">
+                    <div className="py-12 flex flex-col items-center justify-center text-gray-800 space-y-4 border-t border-black/5">
                         <Feather className="w-8 h-8 opacity-50" />
                         <p className="text-sm tracking-widest uppercase">End of stories</p>
                     </div>

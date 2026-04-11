@@ -51,22 +51,22 @@ const Navbar = () => {
                         {user ? (
                             <>
                                 <div className="hidden md:flex items-center gap-3 lg:gap-4 text-xs lg:text-sm">
-                                    <Link to="/dashboard" className="text-gray-300 hover:text-black flex items-center gap-1.5 transition-colors" title="Dashboard">
+                                    <Link to="/dashboard" className="text-gray-700 hover:text-black flex items-center gap-1.5 transition-colors" title="Dashboard">
                                         <LayoutDashboard className="w-4 h-4" /> <span className="hidden xl:inline">Dashboard</span>
                                     </Link>
-                                    <Link to="/report" className="text-black hover:text-gray-300 font-bold flex items-center gap-1.5 transition-colors" title="Report Abuse">
+                                    <Link to="/report" className="text-black hover:text-gray-700 font-bold flex items-center gap-1.5 transition-colors" title="Report Abuse">
                                         <FileWarning className="w-4 h-4" /> <span className="hidden xl:inline">Report Abuse</span>
                                     </Link>
-                                    <Link to="/analyzer" className="text-gray-300 hover:text-black flex items-center gap-1.5 transition-colors" title="AI Analyzer">
+                                    <Link to="/analyzer" className="text-gray-700 hover:text-black flex items-center gap-1.5 transition-colors" title="AI Analyzer">
                                         <Search className="w-4 h-4" /> <span className="hidden xl:inline">Analyzer</span>
                                     </Link>
-                                    <Link to="/vault" className="text-gray-300 hover:text-black flex items-center gap-1.5 transition-colors" title="Evidence Vault">
+                                    <Link to="/vault" className="text-gray-700 hover:text-black flex items-center gap-1.5 transition-colors" title="Evidence Vault">
                                         <FolderLock className="w-4 h-4" /> <span className="hidden xl:inline">Vault</span>
                                     </Link>
-                                    <Link to="/forum" className="text-gray-300 hover:text-black flex items-center gap-1.5 transition-colors" title="Anonymous Forum">
+                                    <Link to="/forum" className="text-gray-700 hover:text-black flex items-center gap-1.5 transition-colors" title="Anonymous Forum">
                                         <MessageCircle className="w-4 h-4" /> <span className="hidden xl:inline">Forum</span>
                                     </Link>
-                                    <Link to="/laws" className="text-gray-300 hover:text-black flex items-center gap-1.5 transition-colors" title="Cyber Laws">
+                                    <Link to="/laws" className="text-gray-700 hover:text-black flex items-center gap-1.5 transition-colors" title="Cyber Laws">
                                         <Scale className="w-4 h-4" /> <span className="hidden xl:inline">Laws</span>
                                     </Link>
                                 </div>
@@ -74,8 +74,8 @@ const Navbar = () => {
                                 <div className="h-6 w-px bg-gray-700 mx-1 hidden md:block"></div>
                                 
                                 <div className="flex items-center gap-3">
-                                    <span className="text-xs text-gray-600 hidden lg:inline">Hi, {user.name}</span>
-                                    <Link to="/account" className="text-gray-600 hover:text-black transition-colors" title="Account Settings">
+                                    <span className="text-xs text-gray-800 hidden lg:inline">Hi, {user.name}</span>
+                                    <Link to="/account" className="text-gray-800 hover:text-black transition-colors" title="Account Settings">
                                         <Settings className="w-4 h-4" />
                                     </Link>
                                 </div>
@@ -86,7 +86,7 @@ const Navbar = () => {
                             </>
                         ) : (
                             <>
-                                <Link to="/login" className="text-gray-300 hover:text-black transition-colors text-sm">Login</Link>
+                                <Link to="/login" className="text-gray-700 hover:text-black transition-colors text-sm">Login</Link>
                                 <Link to="/register" className="bg-black hover:bg-gray-200 text-white px-4 py-2 rounded-none font-bold transition-colors uppercase tracking-widest text-xs border-2 border-black whitespace-nowrap">
                                     Sign Up Free
                                 </Link>
