@@ -6,7 +6,7 @@ const createReport = async (req, res) => {
         
         let evidenceUrls = [];
         if (req.files && req.files.length > 0) {
-            evidenceUrls = req.files.map(file => `/uploads/${file.filename}`);
+            evidenceUrls = req.files.map(file => file.path); // file.path securely injected by cloudinary
         }
 
         const report = await Report.create({

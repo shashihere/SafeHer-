@@ -60,15 +60,15 @@ const EvidenceVault = () => {
                                 {report.evidenceUrls.map((url, i) => (
                                     <div key={i} className="relative aspect-video overflow-hidden bg-black border border-gray-700 group/image">
                                         <img 
-                                            src={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${url}`} 
+                                            src={url.startsWith('http') ? url : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${url}`} 
                                             alt="Evidence" 
                                             className="w-full h-full object-cover opacity-80 group-hover/image:opacity-100 transition-opacity grayscale hover:grayscale-0"
                                         />
                                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/image:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                                            <a href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${url}`} target="_blank" rel="noreferrer" className="p-3 border-2 border-white hover:bg-white hover:text-black transition-colors rounded-none text-white">
+                                            <a href={url.startsWith('http') ? url : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${url}`} target="_blank" rel="noreferrer" className="p-3 border-2 border-white hover:bg-white hover:text-black transition-colors rounded-none text-white">
                                                 <ExternalLink className="w-5 h-5" />
                                             </a>
-                                            <a href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${url}`} download className="p-3 bg-white text-black hover:bg-gray-200 transition-colors rounded-none">
+                                            <a href={url.startsWith('http') ? url : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${url}`} download className="p-3 bg-white text-black hover:bg-gray-200 transition-colors rounded-none">
                                                 <Download className="w-5 h-5" />
                                             </a>
                                         </div>
