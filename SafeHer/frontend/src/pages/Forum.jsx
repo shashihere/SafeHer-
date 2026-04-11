@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
-import { MessageSquarePlus, MessageCircle, Heart, UserCircle, Shield, Share2, Sparkles, TrendingUp } from 'lucide-react';
+import { MessageSquarePlus, MessageCircle, Heart, UserCircle, Shield, Share2, Sparkles, Wind, Feathers } from 'lucide-react';
 
 const DUMMY_STORIES = [
     {
@@ -74,116 +74,145 @@ const Forum = () => {
     const feed = [...posts, ...DUMMY_STORIES];
 
     return (
-        <div className="max-w-5xl mx-auto px-4 py-8 w-full min-h-screen bg-black text-white selection:bg-white selection:text-black">
-            <header className="mb-10 text-center space-y-4 relative">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-white rounded-full blur-[120px] opacity-10 pointer-events-none"></div>
-                <div className="inline-flex items-center justify-center p-4 bg-white border border-gray-200 shadow-[0_0_30px_rgba(255,255,255,0.2)] relative z-10 mb-4">
-                    <MessageCircle className="w-10 h-10 text-black" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full min-h-screen bg-black text-white selection:bg-white selection:text-black">
+            {/* Soft Ambient Glow */}
+            <div className="fixed top-0 left-1/2 -translate-x-1/2 w-screen h-[500px] bg-gradient-to-b from-gray-900/50 via-black/10 to-transparent pointer-events-none -z-10"></div>
+
+            <header className="mb-16 text-center space-y-6 relative">
+                <div className="inline-flex items-center justify-center p-5 bg-white/5 border border-white/10 backdrop-blur-md rounded-full shadow-[0_0_40px_rgba(255,255,255,0.05)] relative z-10 mb-2">
+                    <MessageCircle className="w-8 h-8 text-white" />
                 </div>
-                <h1 className="text-5xl font-cursive font-bold text-white tracking-widest relative z-10">Survivor Feed</h1>
-                <p className="text-gray-400 tracking-wide max-w-2xl mx-auto relative z-10 text-lg">
-                    A completely anonymous, zero-judgment social feed. Read survival stories, share your trauma, and find strength in the community.
+                <h1 className="text-5xl md:text-6xl font-cursive font-bold text-white tracking-widest relative z-10 drop-shadow-lg">
+                    The Safe Haven
+                </h1>
+                <p className="text-gray-400 tracking-wide max-w-2xl mx-auto relative z-10 text-lg md:text-xl font-light">
+                    A completely anonymous, zero-judgment sanctuary. Share your trauma, heal together, and find strength in the community.
                 </p>
-                <div className="inline-flex items-center gap-2 bg-gray-900 border border-gray-800 px-4 py-2 mt-4 rounded-full">
-                    <Shield className="w-4 h-4 text-green-500" />
-                    <span className="text-xs font-bold tracking-widest uppercase text-gray-300">Identity Strictly Protected</span>
+                <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-5 py-2 mt-6 rounded-full backdrop-blur-sm">
+                    <Shield className="w-4 h-4 text-gray-300" />
+                    <span className="text-sm font-medium tracking-widest text-gray-300">Identity Strictly Protected</span>
                 </div>
             </header>
 
-            <div className="grid lg:grid-cols-3 gap-8">
-                {/* Left Side: Create Post */}
-                <div className="lg:col-span-1 border-t md:border-t-0 md:border-r border-gray-800 md:pr-8 pt-8 md:pt-0">
-                    <div className="sticky top-24">
-                        <form onSubmit={handleSubmit} className="bg-[#0a0a0a] border border-gray-800 p-6 shadow-2xl relative overflow-hidden group rounded-xl">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-gray-600 rounded-full blur-3xl opacity-10 group-hover:opacity-20 transition-opacity"></div>
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
+                {/* Left Side: Create Post (Wider and Softer) */}
+                <div className="lg:col-span-5">
+                    <div className="sticky top-28">
+                        <form onSubmit={handleSubmit} className="bg-white/[0.03] backdrop-blur-xl border border-white/10 p-8 shadow-2xl relative overflow-hidden group rounded-3xl transition-all hover:bg-white/[0.04]">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-[80px] opacity-50 group-hover:opacity-70 transition-opacity"></div>
                             
-                            <h3 className="text-xl font-bold font-cursive tracking-widest mb-6 flex items-center gap-2 relative z-10">
-                                <MessageSquarePlus className="w-5 h-5 text-gray-300" /> Post to Feed
+                            <h3 className="text-2xl font-cursive tracking-widest mb-8 flex items-center gap-3 relative z-10 text-white">
+                                <MessageSquarePlus className="w-6 h-6 text-gray-400" /> Share Your Truth
                             </h3>
                             
-                            <div className="space-y-5 relative z-10">
-                                <input 
-                                    type="text" 
-                                    placeholder="Headline of your story..."
-                                    value={title}
-                                    onChange={(e) => setTitle(e.target.value)}
-                                    className="w-full bg-black border-b border-gray-800 text-white px-2 py-3 focus:outline-none focus:border-white transition-colors text-lg font-bold placeholder:font-normal"
-                                    required 
-                                />
-                                <textarea 
-                                    rows="5"
-                                    placeholder="Share your experience here. No one will ever know who you are. Let it out..."
-                                    value={content}
-                                    onChange={(e) => setContent(e.target.value)}
-                                    className="w-full bg-black border border-gray-800 text-gray-300 p-4 focus:outline-none focus:border-white transition-colors resize-none rounded-lg leading-relaxed"
-                                    required 
-                                ></textarea>
+                            <div className="space-y-6 relative z-10">
+                                <div>
+                                    <label className="text-xs text-gray-500 uppercase tracking-widest mb-2 block font-medium">Story Headline</label>
+                                    <input 
+                                        type="text" 
+                                        placeholder="E.g., I finally spoke up..."
+                                        value={title}
+                                        onChange={(e) => setTitle(e.target.value)}
+                                        className="w-full bg-black/50 border border-white/10 text-white px-5 py-4 focus:outline-none focus:border-white/40 transition-colors text-lg font-medium rounded-xl placeholder:text-gray-600"
+                                        required 
+                                    />
+                                </div>
+
+                                <div>
+                                    <label className="text-xs text-gray-500 uppercase tracking-widest mb-2 block font-medium">Your Experience</label>
+                                    <textarea 
+                                        rows="6"
+                                        placeholder="This is a safe space. No one will ever know who you are. Let it all out..."
+                                        value={content}
+                                        onChange={(e) => setContent(e.target.value)}
+                                        className="w-full bg-black/50 border border-white/10 text-gray-300 px-5 py-4 focus:outline-none focus:border-white/40 transition-colors resize-none rounded-xl leading-relaxed placeholder:text-gray-600"
+                                        required 
+                                    ></textarea>
+                                </div>
                                 
-                                <div className="flex gap-2 text-xs">
-                                    {['Advice', 'Rant', 'Success Story', 'Need Help'].map(tag => (
-                                        <button 
-                                            key={tag}
-                                            type="button"
-                                            onClick={() => setActiveTag(tag)}
-                                            className={`px-3 py-1.5 rounded-full transition-colors border ${activeTag === tag ? 'bg-white text-black border-white font-bold' : 'bg-transparent text-gray-500 border-gray-700 hover:border-gray-500'}`}
-                                        >
-                                            {tag}
-                                        </button>
-                                    ))}
+                                <div className="pt-2">
+                                    <label className="text-xs text-gray-500 uppercase tracking-widest mb-3 block font-medium">How are you feeling?</label>
+                                    <div className="flex flex-wrap gap-2.5">
+                                        {['Seeking Advice', 'Just Venting', 'Success Story', 'Need Help'].map(tag => (
+                                            <button 
+                                                key={tag}
+                                                type="button"
+                                                onClick={() => setActiveTag(tag)}
+                                                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeTag === tag ? 'bg-white text-black shadow-[0_0_15px_rgba(255,255,255,0.3)]' : 'bg-black/50 text-gray-400 border border-white/10 hover:border-white/30 hover:text-gray-200'}`}
+                                            >
+                                                {tag}
+                                            </button>
+                                        ))}
+                                    </div>
                                 </div>
 
                                 <button 
                                     type="submit" 
                                     disabled={loading}
-                                    className="w-full bg-white text-black font-bold uppercase tracking-widest px-8 py-3.5 hover:bg-gray-200 disabled:opacity-50 transition-colors flex justify-center items-center gap-2 rounded-lg"
+                                    className="w-full bg-white text-black font-bold uppercase tracking-widest px-8 py-4 hover:bg-gray-200 disabled:opacity-50 transition-all flex justify-center items-center gap-2 rounded-xl mt-6 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]"
                                 >
-                                    {loading ? 'Posting...' : <><Sparkles className="w-4 h-4"/> Publish Anonymously</>}
+                                    {loading ? 'Posting securely...' : <><Sparkles className="w-5 h-5"/> Publish Anonymously</>}
                                 </button>
+                                
+                                <div className="flex items-center gap-2 justify-center mt-4">
+                                    <Shield className="w-3.5 h-3.5 text-gray-500" />
+                                    <p className="text-xs text-gray-500 font-medium">End-to-end stripped of identity markers.</p>
+                                </div>
                             </div>
                         </form>
                     </div>
                 </div>
 
-                {/* Right Side: Feed */}
-                <div className="lg:col-span-2 space-y-6">
-                    <div className="flex justify-between items-center mb-6">
-                        <h2 className="text-xl font-bold flex items-center gap-2 text-gray-300">
-                            <TrendingUp className="w-5 h-5" /> Recent Activity
+                {/* Right Side: Feed (More spacious and elegant) */}
+                <div className="lg:col-span-7 space-y-8">
+                    <div className="flex items-center gap-3 border-b border-white/10 pb-4 mb-8">
+                        <Wind className="w-5 h-5 text-gray-400" />
+                        <h2 className="text-xl font-medium tracking-wider text-gray-300">
+                            Stories of Resilience
                         </h2>
                     </div>
 
                     {feed.map((post) => (
-                        <div key={post._id} className="bg-[#050505] border border-gray-800 p-6 lg:p-8 hover:border-gray-600 transition-all shadow-lg rounded-2xl group cursor-default">
+                        <div key={post._id} className="bg-white/[0.02] border border-white/10 p-8 hover:bg-white/[0.04] transition-all shadow-xl shadow-black/50 rounded-3xl group cursor-default backdrop-blur-sm">
                             <div className="flex justify-between items-start mb-6">
                                 <div className="flex items-center gap-4">
-                                    <div className="bg-gradient-to-br from-gray-700 to-black p-0.5 rounded-full">
-                                        <UserCircle className="w-10 h-10 text-white bg-black rounded-full" />
+                                    <div className="w-12 h-12 bg-gradient-to-br from-gray-800 to-black border border-white/10 rounded-full flex items-center justify-center shadow-inner">
+                                        <UserCircle className="w-8 h-8 text-gray-400" />
                                     </div>
                                     <div>
-                                        <p className="font-bold text-white tracking-wide">Anonymous Warrior</p>
-                                        <p className="text-xs text-gray-500 uppercase tracking-widest mt-0.5">{new Date(post.createdAt).toLocaleDateString()}</p>
+                                        <p className="font-bold text-gray-200 tracking-wide">Anonymous Survivor</p>
+                                        <p className="text-xs text-gray-500 uppercase tracking-widest mt-1">{new Date(post.createdAt).toLocaleDateString()}</p>
                                     </div>
                                 </div>
-                                <span className="bg-gray-900 border border-gray-700 text-gray-300 text-xs px-3 py-1 font-bold tracking-widest rounded-full shadow-inner shadow-black/50">
+                                <span className="bg-black/50 border border-white/10 text-gray-300 text-xs px-4 py-1.5 font-medium tracking-widest rounded-full">
                                     {post.tag || 'Survival Story'}
                                 </span>
                             </div>
                             
-                            <h4 className="text-2xl font-bold font-cursive tracking-wide mb-4 text-gray-100 group-hover:text-white transition-colors">{post.title}</h4>
-                            <p className="text-gray-400 leading-relaxed mb-8 text-base md:text-lg">{post.content}</p>
+                            <h4 className="text-3xl font-cursive font-bold tracking-wide mb-5 text-white drop-shadow-md">{post.title}</h4>
+                            <p className="text-gray-300 leading-relaxed mb-8 text-lg font-light">{post.content}</p>
                             
-                            <div className="flex items-center gap-6 border-t border-gray-900 pt-5">
-                                <button className="flex items-center gap-2 text-gray-500 hover:text-red-500 hover:bg-red-500/10 px-3 py-1.5 rounded-full transition-all group/btn">
-                                    <Heart className="w-5 h-5 group-hover/btn:fill-red-500 transition-colors" />
-                                    <span className="text-sm font-bold tracking-wide">{post.upvotes || 0}</span>
+                            <div className="flex items-center gap-8 border-t border-white/10 pt-6">
+                                <button className="flex items-center gap-2.5 text-gray-500 hover:text-white transition-all group/btn">
+                                    <div className="p-2 rounded-full group-hover/btn:bg-white/10 transition-colors">
+                                        <Heart className="w-5 h-5 group-hover/btn:fill-white transition-colors" />
+                                    </div>
+                                    <span className="text-sm font-medium tracking-wide">{post.upvotes || 0} Supported</span>
                                 </button>
-                                <button className="flex items-center gap-2 text-gray-500 hover:text-white hover:bg-gray-800 px-3 py-1.5 rounded-full transition-all">
-                                    <Share2 className="w-5 h-5" />
-                                    <span className="text-sm font-bold tracking-wide">Amplify</span>
+                                <button className="flex items-center gap-2.5 text-gray-500 hover:text-white transition-all group/btn">
+                                    <div className="p-2 rounded-full group-hover/btn:bg-white/10 transition-colors">
+                                        <Share2 className="w-5 h-5" />
+                                    </div>
+                                    <span className="text-sm font-medium tracking-wide">Amplify</span>
                                 </button>
                             </div>
                         </div>
                     ))}
+                    
+                    <div className="py-12 flex flex-col items-center justify-center text-gray-600 space-y-4 border-t border-white/5">
+                        <Feathers className="w-8 h-8 opacity-50" />
+                        <p className="text-sm tracking-widest uppercase">End of stories</p>
+                    </div>
                 </div>
             </div>
         </div>
