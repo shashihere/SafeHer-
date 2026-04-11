@@ -24,23 +24,23 @@ const Analyzer = () => {
     };
 
     return (
-        <div className="max-w-4xl mx-auto px-4 py-12 w-full bg-black min-h-screen text-white">
+        <div className="max-w-4xl mx-auto px-4 py-12 w-full bg-white min-h-screen text-black">
             <div className="text-center mb-12">
-                <div className="inline-block p-4 bg-white rounded-2xl mb-4">
-                    <Search className="w-8 h-8 text-black" />
+                <div className="inline-block p-4 bg-black rounded-2xl mb-4">
+                    <Search className="w-8 h-8 text-white" />
                 </div>
                 <h1 className="text-4xl font-cursive font-bold mb-4 tracking-wider">AI Toxicity Analyzer</h1>
-                <p className="text-gray-400 max-w-xl mx-auto font-sans">
+                <p className="text-gray-600 max-w-xl mx-auto font-sans">
                     Unsure if a message crosses the line? Paste it below. Our SafeHer AI will analyze it for toxicity, harassment, and threats.
                 </p>
-                <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 bg-black text-white border border-white text-sm uppercase tracking-widest font-bold font-sans">
-                    <Shield className="w-4 h-4 text-white" /> AI is Watching Out for You.
+                <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 bg-white text-black border border-black text-sm uppercase tracking-widest font-bold font-sans">
+                    <Shield className="w-4 h-4 text-black" /> AI is Watching Out for You.
                 </div>
             </div>
 
-            <div className="bg-black border border-gray-700 rounded-none p-6 mb-8 group hover:border-white transition-colors">
+            <div className="bg-white border border-gray-700 rounded-none p-6 mb-8 group hover:border-black transition-colors">
                 <textarea 
-                    className="w-full bg-black border border-gray-700 rounded-none p-6 text-xl text-white placeholder-gray-600 focus:outline-none focus:border-white resize-none transition-colors"
+                    className="w-full bg-white border border-gray-700 rounded-none p-6 text-xl text-black placeholder-gray-600 focus:outline-none focus:border-black resize-none transition-colors"
                     rows="4"
                     placeholder="Paste the suspicious message here..."
                     value={text}
@@ -50,7 +50,7 @@ const Analyzer = () => {
                     <button 
                         onClick={handleAnalyze}
                         disabled={loading || !text}
-                        className="bg-white hover:bg-gray-200 text-black px-8 py-3 rounded-none font-bold transition-colors disabled:opacity-50 uppercase tracking-widest text-sm border-2 border-white"
+                        className="bg-black hover:bg-gray-200 text-white px-8 py-3 rounded-none font-bold transition-colors disabled:opacity-50 uppercase tracking-widest text-sm border-2 border-black"
                     >
                         {loading ? 'Analyzing...' : 'Analyze Message'}
                     </button>
@@ -58,34 +58,34 @@ const Analyzer = () => {
             </div>
 
             {result && (
-                <div className="p-8 rounded-none border-2 bg-black border-white transition-all">
+                <div className="p-8 rounded-none border-2 bg-white border-black transition-all">
                     <div className="flex items-center gap-4 mb-6">
-                        <AlertTriangle className="w-8 h-8 text-white" />
+                        <AlertTriangle className="w-8 h-8 text-black" />
                         <h2 className="text-2xl font-bold font-cursive tracking-widest">Analysis Complete</h2>
                     </div>
                     
                     <div className="grid md:grid-cols-2 gap-8">
                         <div>
-                            <p className="text-gray-400 mb-1 uppercase tracking-widest text-sm font-bold">Toxicity Score</p>
+                            <p className="text-gray-600 mb-1 uppercase tracking-widest text-sm font-bold">Toxicity Score</p>
                             <div className="flex items-baseline gap-2">
                                 <span className="text-4xl font-extrabold">{result.toxicityScore}%</span>
-                                <span className="text-lg font-medium text-gray-400">
+                                <span className="text-lg font-medium text-gray-600">
                                     ({result.severity} Severity)
                                 </span>
                             </div>
                             
                             {/* Visual Progress Bar - B&W */}
-                            <div className="w-full h-3 bg-gray-900 rounded-none mt-4 overflow-hidden border border-gray-700">
+                            <div className="w-full h-3 bg-gray-100 rounded-none mt-4 overflow-hidden border border-gray-700">
                                 <div 
-                                    className="h-full bg-white"
+                                    className="h-full bg-black"
                                     style={{ width: `${Math.max(result.toxicityScore, 5)}%` }}
                                 ></div>
                             </div>
                         </div>
                         
                         <div>
-                            <p className="text-gray-400 mb-1 uppercase tracking-widest text-sm font-bold">Suggested Action</p>
-                            <p className="text-xl font-medium text-white p-4 border border-gray-800 bg-gray-900/50">{result.suggestedAction}</p>
+                            <p className="text-gray-600 mb-1 uppercase tracking-widest text-sm font-bold">Suggested Action</p>
+                            <p className="text-xl font-medium text-black p-4 border border-gray-200 bg-gray-100/50">{result.suggestedAction}</p>
                         </div>
                     </div>
                 </div>

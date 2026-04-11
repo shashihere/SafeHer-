@@ -13,8 +13,8 @@
 }
 
 body {
-  background-color: var(--color-bg-dark);
-  color: #ffffff;
+  background-color: #f9fafb; /* Light clean gray-white */
+  color: #000000;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 

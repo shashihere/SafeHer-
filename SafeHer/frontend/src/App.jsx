@@ -23,9 +23,9 @@ const ProtectedRoute = ({ children }) => {
 function App() {
     return (
         <BrowserRouter>
-            <div className="min-h-screen flex flex-col bg-black text-white font-sans selection:bg-white selection:text-black">
+            <div className="min-h-screen flex flex-col bg-white text-black font-sans selection:bg-black selection:text-white">
                 <Navbar />
-                <main className="flex-grow flex flex-col relative bg-black">
+                <main className="flex-grow flex flex-col relative bg-white">
                     <div className="relative z-10 flex-grow flex flex-col">
                         <Routes>
                             <Route path="/" element={<Home />} />
