@@ -6,7 +6,8 @@ const reportSchema = new mongoose.Schema({
     platform: { type: String }, // e.g., Instagram, Twitter
     aiScore: { type: Number },
     severity: { type: String, enum: ['Low', 'Medium', 'High', 'Pending'], default: 'Pending' },
-    evidenceUrls: [{ type: String }] // Store file paths
+    evidenceUrls: [{ type: String }], // Store file paths
+    escalated: { type: Boolean, default: false } // Track if authorities were emailed
 }, { timestamps: true });
 
 module.exports = mongoose.model('Report', reportSchema);
