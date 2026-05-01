@@ -13,6 +13,8 @@ import Premium from './pages/Premium';
 import Account from './pages/Account';
 import CyberLaw from './pages/CyberLaw';
 import Forum from './pages/Forum';
+import LiveTracking from './pages/LiveTracking';
+import SOSWidget from './components/SOSWidget';
 
 const ProtectedRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
@@ -23,8 +25,9 @@ const ProtectedRoute = ({ children }) => {
 function App() {
     return (
         <BrowserRouter>
-            <div className="min-h-screen flex flex-col bg-transparent text-[#615e5f] font-sans selection:bg-black selection:text-white">
+            <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800 font-sans selection:bg-blue-600 selection:text-white">
                 <Navbar />
+                <SOSWidget />
                 <main className="flex-grow flex flex-col relative bg-transparent">
                     <div className="relative z-10 flex-grow flex flex-col">
                         <Routes>
@@ -39,6 +42,7 @@ function App() {
                             <Route path="/laws" element={<CyberLaw />} />
                             <Route path="/forum" element={<ProtectedRoute><Forum /></ProtectedRoute>} />
                             <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
+                            <Route path="/track/:userId" element={<LiveTracking />} />
                         </Routes>
                     </div>
                 </main>

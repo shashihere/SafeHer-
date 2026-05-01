@@ -108,67 +108,67 @@ const Dashboard = () => {
         doc.save(`SafeHer_Incident_Report_${report._id}.pdf`);
     };
 
-    if (loading) return <div className="p-8 text-center text-[#615e5f]">Loading your secure dashboard...</div>;
+    if (loading) return <div className="p-8 text-center text-slate-800">Loading your secure dashboard...</div>;
 
     const highSeverityCount = reports.filter(r => r.severity === 'High').length;
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-8 w-full bg-transparent min-h-screen text-[#615e5f]">
+        <div className="max-w-7xl mx-auto px-4 py-8 w-full bg-transparent min-h-screen text-slate-800">
             <header className="mb-10">
-                <h1 className="text-4xl font-cursive font-bold text-[#615e5f] tracking-widest mb-2">Welcome, {user.name}</h1>
-                <p className="text-[#615e5f] uppercase tracking-widest text-sm">Your reports are secure and confidential.</p>
+                <h1 className="text-4xl font-cursive font-bold text-slate-800 tracking-widest mb-2">Welcome, {user.name}</h1>
+                <p className="text-slate-800 uppercase tracking-widest text-sm">Your reports are secure and confidential.</p>
             </header>
 
             <div className="grid md:grid-cols-3 gap-6 mb-12">
                 <div className="bg-white border border-gray-700 p-6 rounded-none flex items-center gap-4">
-                    <div className="p-4 bg-[#615e5f] text-white hover:bg-[#4a4748]"><FileText /></div>
+                    <div className="p-4 bg-blue-600 text-white hover:bg-blue-700"><FileText /></div>
                     <div>
-                        <p className="text-[#615e5f] text-sm font-bold uppercase tracking-widest">Total Reports</p>
-                        <h3 className="text-3xl font-extrabold font-sans text-[#615e5f] mt-1">{reports.length}</h3>
+                        <p className="text-slate-800 text-sm font-bold uppercase tracking-widest">Total Reports</p>
+                        <h3 className="text-3xl font-extrabold font-sans text-slate-800 mt-1">{reports.length}</h3>
                     </div>
                 </div>
                 <div className="bg-white border border-gray-700 p-6 rounded-none flex items-center gap-4">
                     <div className="p-4 bg-gray-800 text-white"><AlertTriangle /></div>
                     <div>
-                        <p className="text-[#615e5f] text-sm font-bold uppercase tracking-widest">High Severity</p>
-                        <h3 className="text-3xl font-extrabold font-sans text-[#615e5f] mt-1">{highSeverityCount}</h3>
+                        <p className="text-slate-800 text-sm font-bold uppercase tracking-widest">High Severity</p>
+                        <h3 className="text-3xl font-extrabold font-sans text-slate-800 mt-1">{highSeverityCount}</h3>
                     </div>
                 </div>
                 <div className="bg-white border border-gray-700 p-6 rounded-none flex items-center gap-4">
-                    <div className="p-4 bg-[#ffffff]/90 border border-[#c4b7b1] text-[#615e5f]"><CheckCircle /></div>
+                    <div className="p-4 bg-[#ffffff]/90 border border-slate-200 text-slate-800"><CheckCircle /></div>
                     <div>
-                        <p className="text-[#615e5f] text-sm font-bold uppercase tracking-widest">Resolved (Mock)</p>
-                        <h3 className="text-3xl font-extrabold font-sans text-[#615e5f] mt-1">0</h3>
+                        <p className="text-slate-800 text-sm font-bold uppercase tracking-widest">Resolved (Mock)</p>
+                        <h3 className="text-3xl font-extrabold font-sans text-slate-800 mt-1">0</h3>
                     </div>
                 </div>
             </div>
 
-            <div className="flex justify-between items-center mb-6 border-b border-[#c4b7b1] pb-4">
+            <div className="flex justify-between items-center mb-6 border-b border-slate-200 pb-4">
                 <h2 className="text-2xl font-bold font-cursive tracking-widest">Recent Reports</h2>
-                <Link to="/report" className="text-sm bg-[#615e5f] text-white hover:bg-[#4a4748] hover:bg-[#4a4748] border border-[#615e5f] px-4 py-2 rounded-none transition-colors font-bold uppercase tracking-widest">
+                <Link to="/report" className="text-sm bg-blue-600 text-white hover:bg-blue-700 hover:bg-blue-700 border border-blue-600 px-4 py-2 rounded-none transition-colors font-bold uppercase tracking-widest">
                     + New Report
                 </Link>
             </div>
 
             {reports.length === 0 ? (
-                <div className="bg-white border border-[#c4b7b1] rounded-none p-12 text-center">
+                <div className="bg-white border border-slate-200 rounded-none p-12 text-center">
                     <img 
                         src="/images/first_image.jpg"
                         alt="No reports" 
                         className="w-32 h-32 object-cover mx-auto mb-6 opacity-80 "
                         onError={(e) => { e.target.style.display = 'none'; }}
                     />
-                    <h3 className="text-2xl font-bold text-[#615e5f] mb-2 font-cursive tracking-widest">No Reports Yet</h3>
-                    <p className="text-[#615e5f] max-w-sm mx-auto mb-6 text-sm uppercase tracking-widest">You haven't filed any reports. Your dashboard is clear.</p>
-                    <Link to="/report" className="inline-block bg-[#615e5f] text-white hover:bg-[#4a4748] hover:bg-[#4a4748] px-6 py-3 rounded-none font-extrabold uppercase tracking-widest border-2 border-[#615e5f] transition-colors">
+                    <h3 className="text-2xl font-bold text-slate-800 mb-2 font-cursive tracking-widest">No Reports Yet</h3>
+                    <p className="text-slate-800 max-w-sm mx-auto mb-6 text-sm uppercase tracking-widest">You haven't filed any reports. Your dashboard is clear.</p>
+                    <Link to="/report" className="inline-block bg-blue-600 text-white hover:bg-blue-700 hover:bg-blue-700 px-6 py-3 rounded-none font-extrabold uppercase tracking-widest border-2 border-blue-600 transition-colors">
                         File a Report
                     </Link>
                 </div>
             ) : (
                 <div className="bg-white border border-gray-700 rounded-none overflow-hidden">
                     <div className="overflow-x-auto">
-                        <table className="w-full text-left text-sm text-[#615e5f]">
-                            <thead className="text-xs text-[#615e5f] uppercase tracking-widest bg-[#ffffff]/90 border-b border-gray-700">
+                        <table className="w-full text-left text-sm text-slate-800">
+                            <thead className="text-xs text-slate-800 uppercase tracking-widest bg-[#ffffff]/90 border-b border-gray-700">
                                 <tr>
                                     <th className="px-6 py-4">Date</th>
                                     <th className="px-6 py-4">Platform</th>
@@ -179,9 +179,9 @@ const Dashboard = () => {
                             </thead>
                             <tbody>
                                 {reports.map((report) => (
-                                    <tr key={report._id} className="border-t border-[#c4b7b1] hover:bg-[#ffffff]/90/50 transition-colors">
-                                        <td className="px-6 py-4 flex items-center gap-2 text-[#615e5f]">
-                                            <Clock className="w-4 h-4 text-[#615e5f]" />
+                                    <tr key={report._id} className="border-t border-slate-200 hover:bg-[#ffffff]/90/50 transition-colors">
+                                        <td className="px-6 py-4 flex items-center gap-2 text-slate-800">
+                                            <Clock className="w-4 h-4 text-slate-800" />
                                             {new Date(report.createdAt).toLocaleDateString()}
                                         </td>
                                         <td className="px-6 py-4 font-bold uppercase tracking-widest">{report.platform || 'General'}</td>
@@ -190,22 +190,20 @@ const Dashboard = () => {
                                                 {report.severity}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 text-[#615e5f] uppercase tracking-widest text-xs font-bold">
-                                            {report.escalated ? <span className="text-rose-600">Escalated</span> : 'Under Review'}
+                                        <td className="px-6 py-4 text-slate-800 uppercase tracking-widest text-xs font-bold">
+                                            {report.escalated ? <span className="text-blue-600">Escalated</span> : 'Under Review'}
                                         </td>
                                         <td className="px-6 py-4 text-right space-x-2">
                                             <button 
                                                 onClick={() => generatePDF(report)}
-                                                className="text-xs bg-[#615e5f] text-white px-3 py-1.5 hover:bg-[#4a4748] transition-colors font-bold uppercase tracking-widest"
+                                                className="text-xs bg-blue-600 text-white px-3 py-1.5 hover:bg-blue-700 transition-colors font-bold uppercase tracking-widest"
                                             >
                                                 PDF
                                             </button>
                                             {!report.escalated && (
                                                 <button 
                                                     onClick={() => handleEscalate(report._id)}
-                                                    className="text-xs bg-rose-600 text-white px-3 py-1.5 hover:bg-rose-700 transition-colors font-bold uppercase tracking-widest"
-                                                >
-                                                    Escalate
+                                                    className="text-xs bg-red-600 text-white px-3 py-1.5 hover:bg-red-700 transition-colors font-bold uppercase tracking-widest">Escalate
                                                 </button>
                                             )}
                                         </td>

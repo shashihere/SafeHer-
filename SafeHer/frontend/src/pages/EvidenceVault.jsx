@@ -24,7 +24,7 @@ const EvidenceVault = () => {
         fetchReports();
     }, [user]);
 
-    if (loading) return <div className="p-8 text-center text-gray-600 font-sans tracking-wide">Decrypting vault...</div>;
+    if (loading) return <div className="p-8 text-center text-slate-600 font-sans tracking-wide">Decrypting vault...</div>;
 
     const generatePDF = (report) => {
         const doc = new jsPDF();
@@ -61,36 +61,36 @@ const EvidenceVault = () => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-12 w-full min-h-screen bg-transparent text-[#615e5f]">
-            <header className="mb-10 border-b border-[#c4b7b1] pb-8">
+        <div className="max-w-7xl mx-auto px-4 py-12 w-full min-h-screen bg-transparent text-slate-800">
+            <header className="mb-10 border-b border-slate-200 pb-8">
                 <div className="flex items-center gap-4 mb-4">
-                    <div className="p-4 bg-black border border-[#c4b7b1] shadow-inner">
+                    <div className="p-4 bg-blue-600 border border-slate-200 shadow-inner">
                         <FolderLock className="w-8 h-8 text-white" />
                     </div>
                     <div>
-                        <h1 className="text-4xl font-cursive font-bold text-[#615e5f] tracking-widest">Evidence Vault</h1>
-                        <p className="text-gray-600 tracking-wide mt-2">Secure storage for your uploaded screenshots and files.</p>
+                        <h1 className="text-4xl font-cursive font-bold text-slate-800 tracking-widest">Evidence Vault</h1>
+                        <p className="text-slate-600 tracking-wide mt-2">Secure storage for your uploaded screenshots and files.</p>
                     </div>
                 </div>
             </header>
 
             {reports.length === 0 ? (
-                <div className="bg-white border border-[#c4b7b1] p-16 text-center">
-                    <ImageIcon className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold font-cursive tracking-wider text-[#615e5f] mb-2">Vault is Empty</h3>
-                    <p className="text-[#615e5f] uppercase tracking-widest text-sm">You have no evidence files stored. Upload screenshots when creating a report to save them here.</p>
+                <div className="bg-white border border-slate-200 p-16 text-center">
+                    <ImageIcon className="w-16 h-16 text-slate-600 mx-auto mb-4" />
+                    <h3 className="text-2xl font-bold font-cursive tracking-wider text-slate-800 mb-2">Vault is Empty</h3>
+                    <p className="text-slate-800 uppercase tracking-widest text-sm">You have no evidence files stored. Upload screenshots when creating a report to save them here.</p>
                 </div>
             ) : (
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {reports.map((report) => (
-                        <div key={report._id} className="bg-white border border-gray-700 overflow-hidden hover:border-[#615e5f] transition-all group rounded-none">
-                            <div className="p-4 bg-[#ffffff]/90 border-b border-[#c4b7b1] flex justify-between items-center">
-                                <span className="text-xs text-gray-600 tracking-widest uppercase">Report from {new Date(report.createdAt).toLocaleDateString()}</span>
+                        <div key={report._id} className="bg-white border border-gray-700 overflow-hidden hover:border-blue-600 transition-all group rounded-none">
+                            <div className="p-4 bg-[#ffffff]/90 border-b border-slate-200 flex justify-between items-center">
+                                <span className="text-xs text-slate-600 tracking-widest uppercase">Report from {new Date(report.createdAt).toLocaleDateString()}</span>
                                 <div className="flex items-center gap-2">
-                                    <span className="text-xs bg-[#615e5f] text-white hover:bg-[#4a4748] font-bold uppercase tracking-widest px-2 py-1">
+                                    <span className="text-xs bg-blue-600 text-white hover:bg-blue-700 font-bold uppercase tracking-widest px-2 py-1">
                                         {report.platform || 'General'}
                                     </span>
-                                    <button onClick={() => generatePDF(report)} className="flex items-center gap-1 text-xs text-[#615e5f] bg-red-600 hover:bg-red-700 px-2 py-1 font-bold tracking-wider transition-colors">
+                                    <button onClick={() => generatePDF(report)} className="flex items-center gap-1 text-xs text-slate-800 bg-red-600 hover:bg-red-700 px-2 py-1 font-bold tracking-wider transition-colors">
                                         <FileText className="w-3 h-3"/> PDF
                                     </button>
                                 </div>
@@ -105,10 +105,10 @@ const EvidenceVault = () => {
                                             className="w-full h-full object-cover opacity-80 group-hover/image:opacity-100 transition-opacity hover:-0"
                                         />
                                         <div className="absolute inset-0 bg-white/50 opacity-0 group-hover/image:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                                            <a href={url.startsWith('http') ? url : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${url}`} target="_blank" rel="noreferrer" className="p-3 border-2 border-[#615e5f] hover:bg-black hover:text-white transition-colors rounded-none text-[#615e5f]">
+                                            <a href={url.startsWith('http') ? url : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${url}`} target="_blank" rel="noreferrer" className="p-3 border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition-colors rounded-none text-slate-800">
                                                 <ExternalLink className="w-5 h-5" />
                                             </a>
-                                            <a href={url.startsWith('http') ? url : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${url}`} download className="p-3 bg-[#615e5f] text-white hover:bg-[#4a4748] hover:bg-[#4a4748] transition-colors rounded-none">
+                                            <a href={url.startsWith('http') ? url : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${url}`} download className="p-3 bg-blue-600 text-white hover:bg-blue-700 hover:bg-blue-700 transition-colors rounded-none">
                                                 <Download className="w-5 h-5" />
                                             </a>
                                         </div>
@@ -116,7 +116,7 @@ const EvidenceVault = () => {
                                 ))}
                             </div>
                             <div className="px-4 pb-4">
-                                <p className="text-sm text-gray-600 line-clamp-2 italic tracking-wide">"{report.content}"</p>
+                                <p className="text-sm text-slate-600 line-clamp-2 italic tracking-wide">"{report.content}"</p>
                             </div>
                         </div>
                     ))}
