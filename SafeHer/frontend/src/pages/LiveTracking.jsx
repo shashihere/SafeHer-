@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import { MapPin, Activity } from 'lucide-react';
 
 const LiveTracking = () => {
     const { userId } = useParams();
+    const navigate = useNavigate();
     const [locationData, setLocationData] = useState(null);
     const [connected, setConnected] = useState(false);
+    const [inputId, setInputId] = useState("");
 
     useEffect(() => {
+        if (!userId) return;
+
         const socket = io(import.meta.env.VITE_API_URL || 'http://localhost:5000');
 
         socket.on("connect", () => {
@@ -32,10 +36,34 @@ const LiveTracking = () => {
                     <Activity className="w-10 h-10 animate-pulse" />
                     EMERGENCY LIVE TRACKING
                 </h1>
-                <p className="text-slate-600 font-bold uppercase tracking-widest text-sm">Target ID: {userId}</p>
+                <p className="text-slate-600 font-bold uppercase tracking-widest text-sm">Target ID: {userId || "Enter ID below"}</p>
             </header>
 
-            <div className="max-w-3xl mx-auto bg-white border-2 border-red-600 shadow-2xl p-8 text-center relative overflow-hidden">
+            {!userId ? (
+                <div className="max-w-md mx-auto bg-white border-2 border-slate-200 shadow-xl p-8 text-center rounded-xl">
+                    <Activity className="w-16 h-16 text-blue-500 mx-auto mb-4" />
+                    <h2 className="text-xl font-bold text-slate-800 mb-2">Track an Emergency</h2>
+                    <p className="text-slate-500 text-sm mb-6">Enter the Target ID provided by the sender to view their live GPS coordinates instantly.</p>
+                    
+                    <form onSubmit={(e) => { e.preventDefault(); if (inputId) navigate(`/track/${inputId}`); }}>
+                        <input 
+                            type="text" 
+                            placeholder="Paste Target ID here..." 
+                            className="w-full px-4 py-3 border border-slate-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all font-mono text-center mb-4 text-slate-800"
+                            value={inputId}
+                            onChange={(e) => setInputId(e.target.value)}
+                            required
+                        />
+                        <button 
+                            type="submit" 
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded uppercase tracking-widest transition-colors shadow-lg"
+                        >
+                            Start Tracking
+                        </button>
+                    </form>
+                </div>
+            ) : (
+                <div className="max-w-3xl mx-auto bg-white border-2 border-red-600 shadow-2xl p-8 text-center relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-2 bg-red-600 animate-pulse"></div>
                 
                 {connected ? (
@@ -91,6 +119,7 @@ const LiveTracking = () => {
                     </div>
                 )}
             </div>
+            )}
         </div>
     );
 };

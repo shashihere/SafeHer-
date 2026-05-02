@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { ShieldCheck, LogOut, LayoutDashboard, FileWarning, Search, FolderLock, Settings, AlertTriangle, Scale, MessageCircle } from 'lucide-react';
+import { ShieldCheck, LogOut, LayoutDashboard, FileWarning, Search, FolderLock, Settings, AlertTriangle, Scale, MessageCircle, Activity } from 'lucide-react';
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
@@ -68,6 +68,9 @@ const Navbar = () => {
                                     </Link>
                                     <Link to="/laws" className="text-slate-800 hover:text-slate-800 flex items-center gap-1.5 transition-colors" title="Cyber Laws">
                                         <Scale className="w-4 h-4" /> <span className="hidden xl:inline">Laws</span>
+                                    </Link>
+                                    <Link to="/track" className="text-blue-600 hover:text-blue-800 font-bold flex items-center gap-1.5 transition-colors" title="Live SOS Radar">
+                                        <Activity className="w-4 h-4 animate-pulse" /> <span className="hidden xl:inline">Tracker</span>
                                     </Link>
                                 </div>
                                 

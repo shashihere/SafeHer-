@@ -42,6 +42,7 @@ function App() {
                             <Route path="/laws" element={<CyberLaw />} />
                             <Route path="/forum" element={<ProtectedRoute><Forum /></ProtectedRoute>} />
                             <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
+                            <Route path="/track" element={<LiveTracking />} />
                             <Route path="/track/:userId" element={<LiveTracking />} />
                         </Routes>
                     </div>
