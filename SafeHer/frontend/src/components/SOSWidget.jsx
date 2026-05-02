@@ -44,7 +44,18 @@ const SOSWidget = () => {
 
         setIsActive(true);
         setError(null);
-        alert(`EMERGENCY SOS ACTIVATED. Live location is being broadcasted to tracking room: ${user._id}`);
+        
+        // Ensure we use the Vercel app link or fallback to localhost
+        const appDomain = window.location.origin.includes('localhost') 
+            ? 'https://safe-her-xi.vercel.app' 
+            : window.location.origin;
+        
+        const trackingLink = `${appDomain}/track/${user._id}`;
+        const message = `🚨 EMERGENCY SOS 🚨\nI am in danger and need help immediately! Track my LIVE moving location here:\n${trackingLink}`;
+        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+        
+        window.open(whatsappUrl, '_blank');
+        alert(`EMERGENCY SOS ACTIVATED.\n\nLive tracking link generated: ${trackingLink}\n\nPlease send the auto-generated WhatsApp message to your emergency contacts.`);
 
         watchIdRef.current = navigator.geolocation.watchPosition(
             (position) => {

@@ -12,26 +12,6 @@ const Navbar = () => {
         navigate('/');
     };
 
-    const handleSOS = () => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const { latitude, longitude } = position.coords;
-                    const message = `🚨 EMERGENCY SOS 🚨\nI need help immediately. Here is my live location coordinates:\nhttps://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-                    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-                    
-                    window.open(whatsappUrl, '_blank');
-                    alert(`🚨 SECURE ALERT TRIGGERED 🚨\n\nYour precise location (${latitude.toFixed(4)}, ${longitude.toFixed(4)}) has been locked.\n\nPlease send the auto-generated WhatsApp message to your emergency contacts or local authorities.`);
-                },
-                (error) => {
-                    alert("⚠️ SOS WARNING: Please enable Location Services in your browser to broadcast your coordinates.");
-                }
-            );
-        } else {
-            alert("Geolocation is not supported by your browser.");
-        }
-    };
-
     return (
         <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
             <div className="max-w-screen-2xl mx-auto px-4 sm:px-6">
@@ -76,10 +56,6 @@ const Navbar = () => {
                                         <Settings className="w-4 h-4" />
                                     </Link>
                                 </div>
-
-                                <button onClick={handleSOS} className="ml-1 md:ml-2 bg-red-600 hover:bg-red-700 text-slate-800 px-3 py-1.5 font-bold tracking-widest text-xs flex items-center gap-1.5 animate-pulse rounded-md shadow-[0_0_10px_rgba(220,38,38,0.4)] whitespace-nowrap">
-                                    <AlertTriangle className="w-4 h-4" /> SOS
-                                </button>
                             </>
                         ) : (
                             <>
