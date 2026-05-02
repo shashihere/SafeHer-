@@ -7,12 +7,9 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import ReportAbuse from './pages/ReportAbuse';
-import Analyzer from './pages/Analyzer';
 import EvidenceVault from './pages/EvidenceVault';
-import Premium from './pages/Premium';
 import Account from './pages/Account';
 import CyberLaw from './pages/CyberLaw';
-import Forum from './pages/Forum';
 import LiveTracking from './pages/LiveTracking';
 import SOSWidget from './components/SOSWidget';
 
@@ -32,15 +29,12 @@ function App() {
                     <div className="relative z-10 flex-grow flex flex-col">
                         <Routes>
                             <Route path="/" element={<Home />} />
-                            <Route path="/premium" element={<Premium />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
                             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                             <Route path="/report" element={<ProtectedRoute><ReportAbuse /></ProtectedRoute>} />
-                            <Route path="/analyzer" element={<ProtectedRoute><Analyzer /></ProtectedRoute>} />
                             <Route path="/vault" element={<ProtectedRoute><EvidenceVault /></ProtectedRoute>} />
                             <Route path="/laws" element={<CyberLaw />} />
-                            <Route path="/forum" element={<ProtectedRoute><Forum /></ProtectedRoute>} />
                             <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
                             <Route path="/track" element={<LiveTracking />} />
                             <Route path="/track/:userId" element={<LiveTracking />} />

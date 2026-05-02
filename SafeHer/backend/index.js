@@ -8,8 +8,6 @@ dotenv.config();
 
 const authRoutes = require('./routes/authRoutes');
 const reportRoutes = require('./routes/reportRoutes');
-const analyzeRoutes = require('./routes/analyzeRoutes');
-const forumRoutes = require('./routes/forumRoutes');
 
 const http = require('http');
 const { Server } = require('socket.io');
@@ -31,8 +29,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/reports', reportRoutes);
-app.use('/api/analyze', analyzeRoutes);
-app.use('/api/forum', forumRoutes);
 
 // Socket.io Real-Time Tracking Engine
 io.on("connection", (socket) => {

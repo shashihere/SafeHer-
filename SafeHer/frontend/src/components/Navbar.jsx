@@ -57,14 +57,8 @@ const Navbar = () => {
                                     <Link to="/report" className="text-slate-800 hover:text-slate-800 font-bold flex items-center gap-1.5 transition-colors" title="Report Abuse">
                                         <FileWarning className="w-4 h-4" /> <span className="hidden xl:inline">Report Abuse</span>
                                     </Link>
-                                    <Link to="/analyzer" className="text-slate-800 hover:text-slate-800 flex items-center gap-1.5 transition-colors" title="AI Analyzer">
-                                        <Search className="w-4 h-4" /> <span className="hidden xl:inline">Analyzer</span>
-                                    </Link>
                                     <Link to="/vault" className="text-slate-800 hover:text-slate-800 flex items-center gap-1.5 transition-colors" title="Evidence Vault">
                                         <FolderLock className="w-4 h-4" /> <span className="hidden xl:inline">Vault</span>
-                                    </Link>
-                                    <Link to="/forum" className="text-slate-800 hover:text-slate-800 flex items-center gap-1.5 transition-colors" title="Anonymous Forum">
-                                        <MessageCircle className="w-4 h-4" /> <span className="hidden xl:inline">Forum</span>
                                     </Link>
                                     <Link to="/laws" className="text-slate-800 hover:text-slate-800 flex items-center gap-1.5 transition-colors" title="Cyber Laws">
                                         <Scale className="w-4 h-4" /> <span className="hidden xl:inline">Laws</span>
