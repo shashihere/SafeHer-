@@ -15,6 +15,7 @@ const storage = new CloudinaryStorage({
   params: {
     folder: 'raksha_evidence',
     allowed_formats: ['jpg', 'jpeg', 'png', 'webp', 'pdf', 'mp4', 'webm', 'mp3', 'wav', 'm4a'],
+    resource_type: 'auto',
   },
 });
 
