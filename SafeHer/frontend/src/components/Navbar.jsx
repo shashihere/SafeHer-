@@ -15,15 +15,15 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-slate-950/80 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50 transition-all duration-300">
+        <nav className="bg-[#fdfdfd] border-b-4 border-black sticky top-0 z-50 transition-all duration-300">
             <div className="max-w-7xl mx-auto px-4">
                 <div className="flex justify-between items-center h-20">
                     <div className="flex items-center">
                         <Link to="/" className="flex items-center gap-3 group">
-                            <div className="p-1 border-2 border-white/20 rounded-full group-hover:border-blue-500 transition-colors shadow-[0_0_15px_rgba(59,130,246,0)] group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]">
-                                <img src="/logo.jpg" alt="Raksha Logo" className="w-9 h-9 object-cover rounded-full" />
+                            <div className="p-1 border-2 border-black rounded-full bg-yellow-300 group-hover:bg-blue-400 transition-colors shadow-[4px_4px_0px_rgba(0,0,0,1)]">
+                                <img src="/logo.jpg" alt="Raksha Logo" className="w-9 h-9 object-cover rounded-full border-2 border-black" />
                             </div>
-                            <span className="font-extrabold text-2xl tracking-widest uppercase font-cursive text-white group-hover:text-blue-400 transition-colors">
+                            <span className="font-extrabold text-3xl tracking-widest uppercase font-cursive text-black">
                                 Raksha
                             </span>
                         </Link>
@@ -32,31 +32,31 @@ const Navbar = () => {
                     <div className="flex items-center gap-3 md:gap-4 lg:gap-5">
                         {user ? (
                             <>
-                                <div className="hidden md:flex items-center gap-3 lg:gap-4 text-xs lg:text-sm">
-                                    <Link to="/dashboard" className="text-slate-300 hover:text-blue-400 flex items-center gap-1.5 transition-colors" title="Action Center">
-                                        <LayoutDashboard className="w-4 h-4" /> <span className="hidden xl:inline">Action Center</span>
+                                <div className="hidden md:flex items-center gap-4 lg:gap-6 text-xs lg:text-sm font-bold">
+                                    <Link to="/dashboard" className="text-black hover:text-blue-600 hover:-translate-y-1 transition-transform flex items-center gap-1.5" title="Action Center">
+                                        <LayoutDashboard className="w-5 h-5" /> <span className="hidden xl:inline uppercase tracking-widest border-b-2 border-transparent hover:border-black">Action Center</span>
                                     </Link>
-                                    <Link to="/laws" className="text-slate-300 hover:text-blue-400 flex items-center gap-1.5 transition-colors" title="Cyber Laws">
-                                        <Scale className="w-4 h-4" /> <span className="hidden xl:inline">Laws</span>
+                                    <Link to="/laws" className="text-black hover:text-green-600 hover:-translate-y-1 transition-transform flex items-center gap-1.5" title="Cyber Laws">
+                                        <Scale className="w-5 h-5" /> <span className="hidden xl:inline uppercase tracking-widest border-b-2 border-transparent hover:border-black">Laws</span>
                                     </Link>
-                                    <Link to="/track" className="text-blue-400 hover:text-blue-300 font-bold flex items-center gap-1.5 transition-colors drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]" title="Live Tracker">
-                                        <Activity className="w-4 h-4 animate-pulse" /> <span className="hidden xl:inline">Tracker</span>
+                                    <Link to="/track" className="bg-red-500 text-black border-2 border-black px-4 py-1.5 hover:-translate-y-1 hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-all flex items-center gap-1.5" title="Live Tracker">
+                                        <Activity className="w-4 h-4 animate-pulse" /> <span className="hidden xl:inline uppercase tracking-widest">Tracker</span>
                                     </Link>
                                 </div>
-                                <div className="hidden md:flex items-center pl-4 border-l border-white/20 gap-4">
-                                    <Link to="/account" className="text-xs uppercase tracking-widest text-slate-400 hover:text-white transition-colors flex items-center gap-2">
+                                <div className="hidden md:flex items-center pl-6 border-l-2 border-black gap-4">
+                                    <Link to="/account" className="text-xs uppercase tracking-widest text-black hover:bg-black hover:text-white px-3 py-2 border-2 border-transparent hover:border-black transition-colors flex items-center gap-2 font-bold">
                                         Hi, {user.name} <Settings className="w-4 h-4" />
                                     </Link>
                                 </div>
                             </>
                         ) : (
                             <div className="hidden md:flex items-center gap-4">
-                                <Link to="/login" className="text-slate-300 hover:text-white font-bold uppercase tracking-widest text-xs transition-colors">Log In</Link>
-                                <Link to="/register" className="bg-blue-600/20 text-blue-400 border border-blue-500/50 hover:bg-blue-600 hover:text-white px-5 py-2 font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:shadow-[0_0_15px_rgba(37,99,235,0.6)]">Create Account</Link>
+                                <Link to="/login" className="text-black font-extrabold uppercase tracking-widest text-sm hover:underline decoration-2 underline-offset-4 transition-all">Log In</Link>
+                                <Link to="/register" className="bg-yellow-400 text-black border-2 border-black px-6 py-2.5 font-extrabold uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-all">Create Account</Link>
                             </div>
                         )}
                         <button 
-                            className="md:hidden p-2 text-slate-300 hover:text-white transition-colors"
+                            className="md:hidden p-2 text-black hover:bg-black hover:text-white border-2 border-transparent hover:border-black transition-colors"
                             onClick={() => setIsOpen(!isOpen)}
                         >
                             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -66,30 +66,30 @@ const Navbar = () => {
             </div>
             
             {isOpen && (
-                <div className="md:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-xl animate-in slide-in-from-top-2 duration-200">
-                    <div className="px-4 pt-2 pb-6 space-y-2">
+                <div className="md:hidden border-t-4 border-black bg-white animate-in slide-in-from-top-2 duration-200">
+                    <div className="px-4 pt-4 pb-8 space-y-4 font-bold text-lg">
                         {user ? (
                             <>
-                                <Link to="/dashboard" onClick={() => setIsOpen(false)} className="flex items-center gap-2 text-slate-300 hover:text-blue-400 transition-colors uppercase tracking-widest text-xs font-bold py-3 border-b border-white/5">
-                                    <LayoutDashboard className="w-4 h-4" /> Action Center
+                                <Link to="/dashboard" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-black hover:pl-4 transition-all uppercase tracking-widest border-b-2 border-black pb-4">
+                                    <LayoutDashboard className="w-5 h-5" /> Action Center
                                 </Link>
-                                <Link to="/laws" onClick={() => setIsOpen(false)} className="flex items-center gap-2 text-slate-300 hover:text-blue-400 transition-colors uppercase tracking-widest text-xs font-bold py-3 border-b border-white/5">
-                                    <Scale className="w-4 h-4" /> Laws
+                                <Link to="/laws" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-black hover:pl-4 transition-all uppercase tracking-widest border-b-2 border-black pb-4">
+                                    <Scale className="w-5 h-5" /> Laws
                                 </Link>
-                                <Link to="/track" onClick={() => setIsOpen(false)} className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors uppercase tracking-widest text-xs font-bold py-3 border-b border-white/5 drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]">
-                                    <Activity className="w-4 h-4 animate-pulse" /> Tracker
+                                <Link to="/track" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-red-600 hover:pl-4 transition-all uppercase tracking-widest border-b-2 border-black pb-4">
+                                    <Activity className="w-5 h-5 animate-pulse" /> Tracker
                                 </Link>
-                                <Link to="/account" onClick={() => setIsOpen(false)} className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors uppercase tracking-widest text-xs font-bold py-3 border-b border-white/5">
-                                    <Settings className="w-4 h-4" /> Account Settings
+                                <Link to="/account" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-blue-600 hover:pl-4 transition-all uppercase tracking-widest border-b-2 border-black pb-4">
+                                    <Settings className="w-5 h-5" /> Account Settings
                                 </Link>
-                                <button onClick={handleLogout} className="w-full flex items-center gap-2 text-red-400 hover:text-red-300 transition-colors uppercase tracking-widest text-xs font-bold py-3">
-                                    <LogOut className="w-4 h-4" /> Log Out
+                                <button onClick={handleLogout} className="w-full flex items-center gap-3 text-black hover:bg-red-500 hover:text-white transition-all uppercase tracking-widest p-4 border-2 border-black hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] mt-4">
+                                    <LogOut className="w-5 h-5" /> Log Out
                                 </button>
                             </>
                         ) : (
-                            <div className="flex flex-col gap-3 pt-4">
-                                <Link to="/login" onClick={() => setIsOpen(false)} className="text-center bg-slate-800/50 text-white border border-white/10 hover:bg-slate-800 py-3 font-bold uppercase tracking-widest text-xs transition-colors">Log In</Link>
-                                <Link to="/register" onClick={() => setIsOpen(false)} className="text-center bg-blue-600/20 text-blue-400 border border-blue-500/50 hover:bg-blue-600 hover:text-white py-3 font-bold uppercase tracking-widest text-xs transition-all hover:shadow-[0_0_15px_rgba(37,99,235,0.6)]">Create Account</Link>
+                            <div className="flex flex-col gap-4 pt-4">
+                                <Link to="/login" onClick={() => setIsOpen(false)} className="text-center bg-white text-black border-2 border-black py-4 font-extrabold uppercase tracking-widest hover:bg-gray-100 transition-colors">Log In</Link>
+                                <Link to="/register" onClick={() => setIsOpen(false)} className="text-center bg-yellow-400 text-black border-2 border-black py-4 font-extrabold uppercase tracking-widest shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all">Create Account</Link>
                             </div>
                         )}
                     </div>

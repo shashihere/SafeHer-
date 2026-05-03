@@ -1,20 +1,33 @@
-import { useState, useEffect, useContext, useRef } from 'react';
+import { useContext, useState, useRef, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { AlertOctagon, Mic, Camera, FileText, Loader2, Activity } from 'lucide-react';
 import axios from 'axios';
-import { AlertOctagon, Mic, Camera, FileText, Loader2, PlaySquare } from 'lucide-react';
 import { jsPDF } from "jspdf";
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    
+    // Auth URL Base
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+    const [uploading, setUploading] = useState(false);
     const [reports, setReports] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [recording, setRecording] = useState(false);
-    const [uploading, setUploading] = useState(false);
     
+    // Audio Recording States
+    const [recording, setRecording] = useState(false);
     const mediaRecorderRef = useRef(null);
     const audioChunksRef = useRef([]);
-    const fileInputRef = useRef(null);
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/login');
+            return;
+        }
+        fetchReports();
+    }, [user, navigate]);
 
     const fetchReports = async () => {
         try {
@@ -22,35 +35,29 @@ const Dashboard = () => {
             const { data } = await axios.get(`${API_URL}/api/reports`, config);
             setReports(data);
         } catch (error) {
-            console.error("Error fetching reports", error);
+            console.error(error);
         } finally {
             setLoading(false);
         }
     };
 
-    useEffect(() => {
-        fetchReports();
-        // eslint-disable-next-line
-    }, [user]);
-
-    // Action 1: Trigger SOS
+    // --- Action 1: TRIGGER SOS (Routes to WhatsApp) ---
     const handleSOS = () => {
-        const trackingLink = `${window.location.origin}/track/${user._id}`;
+        const targetPhone = user?.emergencyContact ? user.emergencyContact.replace(/\D/g, '') : '';
+        const appDomain = window.location.origin.includes('localhost') 
+            ? 'https://safe-her-xi.vercel.app' 
+            : window.location.origin;
+        const trackingLink = `${appDomain}/track/${user._id}`;
         const message = `🚨 EMERGENCY SOS 🚨\nI am in danger and need help immediately! Track my LIVE moving location here:\n${trackingLink}`;
-        let targetPhone = "";
-        if (user && user.emergencyContact) {
-            targetPhone = user.emergencyContact.replace(/\D/g, '');
-        }
         const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`;
+        
+        alert("🚨 INITIATING EMERGENCY SOS 🚨\n\nRouting you to WhatsApp. Please hit SEND immediately.");
         window.open(whatsappUrl, '_blank');
     };
 
-    // Action 2: Secret Record
+    // --- Action 2: SECRET AUDIO (Mic Access & Auto-Upload) ---
     const toggleRecording = async () => {
-        if (recording) {
-            mediaRecorderRef.current.stop();
-            setRecording(false);
-        } else {
+        if (!recording) {
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                 mediaRecorderRef.current = new MediaRecorder(stream);
@@ -66,15 +73,19 @@ const Dashboard = () => {
                     await uploadEvidence(audioBlob, 'Secret Audio Recording', 'audio.webm');
                 };
 
+                audioChunksRef.current = [];
                 mediaRecorderRef.current.start();
                 setRecording(true);
             } catch (err) {
-                alert("Microphone access denied or unavailable.");
+                alert("Microphone access denied. Please allow mic permissions.");
             }
+        } else {
+            mediaRecorderRef.current.stop();
+            setRecording(false);
         }
     };
 
-    // Action 3: Quick Snap
+    // --- Action 3: QUICK SNAP (Camera Upload) ---
     const handleFileChange = async (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -88,11 +99,8 @@ const Dashboard = () => {
             const formData = new FormData();
             formData.append('content', contentText);
             formData.append('platform', 'Direct Action');
-            // Mock severity for quick actions
             formData.append('severity', 'High');
             formData.append('aiScore', 95);
-            
-            // Append file
             formData.append('evidence', fileBlob, filename);
 
             const config = { 
@@ -103,6 +111,7 @@ const Dashboard = () => {
             };
             await axios.post(`${API_URL}/api/reports`, formData, config);
             await fetchReports(); // refresh timeline
+            alert("✅ Evidence Secured in Vault.");
         } catch (error) {
             console.error("Upload error details:", error.response || error);
             alert(`Upload failed: ${error.response?.data?.message || error.message || "Unknown error"}`);
@@ -111,90 +120,111 @@ const Dashboard = () => {
         }
     };
 
-    // Action 4: Master FIR
+    // --- Action 4: AUTO-FIR (Generate Master PDF) ---
     const generateMasterPDF = () => {
-        if (reports.length === 0) return alert("No evidence found to compile.");
+        if (reports.length === 0) {
+            alert("Your evidence vault is empty. Nothing to compile.");
+            return;
+        }
+
         const doc = new jsPDF();
         
+        // Header
         doc.setFontSize(22);
-        doc.setTextColor(225, 29, 72);
-        doc.text("Raksha: Master Evidence Log (FIR Copy)", 20, 20);
+        doc.setTextColor(220, 38, 38); // Red
+        doc.text("MASTER EVIDENCE REPORT (AUTO-FIR)", 20, 20);
         
-        doc.setFontSize(10);
+        doc.setFontSize(12);
         doc.setTextColor(0, 0, 0);
-        doc.text(`Generated By: ${user.name} (${user.email})`, 20, 30);
-        doc.text(`Date of Compilation: ${new Date().toLocaleString()}`, 20, 36);
+        doc.text(`Generated by: Raksha System`, 20, 30);
+        doc.text(`User Identity: ${user.name} (${user.email})`, 20, 38);
+        doc.text(`Timestamp: ${new Date().toLocaleString()}`, 20, 46);
         
-        doc.setLineWidth(0.5);
-        doc.line(20, 40, 190, 40);
+        doc.line(20, 50, 190, 50);
+
+        let yPos = 60;
         
-        let currentY = 50;
-        
-        reports.slice(0, 5).forEach((r, idx) => {
-            if (currentY > 250) {
+        reports.forEach((report, index) => {
+            if (yPos > 270) {
                 doc.addPage();
-                currentY = 20;
+                yPos = 20;
             }
+
+            doc.setFontSize(14);
             doc.setFont("helvetica", "bold");
-            doc.text(`Incident #${idx + 1}: ${new Date(r.createdAt).toLocaleString()}`, 20, currentY);
-            currentY += 6;
-            
+            doc.text(`Incident #${index + 1} - ${new Date(report.createdAt).toLocaleString()}`, 20, yPos);
+            yPos += 8;
+
+            doc.setFontSize(12);
             doc.setFont("helvetica", "normal");
-            doc.text(`Type: ${r.content}`, 20, currentY);
-            currentY += 6;
+            doc.text(`Platform: ${report.platform}`, 20, yPos);
+            yPos += 7;
             
-            if (r.evidenceUrls && r.evidenceUrls.length > 0) {
-                doc.setTextColor(37, 99, 235); // blue link
-                doc.text(`Attachment: ${r.evidenceUrls[0]}`, 20, currentY);
+            doc.text(`Severity: ${report.severity} (AI Confidence: ${report.aiScore}%)`, 20, yPos);
+            yPos += 7;
+
+            // Handle multi-line content
+            const splitContent = doc.splitTextToSize(`Content: ${report.content}`, 170);
+            doc.text(splitContent, 20, yPos);
+            yPos += (splitContent.length * 7) + 5;
+
+            if (report.evidenceFiles && report.evidenceFiles.length > 0) {
+                doc.setFont("helvetica", "bold");
+                doc.text(`Attached Evidence:`, 20, yPos);
+                yPos += 7;
+                doc.setFont("helvetica", "normal");
+                doc.setTextColor(37, 99, 235); // Blue links
+                report.evidenceFiles.forEach(file => {
+                    const splitUrl = doc.splitTextToSize(file, 170);
+                    doc.text(splitUrl, 20, yPos);
+                    yPos += (splitUrl.length * 7);
+                });
                 doc.setTextColor(0, 0, 0);
-            } else {
-                doc.text(`Attachment: None`, 20, currentY);
             }
-            currentY += 15;
+
+            yPos += 10;
+            doc.line(20, yPos, 190, yPos);
+            yPos += 10;
         });
 
-        doc.setFontSize(10);
-        doc.setTextColor(150, 150, 150);
-        doc.text("This master document is auto-generated by the Raksha Action Center.", 20, 280);
-
-        doc.save(`Raksha_Master_FIR.pdf`);
+        doc.save(`Raksha_Master_FIR_${user.name.replace(/\s+/g, '_')}.pdf`);
     };
 
-    if (loading) return <div className="p-8 text-center text-slate-800 flex justify-center items-center h-screen"><Loader2 className="animate-spin w-8 h-8" /></div>;
+    if (loading) return <div className="p-8 text-center text-black flex justify-center items-center h-screen"><Loader2 className="animate-spin w-12 h-12" /></div>;
 
     return (
-        <div className="max-w-6xl mx-auto px-4 py-8 w-full bg-transparent min-h-[calc(100vh-80px)] text-slate-200">
-            <header className="mb-10 text-center">
-                <h1 className="text-5xl font-cursive font-extrabold text-white tracking-widest mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">Action Center</h1>
-                <p className="text-slate-400 uppercase tracking-widest text-sm font-bold">One-Tap Emergency Responses & Evidence Collection</p>
+        <div className="max-w-7xl mx-auto px-4 py-12 w-full bg-transparent min-h-[calc(100vh-80px)] text-black">
+            <header className="mb-16 text-center border-b-8 border-black pb-8">
+                <div className="inline-block bg-black text-white px-6 py-2 font-extrabold uppercase tracking-widest mb-6 -rotate-1 shadow-[4px_4px_0px_rgba(255,0,0,1)]">
+                    CRITICAL OPERATIONS
+                </div>
+                <h1 className="text-6xl md:text-8xl font-cursive font-black text-black tracking-tighter mb-4 uppercase">Action Center</h1>
+                <p className="text-black uppercase tracking-widest text-lg font-bold">One-Tap Emergency Responses & Evidence Collection</p>
             </header>
 
-            {/* The 4 Massive Action Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {/* The 4 Massive Action Cards - NEOBRUTALIST */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
                 
                 {/* 1. SOS */}
-                <button onClick={handleSOS} className="group bg-slate-900/40 backdrop-blur-md border border-white/10 hover:border-rose-500/50 hover:bg-rose-950/30 transition-all duration-300 hover:-translate-y-2 shadow-lg hover:shadow-[0_0_30px_rgba(225,29,72,0.4)] flex flex-col items-center justify-center p-8 h-64 rounded-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-b from-rose-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <AlertOctagon className="w-16 h-16 text-rose-500 mb-4 group-hover:animate-pulse z-10" />
-                    <h3 className="text-white font-extrabold text-xl uppercase tracking-widest z-10">Trigger SOS</h3>
-                    <p className="text-rose-200/60 text-xs mt-2 text-center uppercase font-bold z-10">Live Track & Alert</p>
+                <button onClick={handleSOS} className="group bg-red-500 border-8 border-black hover:-translate-y-2 hover:-translate-x-2 transition-all shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[16px_16px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center p-12 h-80 relative overflow-hidden">
+                    <AlertOctagon className="w-24 h-24 text-black mb-6 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-black font-black text-4xl uppercase tracking-tighter">Trigger SOS</h3>
+                    <p className="text-black font-bold text-lg mt-4 text-center uppercase tracking-widest bg-white border-4 border-black px-4 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">Live Track & Alert</p>
                 </button>
 
                 {/* 2. Secret Record */}
-                <button onClick={toggleRecording} className={`group bg-slate-900/40 backdrop-blur-md border border-white/10 ${recording ? 'border-emerald-500 shadow-[0_0_30px_rgba(16,185,129,0.4)] bg-emerald-950/30' : 'hover:border-emerald-500/50 hover:bg-emerald-950/30 hover:shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:-translate-y-2'} transition-all duration-300 flex flex-col items-center justify-center p-8 h-64 rounded-2xl relative overflow-hidden`}>
-                    <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <Mic className={`w-16 h-16 ${recording ? 'text-emerald-400 animate-pulse' : 'text-emerald-500/80'} mb-4 z-10 transition-colors`} />
-                    <h3 className="text-white font-extrabold text-xl uppercase tracking-widest z-10">
-                        {recording ? 'Recording...' : 'Secret Audio'}
+                <button onClick={toggleRecording} className={`group ${recording ? 'bg-green-400' : 'bg-yellow-400'} border-8 border-black hover:-translate-y-2 hover:-translate-x-2 transition-all shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[16px_16px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center p-12 h-80 relative overflow-hidden`}>
+                    <Mic className={`w-24 h-24 text-black mb-6 ${recording ? 'animate-pulse' : 'group-hover:scale-110 transition-transform'}`} />
+                    <h3 className="text-black font-black text-4xl uppercase tracking-tighter">
+                        {recording ? 'RECORDING...' : 'SECRET AUDIO'}
                     </h3>
-                    <p className="text-emerald-200/60 text-xs mt-2 text-center uppercase font-bold z-10">
-                        {recording ? 'Tap to Save to Vault' : 'One-Tap Mic Access'}
+                    <p className="text-black font-bold text-lg mt-4 text-center uppercase tracking-widest bg-white border-4 border-black px-4 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">
+                        {recording ? 'TAP TO SAVE TO VAULT' : 'ONE-TAP MIC ACCESS'}
                     </p>
                 </button>
 
                 {/* 3. Quick Snap */}
-                <div className="relative group bg-slate-900/40 backdrop-blur-md border border-white/10 hover:border-blue-500/50 hover:bg-blue-950/30 transition-all duration-300 hover:-translate-y-2 shadow-lg hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] flex flex-col items-center justify-center p-8 h-64 rounded-2xl overflow-hidden cursor-pointer">
-                    <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="relative group bg-blue-500 border-8 border-black hover:-translate-y-2 hover:-translate-x-2 transition-all shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[16px_16px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center p-12 h-80 cursor-pointer overflow-hidden">
                     <input 
                         type="file" 
                         accept="image/*" 
@@ -203,19 +233,18 @@ const Dashboard = () => {
                         disabled={uploading}
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20"
                     />
-                    {uploading ? <Loader2 className="w-16 h-16 text-blue-400 mb-4 animate-spin z-10" /> : <Camera className="w-16 h-16 text-blue-500/80 mb-4 group-hover:scale-110 transition-transform z-10" />}
-                    <h3 className="text-white font-extrabold text-xl uppercase tracking-widest z-10">
-                        {uploading ? 'Uploading...' : 'Quick Snap'}
+                    {uploading ? <Loader2 className="w-24 h-24 text-black mb-6 animate-spin" /> : <Camera className="w-24 h-24 text-black mb-6 group-hover:scale-110 transition-transform" />}
+                    <h3 className="text-black font-black text-4xl uppercase tracking-tighter">
+                        {uploading ? 'UPLOADING...' : 'QUICK SNAP'}
                     </h3>
-                    <p className="text-blue-200/60 text-xs mt-2 text-center uppercase font-bold z-10">Direct Camera Upload</p>
+                    <p className="text-black font-bold text-lg mt-4 text-center uppercase tracking-widest bg-white border-4 border-black px-4 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">DIRECT CAMERA UPLOAD</p>
                 </div>
 
                 {/* 4. Auto-FIR */}
-                <button onClick={generateMasterPDF} className="group bg-slate-900/40 backdrop-blur-md border border-white/10 hover:border-purple-500/50 hover:bg-purple-950/30 transition-all duration-300 hover:-translate-y-2 shadow-lg hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] flex flex-col items-center justify-center p-8 h-64 rounded-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <FileText className="w-16 h-16 text-purple-500/80 mb-4 group-hover:-translate-y-1 transition-transform z-10" />
-                    <h3 className="text-white font-extrabold text-xl uppercase tracking-widest z-10">Auto-FIR</h3>
-                    <p className="text-purple-200/60 text-xs mt-2 text-center uppercase font-bold z-10">Compile Evidence PDF</p>
+                <button onClick={generateMasterPDF} className="group bg-purple-400 border-8 border-black hover:-translate-y-2 hover:-translate-x-2 transition-all shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[16px_16px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center p-12 h-80 relative overflow-hidden">
+                    <FileText className="w-24 h-24 text-black mb-6 group-hover:-translate-y-2 transition-transform" />
+                    <h3 className="text-black font-black text-4xl uppercase tracking-tighter">AUTO-FIR</h3>
+                    <p className="text-black font-bold text-lg mt-4 text-center uppercase tracking-widest bg-white border-4 border-black px-4 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">COMPILE EVIDENCE PDF</p>
                 </button>
 
             </div>

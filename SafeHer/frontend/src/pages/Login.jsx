@@ -24,61 +24,58 @@ const Login = () => {
     };
 
     return (
-        <div className="flex-grow flex items-center justify-center p-4 bg-transparent min-h-[calc(100vh-80px)] relative overflow-hidden">
-            {/* Background Glows */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 blur-[100px] rounded-full pointer-events-none z-0"></div>
-
-            <div className="w-full max-w-lg bg-slate-900/40 backdrop-blur-xl border border-white/10 hover:border-blue-500/30 p-10 md:p-14 rounded-3xl relative z-10 transition-all duration-700 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
+        <div className="flex-grow flex items-center justify-center p-4 min-h-[calc(100vh-80px)] relative overflow-hidden bg-[#fdfdfd]">
+            <div className="w-full max-w-lg bg-white border-8 border-black p-8 md:p-14 relative z-10 shadow-[12px_12px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[16px_16px_0px_rgba(0,0,0,1)] transition-all duration-300">
                 
                 <div className="relative z-10">
                     <div className="flex justify-center mb-8">
-                        <div className="p-4 bg-blue-600/20 text-blue-400 border border-blue-500/50 rounded-2xl shadow-[0_0_15px_rgba(37,99,235,0.3)] inline-block">
-                            <ShieldCheck className="w-10 h-10" />
+                        <div className="p-4 bg-yellow-400 border-4 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] inline-block -rotate-3 hover:rotate-0 transition-transform">
+                            <ShieldCheck className="w-12 h-12 text-black" />
                         </div>
                     </div>
-                    <h2 className="text-4xl font-extrabold font-cursive text-center mb-2 tracking-wide text-white drop-shadow-md">Welcome Back</h2>
-                    <p className="text-center text-slate-400 mb-10 font-sans tracking-widest uppercase text-xs font-bold">Securely access your Action Center</p>
+                    <h2 className="text-5xl font-black font-cursive text-center mb-2 tracking-tighter text-black uppercase">Welcome Back</h2>
+                    <p className="text-center text-slate-800 mb-10 font-sans tracking-widest uppercase text-xs font-bold bg-gray-100 py-2 border-y-2 border-black">Securely access your Action Center</p>
 
                     {error && (
-                        <div className="bg-rose-500/10 border border-rose-500/50 text-rose-400 px-4 py-3 mb-8 rounded-xl uppercase tracking-widest text-xs font-bold text-center animate-pulse shadow-[0_0_15px_rgba(225,29,72,0.2)]">
+                        <div className="bg-red-500 border-4 border-black text-black px-4 py-3 mb-8 uppercase tracking-widest text-sm font-black text-center shadow-[4px_4px_0px_rgba(0,0,0,1)]">
                             {error}
                         </div>
                     )}
 
                     <form onSubmit={handleSubmit} className="space-y-6">
-                        <div className="group/input">
-                            <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 group-focus-within/input:text-blue-400 transition-colors">Email Address</label>
+                        <div>
+                            <label className="block text-sm font-black text-black uppercase tracking-widest mb-2">Email Address</label>
                             <input 
                                 type="email" 
-                                className="w-full bg-slate-800/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:bg-slate-800/80 transition-all placeholder:text-slate-600 font-medium"
+                                className="w-full bg-white border-4 border-black px-4 py-4 text-black focus:outline-none focus:bg-yellow-100 transition-colors placeholder:text-slate-400 font-bold shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
                                 placeholder="name@example.com"
                             />
                         </div>
-                        <div className="group/input">
-                            <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 group-focus-within/input:text-blue-400 transition-colors">Password</label>
+                        <div>
+                            <label className="block text-sm font-black text-black uppercase tracking-widest mb-2">Password</label>
                             <input 
                                 type="password" 
-                                className="w-full bg-slate-800/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:bg-slate-800/80 transition-all placeholder:text-slate-600 font-medium"
+                                className="w-full bg-white border-4 border-black px-4 py-4 text-black focus:outline-none focus:bg-yellow-100 transition-colors placeholder:text-slate-400 font-bold shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                                 placeholder="••••••••"
                             />
                         </div>
-                        <div className="pt-4">
-                            <button disabled={loading} type="submit" className="w-full bg-blue-600 text-white hover:bg-blue-500 font-bold py-4 px-4 rounded-xl transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(37,99,235,0.4)] hover:shadow-[0_0_25px_rgba(37,99,235,0.6)] disabled:opacity-50 disabled:cursor-not-allowed">
-                                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Authenticate Identity'}
+                        <div className="pt-6">
+                            <button disabled={loading} type="submit" className="w-full bg-blue-600 text-white font-black py-5 px-4 border-4 border-black shadow-[6px_6px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[10px_10px_0px_rgba(0,0,0,1)] hover:bg-blue-500 transition-all uppercase tracking-widest text-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                                {loading ? <Loader2 className="w-6 h-6 animate-spin text-white" /> : 'AUTHENTICATE'}
                             </button>
                         </div>
                     </form>
                     
-                    <div className="mt-8 pt-6 text-center">
-                        <p className="text-slate-400 uppercase tracking-widest text-xs font-bold">
+                    <div className="mt-10 pt-6 text-center border-t-4 border-black">
+                        <p className="text-black uppercase tracking-widest text-sm font-bold bg-yellow-400 inline-block px-4 py-2 border-2 border-black">
                             Don't have an account? 
-                            <Link to="/register" className="ml-2 text-blue-400 hover:text-blue-300 transition-colors">Sign up</Link>
+                            <Link to="/register" className="ml-2 text-blue-700 hover:text-blue-900 transition-colors underline decoration-2 underline-offset-4">Sign up</Link>
                         </p>
                     </div>
                 </div>

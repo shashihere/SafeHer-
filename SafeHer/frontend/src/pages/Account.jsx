@@ -56,7 +56,7 @@ const Account = () => {
             await axios.put(`${API_URL}/api/auth/update-password`, pwdData, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
-            setPwdStatus({ loading: false, success: 'Sanctuary gates resecured. Password updated.', error: null });
+            setPwdStatus({ loading: false, success: 'PASSWORD UPDATED SECURELY.', error: null });
             setPwdData({ currentPassword: '', newPassword: '' });
         } catch (error) {
             setPwdStatus({ loading: false, success: null, error: error.response?.data?.message || 'Password update failed' });
@@ -100,48 +100,45 @@ const Account = () => {
     };
 
     return (
-        <div className="bg-transparent min-h-[calc(100vh-80px)] text-slate-200 pt-16 pb-20 px-4 relative overflow-hidden">
-            {/* Background Glow */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
-
-            <div className="max-w-5xl mx-auto relative z-10">
+        <div className="bg-[#fdfdfd] min-h-[calc(100vh-80px)] text-black pt-12 pb-20 px-4">
+            <div className="max-w-5xl mx-auto">
                 <div className="mb-12">
-                    <h1 className="text-5xl md:text-7xl font-cursive font-extrabold mb-4 text-white drop-shadow-md tracking-widest">Your Sanctuary</h1>
-                    <p className="text-slate-400 font-sans uppercase tracking-widest text-xs font-bold border-b border-white/10 pb-8">
+                    <h1 className="text-6xl md:text-8xl font-cursive font-black mb-4 uppercase tracking-tighter">Your Hub</h1>
+                    <p className="font-sans uppercase tracking-widest text-sm font-bold bg-yellow-400 inline-block px-4 py-2 border-4 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)]">
                         Manage your secure identity and privacy settings.
                     </p>
                 </div>
 
                 <div className="grid md:grid-cols-4 gap-8">
                     {/* Sidebar / Nav */}
-                    <div className="md:col-span-1 bg-slate-900/40 backdrop-blur-xl border border-white/10 p-4 space-y-2 font-sans tracking-widest uppercase text-xs font-bold flex flex-col justify-between rounded-2xl shadow-lg" style={{ minHeight: '300px' }}>
-                        <div className="space-y-2">
+                    <div className="md:col-span-1 bg-white border-4 border-black p-4 space-y-4 font-sans tracking-widest uppercase text-xs font-bold flex flex-col justify-between shadow-[8px_8px_0px_rgba(0,0,0,1)]" style={{ minHeight: '400px' }}>
+                        <div className="space-y-4">
                             <button 
                                 onClick={() => setActiveTab('profile')}
-                                className={`w-full text-left px-4 py-4 rounded-xl flex items-center gap-3 transition-all duration-300 ${activeTab === 'profile' ? 'bg-blue-600/20 text-blue-400 border border-blue-500/50 shadow-[0_0_15px_rgba(37,99,235,0.3)]' : 'text-slate-400 border border-transparent hover:bg-slate-800/50 hover:text-white'}`}
+                                className={`w-full text-left px-4 py-4 border-4 border-black flex items-center gap-3 transition-all ${activeTab === 'profile' ? 'bg-yellow-400 shadow-[4px_4px_0px_rgba(0,0,0,1)] -translate-y-1' : 'bg-white hover:bg-gray-100'}`}
                             >
-                                <User className="w-4 h-4" /> Profile Info
+                                <User className="w-5 h-5" /> Profile
                             </button>
                             <button 
                                 onClick={() => setActiveTab('security')}
-                                className={`w-full text-left px-4 py-4 rounded-xl flex items-center gap-3 transition-all duration-300 ${activeTab === 'security' ? 'bg-blue-600/20 text-blue-400 border border-blue-500/50 shadow-[0_0_15px_rgba(37,99,235,0.3)]' : 'text-slate-400 border border-transparent hover:bg-slate-800/50 hover:text-white'}`}
+                                className={`w-full text-left px-4 py-4 border-4 border-black flex items-center gap-3 transition-all ${activeTab === 'security' ? 'bg-yellow-400 shadow-[4px_4px_0px_rgba(0,0,0,1)] -translate-y-1' : 'bg-white hover:bg-gray-100'}`}
                             >
-                                <Key className="w-4 h-4" /> Security
+                                <Key className="w-5 h-5" /> Security
                             </button>
                             <button 
                                 onClick={() => setActiveTab('preferences')}
-                                className={`w-full text-left px-4 py-4 rounded-xl flex items-center gap-3 transition-all duration-300 ${activeTab === 'preferences' ? 'bg-blue-600/20 text-blue-400 border border-blue-500/50 shadow-[0_0_15px_rgba(37,99,235,0.3)]' : 'text-slate-400 border border-transparent hover:bg-slate-800/50 hover:text-white'}`}
+                                className={`w-full text-left px-4 py-4 border-4 border-black flex items-center gap-3 transition-all ${activeTab === 'preferences' ? 'bg-yellow-400 shadow-[4px_4px_0px_rgba(0,0,0,1)] -translate-y-1' : 'bg-white hover:bg-gray-100'}`}
                             >
-                                <Settings className="w-4 h-4" /> Preferences
+                                <Settings className="w-5 h-5" /> Settings
                             </button>
                         </div>
 
-                        <div className="pt-8 mt-auto border-t border-white/10">
+                        <div className="pt-8 mt-auto border-t-4 border-black">
                             <button 
                                 onClick={handleLogout}
-                                className="w-full text-left px-4 py-4 rounded-xl flex items-center gap-3 transition-all text-red-400 hover:bg-red-950/30 hover:text-red-300 border border-transparent hover:border-red-500/30"
+                                className="w-full text-left px-4 py-4 flex items-center gap-3 transition-all bg-red-500 text-white border-4 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_rgba(0,0,0,1)]"
                             >
-                                <LogOut className="w-4 h-4" /> Sign Out
+                                <LogOut className="w-5 h-5" /> SIGN OUT
                             </button>
                         </div>
                     </div>
@@ -151,19 +148,19 @@ const Account = () => {
                         
                         {/* Profile Section */}
                         {activeTab === 'profile' && (
-                            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                                <section className="bg-slate-900/40 backdrop-blur-xl border border-white/10 p-8 md:p-10 rounded-2xl shadow-lg">
-                                    <h2 className="text-3xl font-cursive font-bold mb-8 tracking-wide flex items-center gap-3 text-white"><User className="w-6 h-6 text-blue-400"/> Identity Details</h2>
+                            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-300">
+                                <section className="bg-white border-4 border-black p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1">
+                                    <h2 className="text-4xl font-cursive font-black mb-8 tracking-tighter uppercase flex items-center gap-3"><User className="w-8 h-8 text-blue-600"/> IDENTITY</h2>
                                     <div className="space-y-6">
                                         <div>
-                                            <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Registered Name</label>
-                                            <div className="w-full border border-white/10 bg-slate-800/50 px-4 py-4 text-slate-300 font-sans text-lg rounded-xl opacity-80 decoration-dashed underline underline-offset-8">
+                                            <label className="block text-sm font-black uppercase tracking-widest mb-2">Registered Name</label>
+                                            <div className="w-full border-4 border-black bg-gray-100 px-4 py-4 font-sans text-lg cursor-not-allowed opacity-80 decoration-dashed underline underline-offset-8">
                                                 {user?.name || 'Raksha User'}
                                             </div>
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Registered Email</label>
-                                            <div className="w-full border border-white/10 bg-slate-800/50 px-4 py-4 text-slate-300 font-sans text-lg rounded-xl opacity-80 decoration-dashed underline underline-offset-8">
+                                            <label className="block text-sm font-black uppercase tracking-widest mb-2">Registered Email</label>
+                                            <div className="w-full border-4 border-black bg-gray-100 px-4 py-4 font-sans text-lg cursor-not-allowed opacity-80 decoration-dashed underline underline-offset-8">
                                                 {user?.email || 'user@email.com'}
                                             </div>
                                         </div>
@@ -171,23 +168,23 @@ const Account = () => {
                                 </section>
 
                                 {/* Danger Zone */}
-                                <section className="bg-rose-950/20 backdrop-blur-xl border border-rose-900/50 p-8 md:p-10 rounded-2xl shadow-[0_0_30px_rgba(225,29,72,0.1)]">
-                                    <h2 className="text-3xl font-cursive font-bold mb-4 tracking-wide text-rose-500 flex items-center gap-3"><ShieldAlert className="w-6 h-6 text-rose-500"/> Danger Zone</h2>
-                                    <p className="text-slate-400 text-sm mb-8 leading-relaxed">
+                                <section className="bg-red-500 border-4 border-black p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)]">
+                                    <h2 className="text-4xl font-cursive font-black mb-4 tracking-tighter text-black uppercase flex items-center gap-3"><ShieldAlert className="w-8 h-8 text-black"/> DANGER ZONE</h2>
+                                    <p className="text-black font-bold text-lg mb-8 leading-relaxed">
                                         Erasing your account will permanently delete your identity and wipe all securely stored evidence from the Raksha vault. This action cannot be reversed.
                                     </p>
                                     {showSuccess ? (
-                                        <div className="flex items-center justify-center gap-3 bg-emerald-600/20 border border-emerald-500/50 text-emerald-400 p-4 rounded-xl uppercase tracking-widest text-xs font-bold animate-pulse shadow-[0_0_15px_rgba(16,185,129,0.3)]">
-                                            <CheckCircle2 className="w-5 h-5" /> Account scrubbed successfully. Redirecting...
+                                        <div className="flex items-center justify-center gap-3 bg-white border-4 border-black text-black p-4 uppercase tracking-widest text-sm font-black animate-pulse shadow-[4px_4px_0px_rgba(0,0,0,1)]">
+                                            <CheckCircle2 className="w-6 h-6 text-green-500" /> ACCOUNT DELETED. REDIRECTING...
                                         </div>
                                     ) : (
                                         <button 
                                             onClick={handleDeleteAccount}
                                             disabled={isDeleting}
-                                            className="w-full md:w-auto bg-rose-600/20 border border-rose-500/50 text-rose-400 hover:bg-rose-600 hover:text-white rounded-xl font-bold py-4 px-8 transition-all duration-300 shadow-[0_0_15px_rgba(225,29,72,0.2)] hover:shadow-[0_0_25px_rgba(225,29,72,0.5)] uppercase tracking-widest text-xs flex items-center justify-center gap-2"
+                                            className="w-full md:w-auto bg-black text-white hover:bg-gray-800 border-4 border-black font-black py-5 px-8 transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-3 shadow-[4px_4px_0px_rgba(255,255,255,1)]"
                                         >
-                                            <Trash2 className="w-4 h-4" /> 
-                                            {isDeleting ? 'Erasing Protocol...' : 'Permanently Delete Account'}
+                                            <Trash2 className="w-5 h-5 text-white" /> 
+                                            {isDeleting ? 'ERASING...' : 'PERMANENTLY DELETE ACCOUNT'}
                                         </button>
                                     )}
                                 </section>
@@ -196,42 +193,42 @@ const Account = () => {
 
                         {/* Security Section */}
                         {activeTab === 'security' && (
-                            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                                <section className="bg-slate-900/40 backdrop-blur-xl border border-white/10 p-8 md:p-10 rounded-2xl shadow-lg">
-                                    <h2 className="text-3xl font-cursive font-bold mb-8 tracking-wide flex items-center gap-3 text-white"><Lock className="w-6 h-6 text-emerald-400"/> Password Modification</h2>
+                            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-300">
+                                <section className="bg-white border-4 border-black p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1">
+                                    <h2 className="text-4xl font-cursive font-black mb-8 tracking-tighter uppercase flex items-center gap-3"><Lock className="w-8 h-8 text-green-600"/> PASSWORD</h2>
                                     
                                     <form onSubmit={handlePasswordUpdate} className="space-y-6">
                                         <div>
-                                            <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Current Password</label>
+                                            <label className="block text-sm font-black uppercase tracking-widest mb-2">Current Password</label>
                                             <input 
                                                 type="password" 
                                                 required
                                                 value={pwdData.currentPassword}
                                                 onChange={(e) => setPwdData({...pwdData, currentPassword: e.target.value})}
-                                                className="w-full bg-slate-800/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors" 
+                                                className="w-full bg-white border-4 border-black px-4 py-4 text-black focus:outline-none focus:bg-yellow-100 transition-colors shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]" 
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">New Password</label>
+                                            <label className="block text-sm font-black uppercase tracking-widest mb-2">New Password</label>
                                             <input 
                                                 type="password" 
                                                 required
                                                 minLength="6"
                                                 value={pwdData.newPassword}
                                                 onChange={(e) => setPwdData({...pwdData, newPassword: e.target.value})}
-                                                className="w-full bg-slate-800/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors" 
+                                                className="w-full bg-white border-4 border-black px-4 py-4 text-black focus:outline-none focus:bg-yellow-100 transition-colors shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]" 
                                             />
                                         </div>
                                         
-                                        {pwdStatus.error && <p className="text-rose-400 text-sm mt-2">{pwdStatus.error}</p>}
-                                        {pwdStatus.success && <p className="text-emerald-400 text-sm mt-2">{pwdStatus.success}</p>}
+                                        {pwdStatus.error && <p className="text-red-600 font-bold bg-red-100 p-3 border-2 border-black">{pwdStatus.error}</p>}
+                                        {pwdStatus.success && <p className="text-green-700 font-bold bg-green-100 p-3 border-2 border-black">{pwdStatus.success}</p>}
 
                                         <button 
                                             type="submit" 
                                             disabled={pwdStatus.loading}
-                                            className="w-full sm:w-auto bg-emerald-600/20 border border-emerald-500/50 text-emerald-400 hover:bg-emerald-600 hover:text-white rounded-xl font-bold uppercase tracking-widest text-xs px-8 py-4 transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.2)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] disabled:opacity-50"
+                                            className="w-full sm:w-auto bg-green-500 text-black border-4 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_rgba(0,0,0,1)] font-black uppercase tracking-widest text-sm px-8 py-5 transition-all disabled:opacity-50"
                                         >
-                                            {pwdStatus.loading ? 'Updating...' : 'Ensure Password Security'}
+                                            {pwdStatus.loading ? 'UPDATING...' : 'UPDATE PASSWORD'}
                                         </button>
                                     </form>
                                 </section>
@@ -240,32 +237,32 @@ const Account = () => {
 
                         {/* Preferences Section */}
                         {activeTab === 'preferences' && (
-                            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                                <section className="bg-slate-900/40 backdrop-blur-xl border border-white/10 p-8 md:p-10 rounded-2xl shadow-lg">
-                                    <h2 className="text-3xl font-cursive font-bold mb-8 tracking-wide flex items-center gap-3 text-white"><Settings className="w-6 h-6 text-blue-400"/> Platform Preferences</h2>
+                            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-300">
+                                <section className="bg-white border-4 border-black p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1">
+                                    <h2 className="text-4xl font-cursive font-black mb-8 tracking-tighter uppercase flex items-center gap-3"><Settings className="w-8 h-8 text-blue-600"/> PREFERENCES</h2>
                                     
-                                    <div className="grid grid-cols-1 gap-6">
+                                    <div className="grid grid-cols-1 gap-8">
                                         
-                                        <div className="bg-slate-800/50 border border-white/10 p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 cursor-pointer hover:border-blue-500/50 rounded-xl transition-colors" onClick={handleStrictFilterToggle}>
+                                        <div className="bg-white border-4 border-black p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 cursor-pointer hover:bg-gray-50 transition-colors shadow-[4px_4px_0px_rgba(0,0,0,1)]" onClick={handleStrictFilterToggle}>
                                             <div>
-                                                <h3 className="font-bold text-lg mb-1 flex items-center gap-2 text-white">Strict AI Formatting <EyeOff className="w-4 h-4 text-blue-400"/></h3>
-                                                <p className="text-sm text-slate-400">
+                                                <h3 className="font-black text-xl mb-2 flex items-center gap-2 uppercase">STRICT AI FORMATTING <EyeOff className="w-5 h-5 text-blue-600"/></h3>
+                                                <p className="text-sm font-bold text-slate-700 leading-relaxed">
                                                     Aggressive heuristic shielding. Re-calibrates the toxicity analyzer to maximize threat detection precision.
                                                 </p>
                                             </div>
                                             <div className="shrink-0 flex items-center gap-3">
-                                                <span className={`text-xs font-bold uppercase tracking-widest ${user?.strictAIFilter ? 'text-emerald-400' : 'text-slate-500'}`}>
-                                                    {filterUpdating ? 'Saving...' : user?.strictAIFilter ? 'Enabled' : 'Disabled'}
+                                                <span className={`text-sm font-black uppercase tracking-widest ${user?.strictAIFilter ? 'text-green-600' : 'text-slate-500'}`}>
+                                                    {filterUpdating ? 'SAVING...' : user?.strictAIFilter ? 'ENABLED' : 'DISABLED'}
                                                 </span>
-                                                <div className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${user?.strictAIFilter ? 'bg-emerald-500' : 'bg-slate-700'}`}>
-                                                    <div className={`w-4 h-4 rounded-full transition-transform ${user?.strictAIFilter ? 'bg-white translate-x-6' : 'bg-slate-400'}`}></div>
+                                                <div className={`w-16 h-8 border-4 border-black flex items-center px-1 transition-colors ${user?.strictAIFilter ? 'bg-green-400' : 'bg-gray-300'}`}>
+                                                    <div className={`w-4 h-4 border-2 border-black transition-transform ${user?.strictAIFilter ? 'bg-white translate-x-8' : 'bg-white'}`}></div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="bg-slate-800/50 border border-white/10 p-6 mt-4 rounded-xl">
-                                            <h3 className="font-bold text-lg mb-2 text-white">Primary Emergency Contact</h3>
-                                            <p className="text-sm text-slate-400 mb-4">
+                                        <div className="bg-white border-4 border-black p-6 mt-4 shadow-[4px_4px_0px_rgba(0,0,0,1)]">
+                                            <h3 className="font-black text-xl mb-2 uppercase">PRIMARY SOS CONTACT</h3>
+                                            <p className="text-sm font-bold text-slate-700 mb-6 leading-relaxed">
                                                 Enter the phone number (with country code, e.g., 919876543210) of your most trusted contact. SOS messages will route directly to them via WhatsApp.
                                             </p>
                                             <form onSubmit={handleContactUpdate} className="flex flex-col sm:flex-row gap-4">
@@ -274,21 +271,18 @@ const Account = () => {
                                                     placeholder="e.g. 919876543210"
                                                     value={emergencyContact}
                                                     onChange={(e) => setEmergencyContact(e.target.value)}
-                                                    className="flex-grow bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 font-mono"
+                                                    className="flex-grow bg-white border-4 border-black px-4 py-4 text-black focus:outline-none focus:bg-yellow-100 font-mono shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] font-bold text-lg"
                                                 />
                                                 <button 
                                                     type="submit" 
                                                     disabled={contactUpdating}
-                                                    className="bg-blue-600/20 text-blue-400 border border-blue-500/50 hover:bg-blue-600 hover:text-white rounded-xl font-bold uppercase tracking-widest text-xs px-6 py-3 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.2)] hover:shadow-[0_0_25px_rgba(37,99,235,0.5)] disabled:opacity-50 whitespace-nowrap"
+                                                    className="bg-blue-600 text-white border-4 border-black hover:-translate-y-1 hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] font-black uppercase tracking-widest text-sm px-8 py-4 transition-all disabled:opacity-50 whitespace-nowrap"
                                                 >
-                                                    {contactUpdating ? 'Saving...' : 'Save Contact'}
+                                                    {contactUpdating ? 'SAVING...' : 'SAVE CONTACT'}
                                                 </button>
                                             </form>
                                         </div>
                                     </div>
-                                    <p className="text-xs text-slate-500 mt-6 mt-4 italic">
-                                        Note: We have strictly removed unnecessary UI bloat (such as non-serviceable SMS routing and un-syncable modules) to maintain maximum lightweight and robust security operation.
-                                    </p>
                                 </section>
                             </div>
                         )}

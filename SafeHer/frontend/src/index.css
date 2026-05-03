@@ -13,10 +13,12 @@
 }
 
 body {
-  background-color: #020617; /* Tailwind slate-950 */
-  color: #e2e8f0; /* Tailwind slate-200 */
+  background-color: #fdfdfd; /* Very subtle off-white */
+  color: #0f172a; /* Slate-900 */
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+  background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 h1, h2, h3, h4, h5, h6 {
