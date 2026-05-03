@@ -1,103 +1,133 @@
-import { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useContext, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { LayoutDashboard, Settings, Scale, Activity, Menu, X, LogOut } from 'lucide-react';
+import { Shield, Menu, X, Activity, Scale, User, LogOut } from 'lucide-react';
 
 const Navbar = () => {
-    const { user, logout } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
+    const { user, logout } = useContext(AuthContext);
+    const location = useLocation();
 
-    const handleLogout = () => {
-        logout();
-        navigate('/');
-        setIsOpen(false);
-    };
+    // Prevent body scroll when mobile menu is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+    }, [isOpen]);
 
     return (
-        <nav className="bg-[#fdfdfd] border-b-4 border-black sticky top-0 z-50 transition-all duration-300">
-            <div className="max-w-7xl mx-auto px-4">
+        <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-20">
+                    
+                    {/* Logo Section */}
                     <div className="flex items-center">
-                        <Link to="/" className="flex items-center gap-3 group">
-                            <div className="p-1 border-2 border-black rounded-full bg-yellow-300 group-hover:bg-blue-400 transition-colors shadow-[4px_4px_0px_rgba(0,0,0,1)]">
-                                <img src="/logo.jpg" alt="Raksha Logo" className="w-9 h-9 object-cover rounded-full border-2 border-black" />
+                        <Link to="/" className="flex items-center gap-2 group">
+                            <div className="p-2 bg-blue-600 rounded-xl group-hover:bg-blue-700 transition-colors">
+                                <Shield className="w-6 h-6 text-white" />
                             </div>
-                            <span className="font-extrabold text-3xl tracking-widest uppercase font-cursive text-black">
+                            <span className="font-extrabold text-2xl tracking-tight text-[#1d1d1d]">
                                 Raksha
                             </span>
                         </Link>
                     </div>
 
-                    <div className="flex items-center gap-3 md:gap-4 lg:gap-5">
+                    {/* Desktop Menu */}
+                    <div className="hidden md:flex items-center gap-8">
                         {user ? (
                             <>
-                                <div className="hidden md:flex items-center gap-4 lg:gap-6 text-xs lg:text-sm font-bold">
-                                    <Link to="/dashboard" className="text-black hover:text-blue-600 hover:-translate-y-1 transition-transform flex items-center gap-1.5" title="Action Center">
-                                        <LayoutDashboard className="w-5 h-5" /> <span className="hidden xl:inline uppercase tracking-widest border-b-2 border-transparent hover:border-black">Action Center</span>
+                                <div className="flex items-center gap-6">
+                                    <Link to="/dashboard" className="text-gray-600 font-semibold hover:text-blue-600 transition-colors">
+                                        Dashboard
                                     </Link>
-                                    <Link to="/laws" className="text-black hover:text-green-600 hover:-translate-y-1 transition-transform flex items-center gap-1.5" title="Cyber Laws">
-                                        <Scale className="w-5 h-5" /> <span className="hidden xl:inline uppercase tracking-widest border-b-2 border-transparent hover:border-black">Laws</span>
+                                    <Link to="/laws" className="text-gray-600 font-semibold hover:text-blue-600 transition-colors flex items-center gap-1.5">
+                                        Laws
                                     </Link>
-                                    <a href="/#about" className="text-black hover:text-yellow-600 hover:-translate-y-1 transition-transform flex items-center gap-1.5" title="About Us">
-                                        <span className="uppercase tracking-widest border-b-2 border-transparent hover:border-black">About</span>
+                                    <a href="/#about" className="text-gray-600 font-semibold hover:text-blue-600 transition-colors">
+                                        About
                                     </a>
-                                    <Link to="/track" className="bg-red-500 text-black border-2 border-black px-4 py-1.5 hover:-translate-y-1 hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-all flex items-center gap-1.5" title="Live Tracker">
-                                        <Activity className="w-4 h-4 animate-pulse" /> <span className="hidden xl:inline uppercase tracking-widest">Tracker</span>
+                                    <Link to="/track" className="bg-rose-50 text-rose-600 px-4 py-2 rounded-full font-bold hover:bg-rose-100 transition-colors flex items-center gap-2">
+                                        <Activity className="w-4 h-4 animate-pulse" /> Tracker
                                     </Link>
                                 </div>
-                                <div className="hidden md:flex items-center pl-6 border-l-2 border-black gap-4">
-                                    <Link to="/account" className="text-xs uppercase tracking-widest text-black hover:bg-black hover:text-white px-3 py-2 border-2 border-transparent hover:border-black transition-colors flex items-center gap-2 font-bold">
-                                        Hi, {user.name} <Settings className="w-4 h-4" />
+                                <div className="h-6 w-px bg-gray-200"></div>
+                                <div className="flex items-center gap-4">
+                                    <Link to="/account" className="flex items-center gap-2 text-[#1d1d1d] hover:text-blue-600 font-bold transition-colors">
+                                        <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+                                            <User className="w-4 h-4" />
+                                        </div>
+                                        {user.name?.split(' ')[0] || 'User'}
                                     </Link>
                                 </div>
                             </>
                         ) : (
-                            <div className="hidden md:flex items-center gap-4">
-                                <a href="/#about" className="text-black font-extrabold uppercase tracking-widest text-sm hover:underline decoration-2 underline-offset-4 transition-all">About</a>
-                                <Link to="/login" className="text-black font-extrabold uppercase tracking-widest text-sm hover:underline decoration-2 underline-offset-4 transition-all">Log In</Link>
-                                <Link to="/register" className="bg-yellow-400 text-black border-2 border-black px-6 py-2.5 font-extrabold uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-all">Create Account</Link>
+                            <div className="hidden md:flex items-center gap-6">
+                                <a href="/#about" className="text-gray-600 font-semibold hover:text-blue-600 transition-colors">About</a>
+                                <Link to="/login" className="text-gray-600 font-semibold hover:text-blue-600 transition-colors">Log In</Link>
+                                <Link to="/register" className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold hover:bg-blue-700 hover:shadow-lg hover:-translate-y-0.5 transition-all">
+                                    Get the App
+                                </Link>
                             </div>
                         )}
+                    </div>
+
+                    {/* Mobile Menu Button */}
+                    <div className="md:hidden flex items-center">
                         <button 
-                            className="md:hidden p-2 text-black hover:bg-black hover:text-white border-2 border-transparent hover:border-black transition-colors"
                             onClick={() => setIsOpen(!isOpen)}
+                            className="text-gray-600 hover:text-[#1d1d1d] focus:outline-none p-2"
                         >
-                            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                            {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
                         </button>
                     </div>
                 </div>
             </div>
-            
+
+            {/* Mobile Menu Overlay */}
             {isOpen && (
-                <div className="md:hidden border-t-4 border-black bg-white animate-in slide-in-from-top-2 duration-200">
-                    <div className="px-4 pt-4 pb-8 space-y-4 font-bold text-lg">
+                <div className="md:hidden fixed inset-0 top-20 bg-white z-40 overflow-y-auto">
+                    <div className="px-4 py-8 space-y-8">
                         {user ? (
                             <>
-                                <Link to="/dashboard" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-black hover:pl-4 transition-all uppercase tracking-widest border-b-2 border-black pb-4">
-                                    <LayoutDashboard className="w-5 h-5" /> Action Center
-                                </Link>
-                                <Link to="/laws" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-black hover:pl-4 transition-all uppercase tracking-widest border-b-2 border-black pb-4">
-                                    <Scale className="w-5 h-5" /> Laws
-                                </Link>
-                                <a href="/#about" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-yellow-600 hover:pl-4 transition-all uppercase tracking-widest border-b-2 border-black pb-4">
-                                    About Us
-                                </a>
-                                <Link to="/track" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-red-600 hover:pl-4 transition-all uppercase tracking-widest border-b-2 border-black pb-4">
-                                    <Activity className="w-5 h-5 animate-pulse" /> Tracker
-                                </Link>
-                                <Link to="/account" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-blue-600 hover:pl-4 transition-all uppercase tracking-widest border-b-2 border-black pb-4">
-                                    <Settings className="w-5 h-5" /> Account Settings
-                                </Link>
-                                <button onClick={handleLogout} className="w-full flex items-center gap-3 text-black hover:bg-red-500 hover:text-white transition-all uppercase tracking-widest p-4 border-2 border-black hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] mt-4">
-                                    <LogOut className="w-5 h-5" /> Log Out
-                                </button>
+                                <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl">
+                                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm">
+                                        <User className="w-6 h-6 text-gray-400" />
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-lg text-[#1d1d1d]">{user.name}</p>
+                                        <p className="text-sm text-gray-500">{user.email}</p>
+                                    </div>
+                                </div>
+                                <div className="space-y-4">
+                                    <Link to="/dashboard" onClick={() => setIsOpen(false)} className="block p-4 font-bold text-gray-700 bg-gray-50 rounded-2xl hover:bg-gray-100">
+                                        Dashboard
+                                    </Link>
+                                    <Link to="/laws" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-4 font-bold text-gray-700 bg-gray-50 rounded-2xl hover:bg-gray-100">
+                                        <Scale className="w-5 h-5" /> Cyber Laws
+                                    </Link>
+                                    <a href="/#about" onClick={() => setIsOpen(false)} className="block p-4 font-bold text-gray-700 bg-gray-50 rounded-2xl hover:bg-gray-100">
+                                        About Us
+                                    </a>
+                                    <Link to="/track" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-4 font-bold text-rose-600 bg-rose-50 rounded-2xl hover:bg-rose-100">
+                                        <Activity className="w-5 h-5 animate-pulse" /> Live Tracker
+                                    </Link>
+                                </div>
+                                <div className="space-y-4 pt-4 border-t border-gray-100">
+                                    <Link to="/account" onClick={() => setIsOpen(false)} className="block p-4 font-bold text-gray-700 bg-gray-50 rounded-2xl hover:bg-gray-100">
+                                        Account Settings
+                                    </Link>
+                                    <button onClick={() => { logout(); setIsOpen(false); }} className="w-full flex items-center justify-center gap-2 p-4 font-bold text-red-600 bg-red-50 rounded-2xl hover:bg-red-100">
+                                        <LogOut className="w-5 h-5" /> Sign Out
+                                    </button>
+                                </div>
                             </>
                         ) : (
-                            <div className="flex flex-col gap-4 pt-4">
-                                <a href="/#about" onClick={() => setIsOpen(false)} className="text-center bg-white text-black border-2 border-black py-4 font-extrabold uppercase tracking-widest hover:bg-gray-100 transition-colors">About Us</a>
-                                <Link to="/login" onClick={() => setIsOpen(false)} className="text-center bg-white text-black border-2 border-black py-4 font-extrabold uppercase tracking-widest hover:bg-gray-100 transition-colors">Log In</Link>
-                                <Link to="/register" onClick={() => setIsOpen(false)} className="text-center bg-yellow-400 text-black border-2 border-black py-4 font-extrabold uppercase tracking-widest shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all">Create Account</Link>
+                            <div className="space-y-4">
+                                <a href="/#about" onClick={() => setIsOpen(false)} className="block p-4 text-center font-bold text-gray-700 bg-gray-50 rounded-2xl">About Us</a>
+                                <Link to="/login" onClick={() => setIsOpen(false)} className="block p-4 text-center font-bold text-gray-700 bg-gray-50 rounded-2xl">Log In</Link>
+                                <Link to="/register" onClick={() => setIsOpen(false)} className="block p-4 text-center font-bold text-white bg-blue-600 rounded-2xl shadow-lg">Get the App</Link>
                             </div>
                         )}
                     </div>
