@@ -136,16 +136,16 @@ const SOSWidget = () => {
         <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
             {error && <div className="bg-red-100 text-red-700 p-2 rounded mb-2 text-xs font-bold">{error}</div>}
             {isActive && (
-                <div className="bg-red-600 text-white px-4 py-2 rounded shadow-lg mb-4 animate-pulse flex items-center gap-2">
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
-                    <span className="font-bold text-sm tracking-widest">BROADCASTING LIVE LOCATION</span>
+                <div className="bg-rose-600/20 border border-rose-500/50 text-rose-400 px-4 py-2 rounded-xl shadow-[0_0_15px_rgba(225,29,72,0.3)] mb-4 animate-pulse flex items-center gap-2">
+                    <div className="w-2 h-2 bg-rose-400 rounded-full"></div>
+                    <span className="font-bold text-sm tracking-widest uppercase">Broadcasting Live</span>
                 </div>
             )}
             
             {/* Voice Watch Toggle */}
             <button 
                 onClick={() => setVoiceMode(!voiceMode)}
-                className={`mb-4 w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all ${voiceMode ? 'bg-green-500 text-white animate-pulse border-2 border-white' : 'bg-slate-200 text-slate-500 hover:bg-slate-300'}`}
+                className={`mb-4 w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 ${voiceMode ? 'bg-emerald-600/20 text-emerald-400 animate-pulse border border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.3)]' : 'bg-slate-800 text-slate-400 hover:bg-slate-700 border border-white/10 hover:border-white/20'}`}
                 title="Voice Watch Mode (Say 'Help' or 'Emergency')"
             >
                 {voiceMode ? <Mic className="w-5 h-5" /> : <MicOff className="w-5 h-5" />}
@@ -153,7 +153,7 @@ const SOSWidget = () => {
 
             <button 
                 onClick={handleSOS}
-                className={`w-20 h-20 rounded-full flex flex-col items-center justify-center shadow-2xl transition-all duration-300 border-4 border-white ${isActive ? 'bg-red-600 scale-110 animate-bounce' : 'bg-red-500 hover:bg-red-600 hover:scale-105'}`}
+                className={`w-20 h-20 rounded-full flex flex-col items-center justify-center shadow-[0_0_20px_rgba(225,29,72,0.4)] transition-all duration-300 border border-white/10 ${isActive ? 'bg-rose-700 scale-110 animate-pulse' : 'bg-rose-600 hover:bg-rose-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(225,29,72,0.6)]'}`}
             >
                 <AlertOctagon className="text-white w-8 h-8 mb-1" />
                 <span className="text-white font-extrabold text-xs tracking-widest">SOS</span>

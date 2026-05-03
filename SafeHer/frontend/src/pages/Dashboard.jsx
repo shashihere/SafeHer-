@@ -163,59 +163,62 @@ const Dashboard = () => {
     if (loading) return <div className="p-8 text-center text-slate-800 flex justify-center items-center h-screen"><Loader2 className="animate-spin w-8 h-8" /></div>;
 
     return (
-        <div className="max-w-6xl mx-auto px-4 py-8 w-full bg-transparent min-h-screen text-slate-800">
+        <div className="max-w-6xl mx-auto px-4 py-8 w-full bg-transparent min-h-[calc(100vh-80px)] text-slate-200">
             <header className="mb-10 text-center">
-                <h1 className="text-5xl font-cursive font-bold text-slate-800 tracking-widest mb-2">Action Center</h1>
-                <p className="text-slate-800 uppercase tracking-widest text-sm font-bold">One-Tap Emergency Responses & Evidence Collection</p>
+                <h1 className="text-5xl font-cursive font-extrabold text-white tracking-widest mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">Action Center</h1>
+                <p className="text-slate-400 uppercase tracking-widest text-sm font-bold">One-Tap Emergency Responses & Evidence Collection</p>
             </header>
 
             {/* The 4 Massive Action Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
                 
                 {/* 1. SOS */}
-                <button onClick={handleSOS} className="bg-red-600 hover:bg-red-700 transition-transform hover:scale-105 shadow-xl flex flex-col items-center justify-center p-8 border-4 border-white h-64">
-                    <AlertOctagon className="w-16 h-16 text-white mb-4 animate-pulse" />
-                    <h3 className="text-white font-extrabold text-xl uppercase tracking-widest">Trigger SOS</h3>
-                    <p className="text-red-100 text-xs mt-2 text-center uppercase">Live Track & Alert</p>
+                <button onClick={handleSOS} className="group bg-slate-900/40 backdrop-blur-md border border-white/10 hover:border-rose-500/50 hover:bg-rose-950/30 transition-all duration-300 hover:-translate-y-2 shadow-lg hover:shadow-[0_0_30px_rgba(225,29,72,0.4)] flex flex-col items-center justify-center p-8 h-64 rounded-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-rose-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <AlertOctagon className="w-16 h-16 text-rose-500 mb-4 group-hover:animate-pulse z-10" />
+                    <h3 className="text-white font-extrabold text-xl uppercase tracking-widest z-10">Trigger SOS</h3>
+                    <p className="text-rose-200/60 text-xs mt-2 text-center uppercase font-bold z-10">Live Track & Alert</p>
                 </button>
 
                 {/* 2. Secret Record */}
-                <button onClick={toggleRecording} className={`${recording ? 'bg-green-500 animate-pulse' : 'bg-slate-800 hover:bg-slate-900'} transition-transform hover:scale-105 shadow-xl flex flex-col items-center justify-center p-8 border-4 border-white h-64`}>
-                    <Mic className={`w-16 h-16 ${recording ? 'text-white' : 'text-blue-400'} mb-4`} />
-                    <h3 className="text-white font-extrabold text-xl uppercase tracking-widest">
+                <button onClick={toggleRecording} className={`group bg-slate-900/40 backdrop-blur-md border border-white/10 ${recording ? 'border-emerald-500 shadow-[0_0_30px_rgba(16,185,129,0.4)] bg-emerald-950/30' : 'hover:border-emerald-500/50 hover:bg-emerald-950/30 hover:shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:-translate-y-2'} transition-all duration-300 flex flex-col items-center justify-center p-8 h-64 rounded-2xl relative overflow-hidden`}>
+                    <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <Mic className={`w-16 h-16 ${recording ? 'text-emerald-400 animate-pulse' : 'text-emerald-500/80'} mb-4 z-10 transition-colors`} />
+                    <h3 className="text-white font-extrabold text-xl uppercase tracking-widest z-10">
                         {recording ? 'Recording...' : 'Secret Audio'}
                     </h3>
-                    <p className="text-slate-300 text-xs mt-2 text-center uppercase">
+                    <p className="text-emerald-200/60 text-xs mt-2 text-center uppercase font-bold z-10">
                         {recording ? 'Tap to Save to Vault' : 'One-Tap Mic Access'}
                     </p>
                 </button>
 
                 {/* 3. Quick Snap */}
-                <div className="relative bg-blue-600 hover:bg-blue-700 transition-transform hover:scale-105 shadow-xl flex flex-col items-center justify-center p-8 border-4 border-white h-64 cursor-pointer">
+                <div className="relative group bg-slate-900/40 backdrop-blur-md border border-white/10 hover:border-blue-500/50 hover:bg-blue-950/30 transition-all duration-300 hover:-translate-y-2 shadow-lg hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] flex flex-col items-center justify-center p-8 h-64 rounded-2xl overflow-hidden cursor-pointer">
+                    <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <input 
                         type="file" 
                         accept="image/*" 
                         capture="environment"
                         onChange={handleFileChange}
                         disabled={uploading}
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20"
                     />
-                    {uploading ? <Loader2 className="w-16 h-16 text-white mb-4 animate-spin" /> : <Camera className="w-16 h-16 text-white mb-4" />}
-                    <h3 className="text-white font-extrabold text-xl uppercase tracking-widest">
+                    {uploading ? <Loader2 className="w-16 h-16 text-blue-400 mb-4 animate-spin z-10" /> : <Camera className="w-16 h-16 text-blue-500/80 mb-4 group-hover:scale-110 transition-transform z-10" />}
+                    <h3 className="text-white font-extrabold text-xl uppercase tracking-widest z-10">
                         {uploading ? 'Uploading...' : 'Quick Snap'}
                     </h3>
-                    <p className="text-blue-200 text-xs mt-2 text-center uppercase">Direct Camera Upload</p>
+                    <p className="text-blue-200/60 text-xs mt-2 text-center uppercase font-bold z-10">Direct Camera Upload</p>
                 </div>
 
                 {/* 4. Auto-FIR */}
-                <button onClick={generateMasterPDF} className="bg-slate-100 hover:bg-slate-200 border-2 border-slate-300 transition-transform hover:scale-105 shadow-xl flex flex-col items-center justify-center p-8 h-64 text-slate-800">
-                    <FileText className="w-16 h-16 text-blue-600 mb-4" />
-                    <h3 className="font-extrabold text-xl uppercase tracking-widest">Auto-FIR</h3>
-                    <p className="text-slate-600 text-xs mt-2 text-center uppercase font-bold">Compile Evidence PDF</p>
+                <button onClick={generateMasterPDF} className="group bg-slate-900/40 backdrop-blur-md border border-white/10 hover:border-purple-500/50 hover:bg-purple-950/30 transition-all duration-300 hover:-translate-y-2 shadow-lg hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] flex flex-col items-center justify-center p-8 h-64 rounded-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <FileText className="w-16 h-16 text-purple-500/80 mb-4 group-hover:-translate-y-1 transition-transform z-10" />
+                    <h3 className="text-white font-extrabold text-xl uppercase tracking-widest z-10">Auto-FIR</h3>
+                    <p className="text-purple-200/60 text-xs mt-2 text-center uppercase font-bold z-10">Compile Evidence PDF</p>
                 </button>
 
             </div>
-
         </div>
     );
 };

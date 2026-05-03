@@ -13,17 +13,18 @@
 }
 
 body {
-  background-color: #f9fafb; /* Light clean gray-white */
-  color: #000000;
+  background-color: #020617; /* Tailwind slate-950 */
+  color: #e2e8f0; /* Tailwind slate-200 */
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Sora', sans-serif;
+  font-family: 'Outfit', sans-serif;
 }
 
 .font-cursive {
-  font-family: 'Sora', sans-serif; /* Migrated from Great Vibes to Sora for modern headings */
+  font-family: 'Outfit', sans-serif; /* Repurposed class to avoid rewriting all HTML classes */
 }
 
 /* Custom scrollbar for dark theme */
