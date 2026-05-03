@@ -60,6 +60,26 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+
+            {/* About Us Section */}
+            <section className="w-full bg-yellow-400 text-black border-b-8 border-black py-24 px-4 relative">
+                <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
+                    <div className="inline-block border-4 border-black bg-white px-6 py-2 font-black uppercase tracking-widest mb-8 shadow-[4px_4px_0px_rgba(0,0,0,1)] rotate-2">
+                        THE MISSION
+                    </div>
+                    <h2 className="text-5xl md:text-7xl font-black mb-10 font-cursive tracking-tighter uppercase">WHY WE BUILT RAKSHA</h2>
+                    <p className="text-xl md:text-3xl font-bold leading-relaxed tracking-wide mb-12 border-4 border-black bg-white p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)] text-left hover:-translate-y-2 transition-transform duration-300">
+                        Raksha is not just an application. It's a <strong className="text-red-600 underline decoration-4 underline-offset-4">reactionary weapon</strong> against digital and physical harassment. We noticed that traditional reporting takes too long, and evidence is easily deleted or manipulated by perpetrators. 
+                        <br/><br/>
+                        We built this platform to give you a <strong className="text-blue-600 uppercase">one-tap advantage</strong>. Instant live-tracking, a stealth evidence vault, and automated legal FIR generation. Your safety should never be a negotiation.
+                    </p>
+                    <div className="flex gap-4">
+                         <div className="w-12 h-12 bg-red-500 border-4 border-black rounded-full shadow-[4px_4px_0px_rgba(0,0,0,1)]"></div>
+                         <div className="w-12 h-12 bg-blue-500 border-4 border-black rounded-full shadow-[4px_4px_0px_rgba(0,0,0,1)]"></div>
+                         <div className="w-12 h-12 bg-green-400 border-4 border-black rounded-full shadow-[4px_4px_0px_rgba(0,0,0,1)]"></div>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 };
