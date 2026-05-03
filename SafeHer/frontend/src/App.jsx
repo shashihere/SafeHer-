@@ -6,8 +6,6 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
-import ReportAbuse from './pages/ReportAbuse';
-import EvidenceVault from './pages/EvidenceVault';
 import Account from './pages/Account';
 import CyberLaw from './pages/CyberLaw';
 import LiveTracking from './pages/LiveTracking';
@@ -32,8 +30,6 @@ function App() {
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
                             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-                            <Route path="/report" element={<ProtectedRoute><ReportAbuse /></ProtectedRoute>} />
-                            <Route path="/vault" element={<ProtectedRoute><EvidenceVault /></ProtectedRoute>} />
                             <Route path="/laws" element={<CyberLaw />} />
                             <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
                             <Route path="/track" element={<LiveTracking />} />

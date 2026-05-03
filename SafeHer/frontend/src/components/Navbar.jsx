@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { ShieldCheck, LogOut, LayoutDashboard, FileWarning, Search, FolderLock, Settings, AlertTriangle, Scale, MessageCircle, Activity } from 'lucide-react';
+import { LayoutDashboard, Settings, Scale, Activity } from 'lucide-react';
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
@@ -31,14 +31,8 @@ const Navbar = () => {
                         {user ? (
                             <>
                                 <div className="hidden md:flex items-center gap-3 lg:gap-4 text-xs lg:text-sm">
-                                    <Link to="/dashboard" className="text-slate-800 hover:text-slate-800 flex items-center gap-1.5 transition-colors" title="Dashboard">
-                                        <LayoutDashboard className="w-4 h-4" /> <span className="hidden xl:inline">Dashboard</span>
-                                    </Link>
-                                    <Link to="/report" className="text-slate-800 hover:text-slate-800 font-bold flex items-center gap-1.5 transition-colors" title="Report Abuse">
-                                        <FileWarning className="w-4 h-4" /> <span className="hidden xl:inline">Report Abuse</span>
-                                    </Link>
-                                    <Link to="/vault" className="text-slate-800 hover:text-slate-800 flex items-center gap-1.5 transition-colors" title="Evidence Vault">
-                                        <FolderLock className="w-4 h-4" /> <span className="hidden xl:inline">Vault</span>
+                                    <Link to="/dashboard" className="text-slate-800 hover:text-slate-800 flex items-center gap-1.5 transition-colors" title="Action Center">
+                                        <LayoutDashboard className="w-4 h-4" /> <span className="hidden xl:inline">Action Center</span>
                                     </Link>
                                     <Link to="/laws" className="text-slate-800 hover:text-slate-800 flex items-center gap-1.5 transition-colors" title="Cyber Laws">
                                         <Scale className="w-4 h-4" /> <span className="hidden xl:inline">Laws</span>

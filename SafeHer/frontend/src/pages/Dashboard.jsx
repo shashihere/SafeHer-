@@ -1,219 +1,253 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
-import { FileText, AlertTriangle, CheckCircle, Clock } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { AlertOctagon, Mic, Camera, FileText, Loader2, PlaySquare } from 'lucide-react';
 import { jsPDF } from "jspdf";
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
     const [reports, setReports] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [recording, setRecording] = useState(false);
+    const [uploading, setUploading] = useState(false);
+    
+    const mediaRecorderRef = useRef(null);
+    const audioChunksRef = useRef([]);
+    const fileInputRef = useRef(null);
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
-    useEffect(() => {
-        const fetchReports = async () => {
-            try {
-                const config = {
-                    headers: { Authorization: `Bearer ${user.token}` }
-                };
-                const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/reports`, config);
-                setReports(data);
-            } catch (error) {
-                console.error("Error fetching reports", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchReports();
-    }, [user]);
-
-    const handleEscalate = async (id) => {
+    const fetchReports = async () => {
         try {
             const config = { headers: { Authorization: `Bearer ${user.token}` } };
-            await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/reports/${id}/escalate`, {}, config);
-            alert("Report successfully escalated to designated authorities via encrypted email.");
-            // Refresh reports to show escalated status
-            setReports(reports.map(r => r._id === id ? { ...r, escalated: true } : r));
+            const { data } = await axios.get(`${API_URL}/api/reports`, config);
+            setReports(data);
         } catch (error) {
-            console.error(error);
-            alert(error.response?.data?.message || "Failed to escalate report.");
+            console.error("Error fetching reports", error);
+        } finally {
+            setLoading(false);
         }
     };
 
-    const generatePDF = (report) => {
+    useEffect(() => {
+        fetchReports();
+        // eslint-disable-next-line
+    }, [user]);
+
+    // Action 1: Trigger SOS
+    const handleSOS = () => {
+        const trackingLink = `${window.location.origin}/track/${user._id}`;
+        const message = `🚨 EMERGENCY SOS 🚨\nI am in danger and need help immediately! Track my LIVE moving location here:\n${trackingLink}`;
+        let targetPhone = "";
+        if (user && user.emergencyContact) {
+            targetPhone = user.emergencyContact.replace(/\D/g, '');
+        }
+        const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+    };
+
+    // Action 2: Secret Record
+    const toggleRecording = async () => {
+        if (recording) {
+            mediaRecorderRef.current.stop();
+            setRecording(false);
+        } else {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorderRef.current = new MediaRecorder(stream);
+                
+                mediaRecorderRef.current.ondataavailable = (event) => {
+                    if (event.data.size > 0) audioChunksRef.current.push(event.data);
+                };
+
+                mediaRecorderRef.current.onstop = async () => {
+                    const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+                    audioChunksRef.current = [];
+                    stream.getTracks().forEach(track => track.stop()); // stop mic
+                    await uploadEvidence(audioBlob, 'Secret Audio Recording', 'audio.webm');
+                };
+
+                mediaRecorderRef.current.start();
+                setRecording(true);
+            } catch (err) {
+                alert("Microphone access denied or unavailable.");
+            }
+        }
+    };
+
+    // Action 3: Quick Snap
+    const handleFileChange = async (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            await uploadEvidence(file, 'Quick Photo Evidence', file.name);
+        }
+    };
+
+    const uploadEvidence = async (fileBlob, contentText, filename) => {
+        setUploading(true);
+        try {
+            const formData = new FormData();
+            formData.append('content', contentText);
+            formData.append('platform', 'Direct Action');
+            // Mock severity for quick actions
+            formData.append('severity', 'High');
+            formData.append('aiScore', 95);
+            
+            // Append file
+            formData.append('evidence', fileBlob, filename);
+
+            const config = { 
+                headers: { 
+                    Authorization: `Bearer ${user.token}`,
+                    'Content-Type': 'multipart/form-data'
+                } 
+            };
+            await axios.post(`${API_URL}/api/reports`, formData, config);
+            await fetchReports(); // refresh timeline
+        } catch (error) {
+            alert("Failed to securely upload evidence.");
+        } finally {
+            setUploading(false);
+        }
+    };
+
+    // Action 4: Master FIR
+    const generateMasterPDF = () => {
+        if (reports.length === 0) return alert("No evidence found to compile.");
         const doc = new jsPDF();
         
-        // Header
         doc.setFontSize(22);
-        doc.setTextColor(225, 29, 72); // Rose color
-        doc.text("Raksha: Official Incident Report", 20, 20);
+        doc.setTextColor(225, 29, 72);
+        doc.text("Raksha: Master Evidence Log (FIR Copy)", 20, 20);
         
-        doc.setFontSize(12);
-        doc.setTextColor(0, 0, 0);
-        doc.text(`Report ID: ${report._id}`, 20, 30);
-        doc.text(`Date Filed: ${new Date(report.createdAt).toLocaleString()}`, 20, 38);
-        doc.text(`Status: ${report.escalated ? 'ESCALATED' : 'LOGGED'}`, 20, 46);
-        
-        // Horizontal Line
-        doc.setLineWidth(0.5);
-        doc.line(20, 50, 190, 50);
-        
-        // Details
-        doc.setFontSize(14);
-        doc.setFont("helvetica", "bold");
-        doc.text("Platform / Context:", 20, 60);
-        doc.setFont("helvetica", "normal");
-        doc.text(report.platform || "Not Specified", 20, 68);
-
-        doc.setFont("helvetica", "bold");
-        doc.text("AI Severity Assessment:", 20, 78);
-        doc.setFont("helvetica", "normal");
-        doc.text(`${report.severity} (${report.aiScore}% Toxicity Metric)`, 20, 86);
-
-        // Content Narrative
-        doc.setFont("helvetica", "bold");
-        doc.text("Incident Narrative:", 20, 96);
-        
-        doc.setFont("helvetica", "normal");
-        doc.setFontSize(11);
-        const splitText = doc.splitTextToSize(report.content, 170);
-        doc.text(splitText, 20, 104);
-        
-        // Evidence Links
-        const narrativeHeight = splitText.length * 7;
-        let currentY = 104 + narrativeHeight + 10;
-        
-        doc.setFontSize(14);
-        doc.setFont("helvetica", "bold");
-        doc.text("Logged Evidence (Cryptographic Links):", 20, currentY);
-        
-        doc.setFont("helvetica", "normal");
         doc.setFontSize(10);
-        currentY += 8;
+        doc.setTextColor(0, 0, 0);
+        doc.text(`Generated By: ${user.name} (${user.email})`, 20, 30);
+        doc.text(`Date of Compilation: ${new Date().toLocaleString()}`, 20, 36);
         
-        if (report.evidenceUrls && report.evidenceUrls.length > 0) {
-            report.evidenceUrls.forEach((url, i) => {
-                doc.text(`Attachment ${i + 1}: ${url}`, 20, currentY);
-                currentY += 8;
-            });
-        } else {
-            doc.text("No attachments provided.", 20, currentY);
-        }
+        doc.setLineWidth(0.5);
+        doc.line(20, 40, 190, 40);
+        
+        let currentY = 50;
+        
+        reports.slice(0, 5).forEach((r, idx) => {
+            if (currentY > 250) {
+                doc.addPage();
+                currentY = 20;
+            }
+            doc.setFont("helvetica", "bold");
+            doc.text(`Incident #${idx + 1}: ${new Date(r.createdAt).toLocaleString()}`, 20, currentY);
+            currentY += 6;
+            
+            doc.setFont("helvetica", "normal");
+            doc.text(`Type: ${r.content}`, 20, currentY);
+            currentY += 6;
+            
+            if (r.evidenceUrls && r.evidenceUrls.length > 0) {
+                doc.setTextColor(37, 99, 235); // blue link
+                doc.text(`Attachment: ${r.evidenceUrls[0]}`, 20, currentY);
+                doc.setTextColor(0, 0, 0);
+            } else {
+                doc.text(`Attachment: None`, 20, currentY);
+            }
+            currentY += 15;
+        });
 
-        // Footer
         doc.setFontSize(10);
         doc.setTextColor(150, 150, 150);
-        doc.text("This document is auto-generated by the Raksha Legal Action Engine.", 20, 280);
+        doc.text("This master document is auto-generated by the Raksha Action Center.", 20, 280);
 
-        doc.save(`Raksha_Incident_Report_${report._id}.pdf`);
+        doc.save(`Raksha_Master_FIR.pdf`);
     };
 
-    if (loading) return <div className="p-8 text-center text-slate-800">Loading your secure dashboard...</div>;
-
-    const highSeverityCount = reports.filter(r => r.severity === 'High').length;
+    if (loading) return <div className="p-8 text-center text-slate-800 flex justify-center items-center h-screen"><Loader2 className="animate-spin w-8 h-8" /></div>;
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-8 w-full bg-transparent min-h-screen text-slate-800">
-            <header className="mb-10">
-                <h1 className="text-4xl font-cursive font-bold text-slate-800 tracking-widest mb-2">Welcome, {user.name}</h1>
-                <p className="text-slate-800 uppercase tracking-widest text-sm">Your reports are secure and confidential.</p>
+        <div className="max-w-6xl mx-auto px-4 py-8 w-full bg-transparent min-h-screen text-slate-800">
+            <header className="mb-10 text-center">
+                <h1 className="text-5xl font-cursive font-bold text-slate-800 tracking-widest mb-2">Action Center</h1>
+                <p className="text-slate-800 uppercase tracking-widest text-sm font-bold">One-Tap Emergency Responses & Evidence Collection</p>
             </header>
 
-            <div className="grid md:grid-cols-3 gap-6 mb-12">
-                <div className="bg-white border border-gray-700 p-6 rounded-none flex items-center gap-4">
-                    <div className="p-4 bg-blue-600 text-white hover:bg-blue-700"><FileText /></div>
-                    <div>
-                        <p className="text-slate-800 text-sm font-bold uppercase tracking-widest">Total Reports</p>
-                        <h3 className="text-3xl font-extrabold font-sans text-slate-800 mt-1">{reports.length}</h3>
-                    </div>
-                </div>
-                <div className="bg-white border border-gray-700 p-6 rounded-none flex items-center gap-4">
-                    <div className="p-4 bg-gray-800 text-white"><AlertTriangle /></div>
-                    <div>
-                        <p className="text-slate-800 text-sm font-bold uppercase tracking-widest">High Severity</p>
-                        <h3 className="text-3xl font-extrabold font-sans text-slate-800 mt-1">{highSeverityCount}</h3>
-                    </div>
-                </div>
-                <div className="bg-white border border-gray-700 p-6 rounded-none flex items-center gap-4">
-                    <div className="p-4 bg-[#ffffff]/90 border border-slate-200 text-slate-800"><CheckCircle /></div>
-                    <div>
-                        <p className="text-slate-800 text-sm font-bold uppercase tracking-widest">Resolved (Mock)</p>
-                        <h3 className="text-3xl font-extrabold font-sans text-slate-800 mt-1">0</h3>
-                    </div>
-                </div>
-            </div>
+            {/* The 4 Massive Action Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                
+                {/* 1. SOS */}
+                <button onClick={handleSOS} className="bg-red-600 hover:bg-red-700 transition-transform hover:scale-105 shadow-xl flex flex-col items-center justify-center p-8 border-4 border-white h-64">
+                    <AlertOctagon className="w-16 h-16 text-white mb-4 animate-pulse" />
+                    <h3 className="text-white font-extrabold text-xl uppercase tracking-widest">Trigger SOS</h3>
+                    <p className="text-red-100 text-xs mt-2 text-center uppercase">Live Track & Alert</p>
+                </button>
 
-            <div className="flex justify-between items-center mb-6 border-b border-slate-200 pb-4">
-                <h2 className="text-2xl font-bold font-cursive tracking-widest">Recent Reports</h2>
-                <Link to="/report" className="text-sm bg-blue-600 text-white hover:bg-blue-700 hover:bg-blue-700 border border-blue-600 px-4 py-2 rounded-none transition-colors font-bold uppercase tracking-widest">
-                    + New Report
-                </Link>
-            </div>
+                {/* 2. Secret Record */}
+                <button onClick={toggleRecording} className={`${recording ? 'bg-green-500 animate-pulse' : 'bg-slate-800 hover:bg-slate-900'} transition-transform hover:scale-105 shadow-xl flex flex-col items-center justify-center p-8 border-4 border-white h-64`}>
+                    <Mic className={`w-16 h-16 ${recording ? 'text-white' : 'text-blue-400'} mb-4`} />
+                    <h3 className="text-white font-extrabold text-xl uppercase tracking-widest">
+                        {recording ? 'Recording...' : 'Secret Audio'}
+                    </h3>
+                    <p className="text-slate-300 text-xs mt-2 text-center uppercase">
+                        {recording ? 'Tap to Save to Vault' : 'One-Tap Mic Access'}
+                    </p>
+                </button>
 
-            {reports.length === 0 ? (
-                <div className="bg-white border border-slate-200 rounded-none p-12 text-center">
-                    <img 
-                        src="/images/first_image.jpg"
-                        alt="No reports" 
-                        className="w-32 h-32 object-cover mx-auto mb-6 opacity-80 "
-                        onError={(e) => { e.target.style.display = 'none'; }}
+                {/* 3. Quick Snap */}
+                <div className="relative bg-blue-600 hover:bg-blue-700 transition-transform hover:scale-105 shadow-xl flex flex-col items-center justify-center p-8 border-4 border-white h-64 cursor-pointer">
+                    <input 
+                        type="file" 
+                        accept="image/*" 
+                        capture="environment"
+                        onChange={handleFileChange}
+                        disabled={uploading}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                     />
-                    <h3 className="text-2xl font-bold text-slate-800 mb-2 font-cursive tracking-widest">No Reports Yet</h3>
-                    <p className="text-slate-800 max-w-sm mx-auto mb-6 text-sm uppercase tracking-widest">You haven't filed any reports. Your dashboard is clear.</p>
-                    <Link to="/report" className="inline-block bg-blue-600 text-white hover:bg-blue-700 hover:bg-blue-700 px-6 py-3 rounded-none font-extrabold uppercase tracking-widest border-2 border-blue-600 transition-colors">
-                        File a Report
-                    </Link>
+                    {uploading ? <Loader2 className="w-16 h-16 text-white mb-4 animate-spin" /> : <Camera className="w-16 h-16 text-white mb-4" />}
+                    <h3 className="text-white font-extrabold text-xl uppercase tracking-widest">
+                        {uploading ? 'Uploading...' : 'Quick Snap'}
+                    </h3>
+                    <p className="text-blue-200 text-xs mt-2 text-center uppercase">Direct Camera Upload</p>
                 </div>
-            ) : (
-                <div className="bg-white border border-gray-700 rounded-none overflow-hidden">
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-left text-sm text-slate-800">
-                            <thead className="text-xs text-slate-800 uppercase tracking-widest bg-[#ffffff]/90 border-b border-gray-700">
-                                <tr>
-                                    <th className="px-6 py-4">Date</th>
-                                    <th className="px-6 py-4">Platform</th>
-                                    <th className="px-6 py-4">Severity</th>
-                                    <th className="px-6 py-4">Status</th>
-                                    <th className="px-6 py-4 text-right">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {reports.map((report) => (
-                                    <tr key={report._id} className="border-t border-slate-200 hover:bg-[#ffffff]/90/50 transition-colors">
-                                        <td className="px-6 py-4 flex items-center gap-2 text-slate-800">
-                                            <Clock className="w-4 h-4 text-slate-800" />
-                                            {new Date(report.createdAt).toLocaleDateString()}
-                                        </td>
-                                        <td className="px-6 py-4 font-bold uppercase tracking-widest">{report.platform || 'General'}</td>
-                                        <td className="px-6 py-4">
-                                            <span className="px-3 py-1 rounded-none text-xs font-bold uppercase tracking-widest border border-gray-600 bg-gray-800 text-white">
-                                                {report.severity}
-                                            </span>
-                                        </td>
-                                        <td className="px-6 py-4 text-slate-800 uppercase tracking-widest text-xs font-bold">
-                                            {report.escalated ? <span className="text-blue-600">Escalated</span> : 'Under Review'}
-                                        </td>
-                                        <td className="px-6 py-4 text-right space-x-2">
-                                            <button 
-                                                onClick={() => generatePDF(report)}
-                                                className="text-xs bg-blue-600 text-white px-3 py-1.5 hover:bg-blue-700 transition-colors font-bold uppercase tracking-widest"
-                                            >
-                                                PDF
-                                            </button>
-                                            {!report.escalated && (
-                                                <button 
-                                                    onClick={() => handleEscalate(report._id)}
-                                                    className="text-xs bg-red-600 text-white px-3 py-1.5 hover:bg-red-700 transition-colors font-bold uppercase tracking-widest">Escalate
-                                                </button>
-                                            )}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+
+                {/* 4. Auto-FIR */}
+                <button onClick={generateMasterPDF} className="bg-slate-100 hover:bg-slate-200 border-2 border-slate-300 transition-transform hover:scale-105 shadow-xl flex flex-col items-center justify-center p-8 h-64 text-slate-800">
+                    <FileText className="w-16 h-16 text-blue-600 mb-4" />
+                    <h3 className="font-extrabold text-xl uppercase tracking-widest">Auto-FIR</h3>
+                    <p className="text-slate-600 text-xs mt-2 text-center uppercase font-bold">Compile Evidence PDF</p>
+                </button>
+
+            </div>
+
+            {/* Recent Evidence Log */}
+            <div className="border-t-2 border-slate-200 pt-8">
+                <h2 className="text-2xl font-bold font-cursive tracking-widest mb-6">Recent Evidence Logs</h2>
+                
+                {reports.length === 0 ? (
+                    <p className="text-slate-600 uppercase tracking-widest text-sm font-bold text-center py-8">Your evidence vault is secure and empty.</p>
+                ) : (
+                    <div className="space-y-4">
+                        {reports.map((report) => (
+                            <div key={report._id} className="bg-white border border-slate-200 p-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-blue-600 transition-colors">
+                                <div>
+                                    <p className="font-bold uppercase tracking-widest text-sm">{report.content}</p>
+                                    <p className="text-xs text-slate-500 font-mono mt-1">{new Date(report.createdAt).toLocaleString()}</p>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    {report.evidenceUrls && report.evidenceUrls.length > 0 ? (
+                                        <a 
+                                            href={report.evidenceUrls[0]} 
+                                            target="_blank" 
+                                            rel="noreferrer"
+                                            className="flex items-center gap-2 text-xs bg-blue-600 text-white px-4 py-2 uppercase tracking-widest font-bold hover:bg-blue-700"
+                                        >
+                                            <PlaySquare className="w-4 h-4" /> View Evidence
+                                        </a>
+                                    ) : (
+                                        <span className="text-xs text-slate-400 uppercase tracking-widest font-bold">Text Log Only</span>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 };
