@@ -34,7 +34,7 @@ const Register = () => {
                             <ShieldCheck className="w-10 h-10" />
                         </div>
                     </div>
-                    <h2 className="text-5xl font-cursive text-center mb-3 tracking-wide">Join SafeHer</h2>
+                    <h2 className="text-5xl font-cursive text-center mb-3 tracking-wide">Join Raksha</h2>
                     <p className="text-center text-slate-600 mb-10 font-sans tracking-widest uppercase text-xs">Your safety matters. Create a secure account.</p>
 
                     {error && (

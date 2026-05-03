@@ -101,9 +101,9 @@ const CyberLaw = () => {
                             
                             <ul className="list-decimal pl-5 space-y-3 text-slate-800 mb-8 text-sm">
                                 <li><strong>Do not delete chats.</strong> Screen record the scrolling conversation.</li>
-                                <li>Generate the <strong>Formal PDF Report</strong> from your SafeHer Evidence Vault to capture exact timestamps.</li>
+                                <li>Generate the <strong>Formal PDF Report</strong> from your Raksha Evidence Vault to capture exact timestamps.</li>
                                 <li>Use the portal below to officially register as a victim.</li>
-                                <li>Attach the SafeHer PDF directly into their evidence submission box.</li>
+                                <li>Attach the Raksha PDF directly into their evidence submission box.</li>
                             </ul>
                             
                             <a 
@@ -122,7 +122,7 @@ const CyberLaw = () => {
             <div className="mt-8 p-6 border border-slate-200 flex flex-col md:flex-row items-center md:items-start gap-4 bg-[#ffffff]/90 border-l-4 border-l-gray-500">
                 <FileWarning className="w-8 h-8 text-slate-800 shrink-0" />
                 <p className="text-sm text-slate-800 italic leading-relaxed">
-                    <strong>Disclaimer:</strong> The SafeHer Platform provides this centralized legal compilation for educational and empowerment purposes only. We are a technical support system, not a law firm. Always consult with a registered legal professional or directly approach your nearest Cyber Cell or Mahila Police Thana for official procedures.
+                    <strong>Disclaimer:</strong> The Raksha Platform provides this centralized legal compilation for educational and empowerment purposes only. We are a technical support system, not a law firm. Always consult with a registered legal professional or directly approach your nearest Cyber Cell or Mahila Police Thana for official procedures.
                 </p>
             </div>
         </div>

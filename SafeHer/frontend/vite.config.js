@@ -12,8 +12,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['logo.jpg'],
       manifest: {
-        name: 'SafeHer - Emergency Tracker',
-        short_name: 'SafeHer',
+        name: 'Raksha - Emergency Tracker',
+        short_name: 'Raksha',
         description: 'Women Safety and Legal Escalation Platform',
         theme_color: '#2563eb',
         background_color: '#ffffff',

@@ -19,10 +19,10 @@ const Navbar = () => {
                     <div className="flex items-center shrink-0">
                         <Link to="/" className="flex items-center gap-2.5 group">
                             <div className="p-0.5 bg-blue-600 rounded-full overflow-hidden transition-all group-hover:scale-105 border border-slate-200 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-                                <img src="/logo.jpg" alt="SafeHer Logo" className="w-9 h-9 object-cover rounded-full" />
+                                <img src="/logo.jpg" alt="Raksha Logo" className="w-9 h-9 object-cover rounded-full" />
                             </div>
                             <span className="font-cursive font-bold text-2xl tracking-wide text-slate-800 transition-colors">
-                                SafeHer
+                                Raksha
                             </span>
                         </Link>
                     </div>

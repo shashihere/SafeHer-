@@ -53,10 +53,10 @@ io.on("connection", (socket) => {
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB Connected to SafeHer Database'))
+  .then(() => console.log('MongoDB Connected to Raksha Database'))
   .catch((err) => console.log('MongoDB Connection Error:', err));
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
-    console.log(`SafeHer Backend running on port ${PORT}`);
+    console.log(`Raksha Backend running on port ${PORT}`);
 });

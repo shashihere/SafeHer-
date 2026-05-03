@@ -155,7 +155,7 @@ const Account = () => {
                                         <div>
                                             <label className="block text-xs font-bold text-slate-800 uppercase tracking-widest mb-2">Registered Name</label>
                                             <div className="w-full border border-slate-200 bg-white px-4 py-4 text-slate-800 font-sans text-lg cursor-not-allowed opacity-80 decoration-dashed underline underline-offset-8">
-                                                {user?.name || 'SafeHer User'}
+                                                {user?.name || 'Raksha User'}
                                             </div>
                                         </div>
                                         <div>
@@ -171,7 +171,7 @@ const Account = () => {
                                 <section className="bg-white border border-slate-200 p-8 md:p-12 hover:border-red-900 transition-colors duration-500">
                                     <h2 className="text-3xl font-cursive mb-4 tracking-wide text-slate-800 flex items-center gap-3"><ShieldAlert className="w-6 h-6 text-red-500"/> Danger Zone</h2>
                                     <p className="text-slate-600 text-sm mb-8 leading-relaxed">
-                                        Erasing your account will permanently delete your identity and wipe all securely stored evidence from the SafeHer vault. This action cannot be reversed.
+                                        Erasing your account will permanently delete your identity and wipe all securely stored evidence from the Raksha vault. This action cannot be reversed.
                                     </p>
                                     {showSuccess ? (
                                         <div className="flex items-center justify-center gap-3 bg-blue-600 text-white hover:bg-blue-700 p-4 uppercase tracking-widest text-xs font-bold animate-pulse">

@@ -13,7 +13,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'safeher_evidence',
+    folder: 'raksha_evidence',
     allowed_formats: ['jpg', 'jpeg', 'png', 'webp', 'pdf', 'mp4'],
   },
 });

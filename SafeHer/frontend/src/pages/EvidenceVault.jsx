@@ -32,7 +32,7 @@ const EvidenceVault = () => {
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(22);
         doc.setTextColor(220, 38, 38);
-        doc.text('SAFEHER CYBER REPORT', 20, 20);
+        doc.text('RAKSHA CYBER REPORT', 20, 20);
 
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(12);
@@ -54,10 +54,10 @@ const EvidenceVault = () => {
         doc.setFont('helvetica', 'italic');
         doc.setTextColor(150, 150, 150);
         doc.setFontSize(10);
-        doc.text('* This is an auto-generated formal report by the SafeHer Platform *', 20, 280);
+        doc.text('* This is an auto-generated formal report by the Raksha Platform *', 20, 280);
         doc.text('* Please attach any external image/video media alongside this document. *', 20, 285);
 
-        doc.save(`SafeHer_Report_${report._id.substring(0,6)}.pdf`);
+        doc.save(`Raksha_Report_${report._id.substring(0,6)}.pdf`);
     };
 
     return (

@@ -34,7 +34,7 @@ const Login = () => {
                         </div>
                     </div>
                     <h2 className="text-5xl font-cursive text-center mb-3 tracking-wide">Welcome Back</h2>
-                    <p className="text-center text-slate-600 mb-10 font-sans tracking-widest uppercase text-xs">Securely access your SafeHer account</p>
+                    <p className="text-center text-slate-600 mb-10 font-sans tracking-widest uppercase text-xs">Securely access your Raksha account</p>
 
                     {error && (
                         <div className="bg-transparent border-2 border-blue-600 px-4 py-3 mb-8 text-slate-800 uppercase tracking-widest text-xs font-bold text-center animate-pulse">

@@ -70,13 +70,13 @@ const escalateReport = async (req, res) => {
             `;
 
             await transporter.sendMail({
-                from: `"SafeHer Emergency Relay" <${process.env.EMAIL_USER}>`,
+                from: `"Raksha Emergency Relay" <${process.env.EMAIL_USER}>`,
                 to: process.env.ESCALATION_EMAIL || process.env.EMAIL_USER, // sends to self if separate escalation email isn't set
-                subject: `SAFEHER ALERT: High Severity Incident Escalation - ${report._id}`,
+                subject: `RAKSHA ALERT: High Severity Incident Escalation - ${report._id}`,
                 html: emailHTML,
             });
         } else {
-            console.warn('[SafeHer Demo] No EMAIL_USER found in .env. Mocking escalation success.');
+            console.warn('[Raksha Demo] No EMAIL_USER found in .env. Mocking escalation success.');
         }
 
         report.escalated = true;
