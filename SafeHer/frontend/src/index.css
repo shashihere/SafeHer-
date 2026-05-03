@@ -1,23 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #ffffff;
+  --color-primary-dark: #cccccc;
+  --color-secondary: #aaaaaa;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  --color-success: #10b981;
+  
+  --color-bg-dark: #000000;
+  --color-bg-card: #111111;
+}
+
 body {
-  background-color: #fcfcfc;
-  color: #1d1d1d;
+  background-color: #fdfdfd; /* Very subtle off-white */
+  color: #0f172a; /* Slate-900 */
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
-::selection {
-  background-color: #2563eb;
-  color: #ffffff;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
 }
 
-.soft-shadow {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+.font-cursive {
+  font-family: 'Outfit', sans-serif; /* Repurposed class to avoid rewriting all HTML classes */
 }
 
-.soft-shadow-lg {
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-dark); 
+}
+::-webkit-scrollbar-thumb {
+  background: #333333; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555555; 
 }

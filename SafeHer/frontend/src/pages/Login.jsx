@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
-import { ShieldCheck, Loader2, ArrowRight } from 'lucide-react';
+import { ShieldCheck, Loader2 } from 'lucide-react';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -24,59 +24,60 @@ const Login = () => {
     };
 
     return (
-        <div className="flex-grow flex items-center justify-center p-4 min-h-[calc(100vh-80px)] bg-[#fcfcfc]">
-            <div className="w-full max-w-md bg-white rounded-3xl p-8 md:p-10 soft-shadow-lg border border-gray-50">
+        <div className="flex-grow flex items-center justify-center p-4 min-h-[calc(100vh-80px)] relative overflow-hidden bg-[#fdfdfd]">
+            <div className="w-full max-w-lg bg-white border-8 border-black p-8 md:p-14 relative z-10 shadow-[12px_12px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[16px_16px_0px_rgba(0,0,0,1)] transition-all duration-300">
                 
-                <div className="flex justify-center mb-6">
-                    <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-2">
-                        <ShieldCheck className="w-8 h-8" />
+                <div className="relative z-10">
+                    <div className="flex justify-center mb-8">
+                        <div className="p-4 bg-yellow-400 border-4 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] inline-block -rotate-3 hover:rotate-0 transition-transform">
+                            <ShieldCheck className="w-12 h-12 text-black" />
+                        </div>
                     </div>
-                </div>
-                
-                <h2 className="text-3xl font-extrabold text-center mb-2 text-[#1d1d1d]">Welcome back</h2>
-                <p className="text-center text-gray-500 mb-8 font-medium">Log in to your secure vault</p>
+                    <h2 className="text-5xl font-black font-cursive text-center mb-2 tracking-tighter text-black uppercase">Welcome Back</h2>
+                    <p className="text-center text-slate-800 mb-10 font-sans tracking-widest uppercase text-xs font-bold bg-gray-100 py-2 border-y-2 border-black">Securely access your Action Center</p>
 
-                {error && (
-                    <div className="bg-rose-50 text-rose-600 px-4 py-3 rounded-2xl mb-6 font-medium text-sm text-center border border-rose-100">
-                        {error}
-                    </div>
-                )}
+                    {error && (
+                        <div className="bg-red-500 border-4 border-black text-black px-4 py-3 mb-8 uppercase tracking-widest text-sm font-black text-center shadow-[4px_4px_0px_rgba(0,0,0,1)]">
+                            {error}
+                        </div>
+                    )}
 
-                <form onSubmit={handleSubmit} className="space-y-5">
-                    <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2">Email address</label>
-                        <input 
-                            type="email" 
-                            className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3.5 text-[#1d1d1d] focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors placeholder:text-gray-400 font-medium"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            placeholder="name@example.com"
-                        />
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <div>
+                            <label className="block text-sm font-black text-black uppercase tracking-widest mb-2">Email Address</label>
+                            <input 
+                                type="email" 
+                                className="w-full bg-white border-4 border-black px-4 py-4 text-black focus:outline-none focus:bg-yellow-100 transition-colors placeholder:text-slate-400 font-bold shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                                placeholder="name@example.com"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-black text-black uppercase tracking-widest mb-2">Password</label>
+                            <input 
+                                type="password" 
+                                className="w-full bg-white border-4 border-black px-4 py-4 text-black focus:outline-none focus:bg-yellow-100 transition-colors placeholder:text-slate-400 font-bold shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                placeholder="••••••••"
+                            />
+                        </div>
+                        <div className="pt-6">
+                            <button disabled={loading} type="submit" className="w-full bg-blue-600 text-white font-black py-5 px-4 border-4 border-black shadow-[6px_6px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[10px_10px_0px_rgba(0,0,0,1)] hover:bg-blue-500 transition-all uppercase tracking-widest text-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                                {loading ? <Loader2 className="w-6 h-6 animate-spin text-white" /> : 'AUTHENTICATE'}
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div className="mt-10 pt-6 text-center border-t-4 border-black">
+                        <p className="text-black uppercase tracking-widest text-sm font-bold bg-yellow-400 inline-block px-4 py-2 border-2 border-black">
+                            Don't have an account? 
+                            <Link to="/register" className="ml-2 text-blue-700 hover:text-blue-900 transition-colors underline decoration-2 underline-offset-4">Sign up</Link>
+                        </p>
                     </div>
-                    <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2">Password</label>
-                        <input 
-                            type="password" 
-                            className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3.5 text-[#1d1d1d] focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-colors placeholder:text-gray-400 font-medium"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                            placeholder="••••••••"
-                        />
-                    </div>
-                    <div className="pt-2">
-                        <button disabled={loading} type="submit" className="w-full bg-blue-600 text-white font-bold py-4 px-4 rounded-2xl shadow-md hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-lg transition-all text-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
-                            {loading ? <Loader2 className="w-6 h-6 animate-spin text-white" /> : <>Log in <ArrowRight className="w-5 h-5"/></>}
-                        </button>
-                    </div>
-                </form>
-                
-                <div className="mt-8 text-center">
-                    <p className="text-gray-500 font-medium">
-                        Don't have an account? 
-                        <Link to="/register" className="ml-2 text-blue-600 hover:text-blue-700 font-bold hover:underline underline-offset-4 transition-all">Sign up</Link>
-                    </p>
                 </div>
             </div>
         </div>

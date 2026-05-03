@@ -1,103 +1,82 @@
 import { Link } from 'react-router-dom';
-import { ShieldAlert, Activity, Scale, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { ShieldAlert, Activity, Scale, ArrowRight, Star } from 'lucide-react';
 
 const Home = () => {
     return (
-        <div className="flex flex-col items-center bg-[#fcfcfc] min-h-screen text-[#1d1d1d] overflow-x-hidden">
-            
-            {/* Soft Startup Hero Section */}
-            <section className="w-full flex flex-col items-center justify-center py-20 md:py-32 px-4 relative overflow-hidden">
-                {/* Background decorative elements */}
-                <div className="absolute top-20 left-10 w-64 h-64 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
-                <div className="absolute top-40 right-10 w-64 h-64 bg-rose-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
-
-                <div className="max-w-4xl w-full text-center relative z-10">
-                    <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full font-bold text-sm mb-8">
-                        <ShieldCheck className="w-4 h-4" />
-                        <span>Your Private Safety Network</span>
+        <div className="flex flex-col items-center bg-transparent min-h-screen pt-12 md:pt-24">
+            {/* Brutalist Typographic Hero Section */}
+            <section className="w-full flex flex-col items-center justify-center pb-24 px-4">
+                
+                <div className="max-w-5xl w-full text-center mb-16">
+                    <div className="inline-block border-4 border-black bg-yellow-400 px-6 py-2 font-extrabold uppercase tracking-widest mb-8 shadow-[4px_4px_0px_rgba(0,0,0,1)] -rotate-2">
+                        NO MORE COMPROMISE
                     </div>
-                    
-                    <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-[#1b1b25] mb-6 leading-tight">
-                        Everyday safety, <br className="hidden md:block"/>
-                        <span className="text-blue-600">without compromise.</span>
+                    <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[120px] font-black font-cursive leading-tight uppercase tracking-tighter text-black mb-6">
+                        YOUR SAFETY.<br/>
+                        <span className="text-red-500 underline decoration-8 underline-offset-8">YOUR RULES.</span>
                     </h1>
-                    
-                    <p className="text-lg md:text-xl text-gray-500 font-medium max-w-2xl mx-auto mb-10 leading-relaxed">
-                        Create a private Bubble with your people. One-tap SOS, live location tracking, and secure evidence vault, built for everyday peace of mind.
+                    <p className="text-xl md:text-3xl font-bold uppercase tracking-widest text-slate-800 max-w-3xl mx-auto mt-12">
+                        The ultimate high-speed emergency response tool for women.
                     </p>
-                    
-                    <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-                        <Link to="/register" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 hover:shadow-lg hover:-translate-y-0.5 transition-all">
-                            Get the App <ArrowRight className="w-5 h-5" />
-                        </Link>
-                        <Link to="/dashboard" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white text-gray-700 px-8 py-4 rounded-full font-bold text-lg border border-gray-200 hover:bg-gray-50 transition-colors shadow-sm">
-                            Open Action Center
-                        </Link>
-                    </div>
+                </div>
+                
+                {/* Buttons Below */}
+                <div className="mt-4 flex gap-6 flex-col sm:flex-row w-full max-w-3xl px-4 z-20">
+                    <Link to="/dashboard" className="flex-1 flex items-center justify-center gap-3 bg-blue-600 text-white px-8 py-6 font-black border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:-translate-y-2 hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] hover:bg-blue-500 uppercase tracking-widest text-lg transition-all">
+                        OPEN ACTION CENTER <ArrowRight className="w-6 h-6" />
+                    </Link>
+                    <Link to="/premium" className="flex-1 flex items-center justify-center gap-3 bg-white text-black border-4 border-black px-8 py-6 font-black hover:-translate-y-2 shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] hover:bg-gray-100 uppercase tracking-widest text-lg transition-all">
+                        <Star className="w-6 h-6 text-yellow-500 fill-yellow-500" /> PREMIUM TRUST
+                    </Link>
                 </div>
             </section>
 
-            {/* Soft Features Section */}
-            <section className="w-full bg-white py-24 px-4 border-t border-gray-100">
-                <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-extrabold text-[#1d1d1d] mb-4">Safety in your hands</h2>
-                        <p className="text-gray-500 font-medium text-lg">Simple tools to protect, alert, and stay connected.</p>
+            {/* Features Section - Brutalist Style */}
+            <section className="w-full bg-black text-white border-y-8 border-black py-24 px-4">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-20">
+                        <h2 className="text-4xl sm:text-5xl md:text-7xl font-black mb-6 font-cursive tracking-tighter uppercase text-yellow-400">UNBREAKABLE SECURITY</h2>
+                        <p className="font-sans uppercase tracking-widest text-lg font-bold">Empowered Women Empower the World.</p>
                     </div>
-                    
                     <div className="grid md:grid-cols-3 gap-8">
                         <FeatureCard 
-                            icon={<Activity className="w-8 h-8 text-rose-500" />}
-                            title="Live SOS Radar"
-                            description="Instantly broadcast your live GPS location and alert your trusted contacts in a single tap."
-                            iconBg="bg-rose-50"
+                            icon={<Activity className="w-12 h-12 text-black" />}
+                            title="LIVE SOS RADAR"
+                            description="Instantly broadcast your live GPS location and alert your emergency contacts in a single tap."
+                            bgColor="bg-red-500"
                         />
                         <FeatureCard 
-                            icon={<ShieldAlert className="w-8 h-8 text-blue-600" />}
-                            title="Secret Evidence Vault"
-                            description="Record audio stealthily and upload photos directly to a secure, encrypted cloud."
-                            iconBg="bg-blue-50"
+                            icon={<ShieldAlert className="w-12 h-12 text-black" />}
+                            title="SECRET EVIDENCE"
+                            description="Record audio stealthily and upload photos directly to a secure, encrypted cloud vault that cannot be tampered with."
+                            bgColor="bg-blue-500"
                         />
                         <FeatureCard 
-                            icon={<Scale className="w-8 h-8 text-indigo-600" />}
-                            title="Auto-FIR Generation"
-                            description="Compile all your logged evidence into a professionally formatted PDF instantly."
-                            iconBg="bg-indigo-50"
+                            icon={<Scale className="w-12 h-12 text-black" />}
+                            title="AUTO-FIR GEN"
+                            description="Compile all your logged evidence into a professionally formatted PDF instantly for legal and police reporting."
+                            bgColor="bg-green-400"
                         />
                     </div>
                 </div>
             </section>
 
             {/* About Us Section */}
-            <section id="about" className="w-full bg-[#1b1b25] text-white py-24 px-4 relative overflow-hidden">
-                <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-                    <div>
-                        <h2 className="text-3xl md:text-5xl font-extrabold mb-6 leading-tight">Built for real life.<br/>Not surveillance.</h2>
-                        <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                            Raksha is built around real relationships. We give you a one-tap advantage against harassment without selling your data. No ads. No tracking without consent. Just pure, reliable safety when it matters most.
-                        </p>
-                        <ul className="space-y-4">
-                            <li className="flex items-center gap-3 text-gray-200 font-medium">
-                                <CheckCircle2 className="w-5 h-5 text-blue-400" /> Invite-only connections
-                            </li>
-                            <li className="flex items-center gap-3 text-gray-200 font-medium">
-                                <CheckCircle2 className="w-5 h-5 text-blue-400" /> Private Mode available
-                            </li>
-                            <li className="flex items-center gap-3 text-gray-200 font-medium">
-                                <CheckCircle2 className="w-5 h-5 text-blue-400" /> Delete your data anytime
-                            </li>
-                        </ul>
+            <section id="about" className="w-full bg-yellow-400 text-black border-b-8 border-black py-24 px-4 relative">
+                <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
+                    <div className="inline-block border-4 border-black bg-white px-6 py-2 font-black uppercase tracking-widest mb-8 shadow-[4px_4px_0px_rgba(0,0,0,1)] rotate-2">
+                        THE MISSION
                     </div>
-                    <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-rose-400 rounded-3xl opacity-20 blur-2xl"></div>
-                        <div className="bg-[#242430] p-8 md:p-12 rounded-3xl relative border border-white/10 soft-shadow-lg">
-                            <div className="flex gap-4 mb-8">
-                                 <div className="w-12 h-12 bg-rose-500 rounded-full shadow-lg flex items-center justify-center"><Activity className="w-6 h-6 text-white"/></div>
-                                 <div className="w-12 h-12 bg-blue-600 rounded-full shadow-lg flex items-center justify-center"><ShieldAlert className="w-6 h-6 text-white"/></div>
-                            </div>
-                            <h3 className="text-2xl font-bold mb-2">Your safety kit</h3>
-                            <p className="text-gray-400">Everything you need to secure your identity and protect your physical space in one clean application.</p>
-                        </div>
+                    <h2 className="text-4xl sm:text-5xl md:text-7xl font-black mb-10 font-cursive tracking-tighter uppercase">WHY WE BUILT RAKSHA</h2>
+                    <p className="text-lg sm:text-xl md:text-3xl font-bold leading-relaxed tracking-wide mb-12 border-4 border-black bg-white p-6 sm:p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)] text-left hover:-translate-y-2 transition-transform duration-300">
+                        Raksha is not just an application. It's a <strong className="text-red-600 underline decoration-4 underline-offset-4">reactionary weapon</strong> against digital and physical harassment. We noticed that traditional reporting takes too long, and evidence is easily deleted or manipulated by perpetrators. 
+                        <br/><br/>
+                        We built this platform to give you a <strong className="text-blue-600 uppercase">one-tap advantage</strong>. Instant live-tracking, a stealth evidence vault, and automated legal FIR generation. Your safety should never be a negotiation.
+                    </p>
+                    <div className="flex gap-4">
+                         <div className="w-12 h-12 bg-red-500 border-4 border-black rounded-full shadow-[4px_4px_0px_rgba(0,0,0,1)]"></div>
+                         <div className="w-12 h-12 bg-blue-500 border-4 border-black rounded-full shadow-[4px_4px_0px_rgba(0,0,0,1)]"></div>
+                         <div className="w-12 h-12 bg-green-400 border-4 border-black rounded-full shadow-[4px_4px_0px_rgba(0,0,0,1)]"></div>
                     </div>
                 </div>
             </section>
@@ -105,13 +84,13 @@ const Home = () => {
     );
 };
 
-const FeatureCard = ({ icon, title, description, iconBg }) => (
-    <div className="bg-white p-8 rounded-3xl soft-shadow hover:soft-shadow-lg transition-all duration-300 border border-gray-50 group">
-        <div className={`mb-6 w-16 h-16 rounded-2xl ${iconBg} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+const FeatureCard = ({ icon, title, description, bgColor }) => (
+    <div className={`p-8 ${bgColor} border-4 border-white shadow-[8px_8px_0px_rgba(255,255,255,1)] hover:-translate-y-2 hover:shadow-[12px_12px_0px_rgba(255,255,255,1)] transition-all group`}>
+        <div className="mb-8 p-4 inline-block bg-white border-4 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] group-hover:scale-110 transition-transform">
             {icon}
         </div>
-        <h3 className="text-xl font-bold mb-3 text-[#1d1d1d]">{title}</h3>
-        <p className="text-gray-500 leading-relaxed font-medium">{description}</p>
+        <h3 className="text-2xl sm:text-3xl font-cursive font-black mb-4 tracking-tighter text-black uppercase">{title}</h3>
+        <p className="text-black font-sans text-base sm:text-lg font-bold leading-relaxed tracking-wide">{description}</p>
     </div>
 );
 
