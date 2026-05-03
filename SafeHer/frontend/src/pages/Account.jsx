@@ -103,7 +103,7 @@ const Account = () => {
         <div className="bg-[#fdfdfd] min-h-[calc(100vh-80px)] text-black pt-12 pb-20 px-4">
             <div className="max-w-5xl mx-auto">
                 <div className="mb-12">
-                    <h1 className="text-6xl md:text-8xl font-cursive font-black mb-4 uppercase tracking-tighter">Your Hub</h1>
+                    <h1 className="text-5xl sm:text-6xl md:text-8xl font-cursive font-black mb-4 uppercase tracking-tighter">Your Hub</h1>
                     <p className="font-sans uppercase tracking-widest text-sm font-bold bg-yellow-400 inline-block px-4 py-2 border-4 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)]">
                         Manage your secure identity and privacy settings.
                     </p>
@@ -149,8 +149,8 @@ const Account = () => {
                         {/* Profile Section */}
                         {activeTab === 'profile' && (
                             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-300">
-                                <section className="bg-white border-4 border-black p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1">
-                                    <h2 className="text-4xl font-cursive font-black mb-8 tracking-tighter uppercase flex items-center gap-3"><User className="w-8 h-8 text-blue-600"/> IDENTITY</h2>
+                                <section className="bg-white border-4 border-black p-6 sm:p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1">
+                                    <h2 className="text-3xl sm:text-4xl font-cursive font-black mb-8 tracking-tighter uppercase flex items-center gap-3"><User className="w-8 h-8 text-blue-600"/> IDENTITY</h2>
                                     <div className="space-y-6">
                                         <div>
                                             <label className="block text-sm font-black uppercase tracking-widest mb-2">Registered Name</label>
@@ -168,8 +168,8 @@ const Account = () => {
                                 </section>
 
                                 {/* Danger Zone */}
-                                <section className="bg-red-500 border-4 border-black p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)]">
-                                    <h2 className="text-4xl font-cursive font-black mb-4 tracking-tighter text-black uppercase flex items-center gap-3"><ShieldAlert className="w-8 h-8 text-black"/> DANGER ZONE</h2>
+                                <section className="bg-red-500 border-4 border-black p-6 sm:p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)] mt-8">
+                                    <h2 className="text-3xl sm:text-4xl font-cursive font-black mb-4 tracking-tighter text-black uppercase flex items-center gap-3"><ShieldAlert className="w-8 h-8 text-black"/> DANGER ZONE</h2>
                                     <p className="text-black font-bold text-lg mb-8 leading-relaxed">
                                         Erasing your account will permanently delete your identity and wipe all securely stored evidence from the Raksha vault. This action cannot be reversed.
                                     </p>
@@ -194,8 +194,8 @@ const Account = () => {
                         {/* Security Section */}
                         {activeTab === 'security' && (
                             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-300">
-                                <section className="bg-white border-4 border-black p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1">
-                                    <h2 className="text-4xl font-cursive font-black mb-8 tracking-tighter uppercase flex items-center gap-3"><Lock className="w-8 h-8 text-green-600"/> PASSWORD</h2>
+                                <section className="bg-white border-4 border-black p-6 sm:p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1">
+                                    <h2 className="text-3xl sm:text-4xl font-cursive font-black mb-8 tracking-tighter uppercase flex items-center gap-3"><Lock className="w-8 h-8 text-green-600"/> PASSWORD</h2>
                                     
                                     <form onSubmit={handlePasswordUpdate} className="space-y-6">
                                         <div>
@@ -238,8 +238,8 @@ const Account = () => {
                         {/* Preferences Section */}
                         {activeTab === 'preferences' && (
                             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-300">
-                                <section className="bg-white border-4 border-black p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1">
-                                    <h2 className="text-4xl font-cursive font-black mb-8 tracking-tighter uppercase flex items-center gap-3"><Settings className="w-8 h-8 text-blue-600"/> PREFERENCES</h2>
+                                <section className="bg-white border-4 border-black p-6 sm:p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1">
+                                    <h2 className="text-3xl sm:text-4xl font-cursive font-black mb-8 tracking-tighter uppercase flex items-center gap-3"><Settings className="w-8 h-8 text-blue-600"/> PREFERENCES</h2>
                                     
                                     <div className="grid grid-cols-1 gap-8">
                                         

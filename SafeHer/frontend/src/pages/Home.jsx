@@ -11,7 +11,7 @@ const Home = () => {
                     <div className="inline-block border-4 border-black bg-yellow-400 px-6 py-2 font-extrabold uppercase tracking-widest mb-8 shadow-[4px_4px_0px_rgba(0,0,0,1)] -rotate-2">
                         NO MORE COMPROMISE
                     </div>
-                    <h1 className="text-6xl md:text-8xl lg:text-[120px] font-black font-cursive leading-none uppercase tracking-tighter text-black mb-6">
+                    <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[120px] font-black font-cursive leading-tight uppercase tracking-tighter text-black mb-6">
                         YOUR SAFETY.<br/>
                         <span className="text-red-500 underline decoration-8 underline-offset-8">YOUR RULES.</span>
                     </h1>
@@ -35,7 +35,7 @@ const Home = () => {
             <section className="w-full bg-black text-white border-y-8 border-black py-24 px-4">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-20">
-                        <h2 className="text-5xl md:text-7xl font-black mb-6 font-cursive tracking-tighter uppercase text-yellow-400">UNBREAKABLE SECURITY</h2>
+                        <h2 className="text-4xl sm:text-5xl md:text-7xl font-black mb-6 font-cursive tracking-tighter uppercase text-yellow-400">UNBREAKABLE SECURITY</h2>
                         <p className="font-sans uppercase tracking-widest text-lg font-bold">Empowered Women Empower the World.</p>
                     </div>
                     <div className="grid md:grid-cols-3 gap-8">
@@ -67,8 +67,8 @@ const Home = () => {
                     <div className="inline-block border-4 border-black bg-white px-6 py-2 font-black uppercase tracking-widest mb-8 shadow-[4px_4px_0px_rgba(0,0,0,1)] rotate-2">
                         THE MISSION
                     </div>
-                    <h2 className="text-5xl md:text-7xl font-black mb-10 font-cursive tracking-tighter uppercase">WHY WE BUILT RAKSHA</h2>
-                    <p className="text-xl md:text-3xl font-bold leading-relaxed tracking-wide mb-12 border-4 border-black bg-white p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)] text-left hover:-translate-y-2 transition-transform duration-300">
+                    <h2 className="text-4xl sm:text-5xl md:text-7xl font-black mb-10 font-cursive tracking-tighter uppercase">WHY WE BUILT RAKSHA</h2>
+                    <p className="text-lg sm:text-xl md:text-3xl font-bold leading-relaxed tracking-wide mb-12 border-4 border-black bg-white p-6 sm:p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)] text-left hover:-translate-y-2 transition-transform duration-300">
                         Raksha is not just an application. It's a <strong className="text-red-600 underline decoration-4 underline-offset-4">reactionary weapon</strong> against digital and physical harassment. We noticed that traditional reporting takes too long, and evidence is easily deleted or manipulated by perpetrators. 
                         <br/><br/>
                         We built this platform to give you a <strong className="text-blue-600 uppercase">one-tap advantage</strong>. Instant live-tracking, a stealth evidence vault, and automated legal FIR generation. Your safety should never be a negotiation.
@@ -89,8 +89,8 @@ const FeatureCard = ({ icon, title, description, bgColor }) => (
         <div className="mb-8 p-4 inline-block bg-white border-4 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] group-hover:scale-110 transition-transform">
             {icon}
         </div>
-        <h3 className="text-3xl font-cursive font-black mb-4 tracking-tighter text-black uppercase">{title}</h3>
-        <p className="text-black font-sans text-lg font-bold leading-relaxed tracking-wide">{description}</p>
+        <h3 className="text-2xl sm:text-3xl font-cursive font-black mb-4 tracking-tighter text-black uppercase">{title}</h3>
+        <p className="text-black font-sans text-base sm:text-lg font-bold leading-relaxed tracking-wide">{description}</p>
     </div>
 );
 

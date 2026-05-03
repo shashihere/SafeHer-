@@ -9,8 +9,8 @@ const CyberLaw = () => {
                         <Scale className="w-16 h-16 text-white" />
                     </div>
                     <div>
-                        <h1 className="text-6xl md:text-8xl font-cursive font-black tracking-tighter mb-6 uppercase">
-                            KNOW <span className="text-white bg-black px-4 py-1 border-4 border-black">YOUR RIGHTS</span>
+                        <h1 className="text-5xl sm:text-6xl md:text-8xl font-cursive font-black tracking-tighter mb-6 uppercase leading-tight">
+                            KNOW <span className="text-white bg-black px-4 py-1 border-4 border-black inline-block mt-2 sm:mt-0">YOUR RIGHTS</span>
                         </h1>
                         <p className="text-black font-bold tracking-widest text-xl max-w-3xl leading-relaxed uppercase bg-yellow-400 border-4 border-black p-4 shadow-[4px_4px_0px_rgba(0,0,0,1)]">
                             Understand the legal protections available under the Indian Information Technology Act, 2000 and the Indian Penal Code to fight online abuse.
@@ -22,9 +22,9 @@ const CyberLaw = () => {
             <div className="grid lg:grid-cols-3 gap-12">
                 {/* Left Column - The Laws */}
                 <div className="lg:col-span-2 space-y-12">
-                    <section className="bg-white border-8 border-black p-8 md:p-12 shadow-[12px_12px_0px_rgba(0,0,0,1)] relative">
+                    <section className="bg-white border-4 sm:border-8 border-black p-6 sm:p-8 md:p-12 shadow-[8px_8px_0px_rgba(0,0,0,1)] sm:shadow-[12px_12px_0px_rgba(0,0,0,1)] relative">
                         <div className="absolute top-0 left-0 w-full h-4 bg-black"></div>
-                        <h2 className="text-4xl font-black font-cursive mb-12 mt-4 flex items-center gap-4 border-b-4 border-black pb-6 uppercase">
+                        <h2 className="text-3xl sm:text-4xl font-black font-cursive mb-8 sm:mb-12 mt-4 flex items-center gap-4 border-b-4 border-black pb-6 uppercase">
                             <BookOpen className="w-10 h-10 text-blue-600" />
                             CRUCIAL LEGAL SECTIONS
                         </h2>
@@ -66,8 +66,8 @@ const CyberLaw = () => {
 
                 {/* Right Column - Actions & Rights */}
                 <div className="space-y-12">
-                    <section className="bg-yellow-300 border-8 border-black p-8 shadow-[8px_8px_0px_rgba(0,0,0,1)]">
-                        <h2 className="text-3xl font-black font-cursive mb-8 flex items-center gap-3 uppercase tracking-tighter">
+                    <section className="bg-yellow-300 border-4 sm:border-8 border-black p-6 sm:p-8 shadow-[8px_8px_0px_rgba(0,0,0,1)]">
+                        <h2 className="text-2xl sm:text-3xl font-black font-cursive mb-8 flex items-center gap-3 uppercase tracking-tighter">
                             <ScrollText className="w-8 h-8 text-black" />
                             IMMUTABLE RIGHTS
                         </h2>
@@ -87,12 +87,12 @@ const CyberLaw = () => {
                         </ul>
                     </section>
 
-                    <section className="bg-red-500 border-8 border-black p-8 shadow-[8px_8px_0px_rgba(0,0,0,1)] relative overflow-hidden group hover:bg-red-600 transition-colors">
+                    <section className="bg-red-500 border-4 sm:border-8 border-black p-6 sm:p-8 shadow-[8px_8px_0px_rgba(0,0,0,1)] relative overflow-hidden group hover:bg-red-600 transition-colors">
                         <div className="absolute top-0 right-0 p-8 opacity-20 text-black group-hover:scale-110 transition-transform duration-500">
                             <ShieldAlert className="w-40 h-40" />
                         </div>
                         <div className="relative z-10">
-                            <h2 className="text-4xl font-black font-cursive mb-2 text-white uppercase tracking-tighter">HOW TO FILE AN FIR</h2>
+                            <h2 className="text-3xl sm:text-4xl font-black font-cursive mb-2 text-white uppercase tracking-tighter">HOW TO FILE AN FIR</h2>
                             <p className="text-sm text-black mb-8 font-black uppercase tracking-widest bg-white inline-block px-3 py-1 border-2 border-black">Take immediate action.</p>
                             
                             <ul className="list-decimal pl-5 space-y-4 text-white mb-10 text-base font-bold bg-black p-6 border-4 border-white">

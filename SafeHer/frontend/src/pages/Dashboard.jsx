@@ -198,7 +198,7 @@ const Dashboard = () => {
                 <div className="inline-block bg-black text-white px-6 py-2 font-extrabold uppercase tracking-widest mb-6 -rotate-1 shadow-[4px_4px_0px_rgba(255,0,0,1)]">
                     CRITICAL OPERATIONS
                 </div>
-                <h1 className="text-6xl md:text-8xl font-cursive font-black text-black tracking-tighter mb-4 uppercase">Action Center</h1>
+                <h1 className="text-5xl sm:text-6xl md:text-8xl font-cursive font-black text-black tracking-tighter mb-4 uppercase">Action Center</h1>
                 <p className="text-black uppercase tracking-widest text-lg font-bold">One-Tap Emergency Responses & Evidence Collection</p>
             </header>
 
@@ -206,25 +206,25 @@ const Dashboard = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
                 
                 {/* 1. SOS */}
-                <button onClick={handleSOS} className="group bg-red-500 border-8 border-black hover:-translate-y-2 hover:-translate-x-2 transition-all shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[16px_16px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center p-12 h-80 relative overflow-hidden">
-                    <AlertOctagon className="w-24 h-24 text-black mb-6 group-hover:scale-110 transition-transform" />
-                    <h3 className="text-black font-black text-4xl uppercase tracking-tighter">Trigger SOS</h3>
-                    <p className="text-black font-bold text-lg mt-4 text-center uppercase tracking-widest bg-white border-4 border-black px-4 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">Live Track & Alert</p>
+                <button onClick={handleSOS} className="group bg-red-500 border-8 border-black hover:-translate-y-2 hover:-translate-x-2 transition-all shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[16px_16px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center p-8 sm:p-12 h-64 sm:h-80 relative overflow-hidden">
+                    <AlertOctagon className="w-16 h-16 sm:w-24 sm:h-24 text-black mb-4 sm:mb-6 group-hover:scale-110 transition-transform" />
+                    <h3 className="text-black font-black text-3xl sm:text-4xl uppercase tracking-tighter">Trigger SOS</h3>
+                    <p className="text-black font-bold text-sm sm:text-lg mt-2 sm:mt-4 text-center uppercase tracking-widest bg-white border-4 border-black px-4 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">Live Track & Alert</p>
                 </button>
 
                 {/* 2. Secret Record */}
-                <button onClick={toggleRecording} className={`group ${recording ? 'bg-green-400' : 'bg-yellow-400'} border-8 border-black hover:-translate-y-2 hover:-translate-x-2 transition-all shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[16px_16px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center p-12 h-80 relative overflow-hidden`}>
-                    <Mic className={`w-24 h-24 text-black mb-6 ${recording ? 'animate-pulse' : 'group-hover:scale-110 transition-transform'}`} />
-                    <h3 className="text-black font-black text-4xl uppercase tracking-tighter">
+                <button onClick={toggleRecording} className={`group ${recording ? 'bg-green-400' : 'bg-yellow-400'} border-8 border-black hover:-translate-y-2 hover:-translate-x-2 transition-all shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[16px_16px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center p-8 sm:p-12 h-64 sm:h-80 relative overflow-hidden`}>
+                    <Mic className={`w-16 h-16 sm:w-24 sm:h-24 text-black mb-4 sm:mb-6 ${recording ? 'animate-pulse' : 'group-hover:scale-110 transition-transform'}`} />
+                    <h3 className="text-black font-black text-3xl sm:text-4xl uppercase tracking-tighter">
                         {recording ? 'RECORDING...' : 'SECRET AUDIO'}
                     </h3>
-                    <p className="text-black font-bold text-lg mt-4 text-center uppercase tracking-widest bg-white border-4 border-black px-4 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">
+                    <p className="text-black font-bold text-sm sm:text-lg mt-2 sm:mt-4 text-center uppercase tracking-widest bg-white border-4 border-black px-4 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">
                         {recording ? 'TAP TO SAVE TO VAULT' : 'ONE-TAP MIC ACCESS'}
                     </p>
                 </button>
 
                 {/* 3. Quick Snap */}
-                <div className="relative group bg-blue-500 border-8 border-black hover:-translate-y-2 hover:-translate-x-2 transition-all shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[16px_16px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center p-12 h-80 cursor-pointer overflow-hidden">
+                <div className="relative group bg-blue-500 border-8 border-black hover:-translate-y-2 hover:-translate-x-2 transition-all shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[16px_16px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center p-8 sm:p-12 h-64 sm:h-80 cursor-pointer overflow-hidden">
                     <input 
                         type="file" 
                         accept="image/*" 
@@ -233,18 +233,18 @@ const Dashboard = () => {
                         disabled={uploading}
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20"
                     />
-                    {uploading ? <Loader2 className="w-24 h-24 text-black mb-6 animate-spin" /> : <Camera className="w-24 h-24 text-black mb-6 group-hover:scale-110 transition-transform" />}
-                    <h3 className="text-black font-black text-4xl uppercase tracking-tighter">
+                    {uploading ? <Loader2 className="w-16 h-16 sm:w-24 sm:h-24 text-black mb-4 sm:mb-6 animate-spin" /> : <Camera className="w-16 h-16 sm:w-24 sm:h-24 text-black mb-4 sm:mb-6 group-hover:scale-110 transition-transform" />}
+                    <h3 className="text-black font-black text-3xl sm:text-4xl uppercase tracking-tighter">
                         {uploading ? 'UPLOADING...' : 'QUICK SNAP'}
                     </h3>
-                    <p className="text-black font-bold text-lg mt-4 text-center uppercase tracking-widest bg-white border-4 border-black px-4 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">DIRECT CAMERA UPLOAD</p>
+                    <p className="text-black font-bold text-sm sm:text-lg mt-2 sm:mt-4 text-center uppercase tracking-widest bg-white border-4 border-black px-4 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">DIRECT CAMERA UPLOAD</p>
                 </div>
 
                 {/* 4. Auto-FIR */}
-                <button onClick={generateMasterPDF} className="group bg-purple-400 border-8 border-black hover:-translate-y-2 hover:-translate-x-2 transition-all shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[16px_16px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center p-12 h-80 relative overflow-hidden">
-                    <FileText className="w-24 h-24 text-black mb-6 group-hover:-translate-y-2 transition-transform" />
-                    <h3 className="text-black font-black text-4xl uppercase tracking-tighter">AUTO-FIR</h3>
-                    <p className="text-black font-bold text-lg mt-4 text-center uppercase tracking-widest bg-white border-4 border-black px-4 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">COMPILE EVIDENCE PDF</p>
+                <button onClick={generateMasterPDF} className="group bg-purple-400 border-8 border-black hover:-translate-y-2 hover:-translate-x-2 transition-all shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:shadow-[16px_16px_0px_rgba(0,0,0,1)] flex flex-col items-center justify-center p-8 sm:p-12 h-64 sm:h-80 relative overflow-hidden">
+                    <FileText className="w-16 h-16 sm:w-24 sm:h-24 text-black mb-4 sm:mb-6 group-hover:-translate-y-2 transition-transform" />
+                    <h3 className="text-black font-black text-3xl sm:text-4xl uppercase tracking-tighter">AUTO-FIR</h3>
+                    <p className="text-black font-bold text-sm sm:text-lg mt-2 sm:mt-4 text-center uppercase tracking-widest bg-white border-4 border-black px-4 py-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">COMPILE EVIDENCE PDF</p>
                 </button>
 
             </div>
