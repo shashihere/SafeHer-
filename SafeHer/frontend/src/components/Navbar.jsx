@@ -21,7 +21,7 @@ const Navbar = () => {
                     <div className="flex items-center">
                         <Link to="/" className="flex items-center gap-3 group">
                             <div className="p-1 border-2 border-black rounded-full bg-yellow-300 group-hover:bg-blue-400 transition-colors shadow-[4px_4px_0px_rgba(0,0,0,1)]">
-                                <img src="/logo.png" alt="Raksha Logo" className="w-9 h-9 object-cover rounded-full border-2 border-black" />
+                                <img src="/logo.jpg" alt="Raksha Logo" className="w-9 h-9 object-cover rounded-full border-2 border-black" />
                             </div>
                             <span className="font-extrabold text-3xl tracking-widest uppercase font-cursive text-black">
                                 Raksha

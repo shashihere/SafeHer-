@@ -80,6 +80,33 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Safety Without Surveillance Section (Inspired by I'm Safe) */}
+            <section className="w-full bg-white text-black py-24 px-4 border-b-8 border-black">
+                <div className="max-w-5xl mx-auto text-center">
+                    <h2 className="text-4xl sm:text-5xl md:text-7xl font-black mb-8 font-cursive tracking-tighter uppercase">SAFETY, WITHOUT SURVEILLANCE</h2>
+                    <p className="text-xl md:text-2xl font-bold uppercase tracking-widest text-slate-600 mb-16">Built for your protection, not for your data.</p>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                        <div className="bg-gray-100 border-4 border-black p-6 shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform">
+                            <h3 className="font-black text-2xl uppercase mb-2">NO ADS</h3>
+                            <p className="font-bold text-sm text-slate-700 uppercase">Your safety is not a billboard.</p>
+                        </div>
+                        <div className="bg-gray-100 border-4 border-black p-6 shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform">
+                            <h3 className="font-black text-2xl uppercase mb-2">NO TRACKING</h3>
+                            <p className="font-bold text-sm text-slate-700 uppercase">We don't sell your location.</p>
+                        </div>
+                        <div className="bg-gray-100 border-4 border-black p-6 shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform">
+                            <h3 className="font-black text-2xl uppercase mb-2">PRIVATE VAULT</h3>
+                            <p className="font-bold text-sm text-slate-700 uppercase">Only you control your evidence.</p>
+                        </div>
+                        <div className="bg-gray-100 border-4 border-black p-6 shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform">
+                            <h3 className="font-black text-2xl uppercase mb-2">TOTAL ERASURE</h3>
+                            <p className="font-bold text-sm text-slate-700 uppercase">Delete your data anytime.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 };
