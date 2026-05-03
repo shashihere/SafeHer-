@@ -104,7 +104,8 @@ const Dashboard = () => {
             await axios.post(`${API_URL}/api/reports`, formData, config);
             await fetchReports(); // refresh timeline
         } catch (error) {
-            alert("Failed to securely upload evidence.");
+            console.error("Upload error details:", error.response || error);
+            alert(`Upload failed: ${error.response?.data?.message || error.message || "Unknown error"}`);
         } finally {
             setUploading(false);
         }
