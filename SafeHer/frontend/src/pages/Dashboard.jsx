@@ -215,39 +215,6 @@ const Dashboard = () => {
 
             </div>
 
-            {/* Recent Evidence Log */}
-            <div className="border-t-2 border-slate-200 pt-8">
-                <h2 className="text-2xl font-bold font-cursive tracking-widest mb-6">Recent Evidence Logs</h2>
-                
-                {reports.length === 0 ? (
-                    <p className="text-slate-600 uppercase tracking-widest text-sm font-bold text-center py-8">Your evidence vault is secure and empty.</p>
-                ) : (
-                    <div className="space-y-4">
-                        {reports.map((report) => (
-                            <div key={report._id} className="bg-white border border-slate-200 p-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-blue-600 transition-colors">
-                                <div>
-                                    <p className="font-bold uppercase tracking-widest text-sm">{report.content}</p>
-                                    <p className="text-xs text-slate-500 font-mono mt-1">{new Date(report.createdAt).toLocaleString()}</p>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    {report.evidenceUrls && report.evidenceUrls.length > 0 ? (
-                                        <a 
-                                            href={report.evidenceUrls[0]} 
-                                            target="_blank" 
-                                            rel="noreferrer"
-                                            className="flex items-center gap-2 text-xs bg-blue-600 text-white px-4 py-2 uppercase tracking-widest font-bold hover:bg-blue-700"
-                                        >
-                                            <PlaySquare className="w-4 h-4" /> View Evidence
-                                        </a>
-                                    ) : (
-                                        <span className="text-xs text-slate-400 uppercase tracking-widest font-bold">Text Log Only</span>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
         </div>
     );
 };
