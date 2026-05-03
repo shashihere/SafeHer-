@@ -39,6 +39,9 @@ const Navbar = () => {
                                     <Link to="/laws" className="text-black hover:text-green-600 hover:-translate-y-1 transition-transform flex items-center gap-1.5" title="Cyber Laws">
                                         <Scale className="w-5 h-5" /> <span className="hidden xl:inline uppercase tracking-widest border-b-2 border-transparent hover:border-black">Laws</span>
                                     </Link>
+                                    <a href="/#about" className="text-black hover:text-yellow-600 hover:-translate-y-1 transition-transform flex items-center gap-1.5" title="About Us">
+                                        <span className="uppercase tracking-widest border-b-2 border-transparent hover:border-black">About</span>
+                                    </a>
                                     <Link to="/track" className="bg-red-500 text-black border-2 border-black px-4 py-1.5 hover:-translate-y-1 hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-all flex items-center gap-1.5" title="Live Tracker">
                                         <Activity className="w-4 h-4 animate-pulse" /> <span className="hidden xl:inline uppercase tracking-widest">Tracker</span>
                                     </Link>
@@ -51,6 +54,7 @@ const Navbar = () => {
                             </>
                         ) : (
                             <div className="hidden md:flex items-center gap-4">
+                                <a href="/#about" className="text-black font-extrabold uppercase tracking-widest text-sm hover:underline decoration-2 underline-offset-4 transition-all">About</a>
                                 <Link to="/login" className="text-black font-extrabold uppercase tracking-widest text-sm hover:underline decoration-2 underline-offset-4 transition-all">Log In</Link>
                                 <Link to="/register" className="bg-yellow-400 text-black border-2 border-black px-6 py-2.5 font-extrabold uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-all">Create Account</Link>
                             </div>
@@ -76,6 +80,9 @@ const Navbar = () => {
                                 <Link to="/laws" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-black hover:pl-4 transition-all uppercase tracking-widest border-b-2 border-black pb-4">
                                     <Scale className="w-5 h-5" /> Laws
                                 </Link>
+                                <a href="/#about" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-yellow-600 hover:pl-4 transition-all uppercase tracking-widest border-b-2 border-black pb-4">
+                                    About Us
+                                </a>
                                 <Link to="/track" onClick={() => setIsOpen(false)} className="flex items-center gap-3 text-red-600 hover:pl-4 transition-all uppercase tracking-widest border-b-2 border-black pb-4">
                                     <Activity className="w-5 h-5 animate-pulse" /> Tracker
                                 </Link>
@@ -88,6 +95,7 @@ const Navbar = () => {
                             </>
                         ) : (
                             <div className="flex flex-col gap-4 pt-4">
+                                <a href="/#about" onClick={() => setIsOpen(false)} className="text-center bg-white text-black border-2 border-black py-4 font-extrabold uppercase tracking-widest hover:bg-gray-100 transition-colors">About Us</a>
                                 <Link to="/login" onClick={() => setIsOpen(false)} className="text-center bg-white text-black border-2 border-black py-4 font-extrabold uppercase tracking-widest hover:bg-gray-100 transition-colors">Log In</Link>
                                 <Link to="/register" onClick={() => setIsOpen(false)} className="text-center bg-yellow-400 text-black border-2 border-black py-4 font-extrabold uppercase tracking-widest shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all">Create Account</Link>
                             </div>

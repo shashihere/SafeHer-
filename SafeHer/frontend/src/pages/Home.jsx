@@ -62,7 +62,7 @@ const Home = () => {
             </section>
 
             {/* About Us Section */}
-            <section className="w-full bg-yellow-400 text-black border-b-8 border-black py-24 px-4 relative">
+            <section id="about" className="w-full bg-yellow-400 text-black border-b-8 border-black py-24 px-4 relative">
                 <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
                     <div className="inline-block border-4 border-black bg-white px-6 py-2 font-black uppercase tracking-widest mb-8 shadow-[4px_4px_0px_rgba(0,0,0,1)] rotate-2">
                         THE MISSION
