@@ -101,7 +101,13 @@ const SOSWidget = () => {
         
         const trackingLink = `${appDomain}/track/${user._id}`;
         const message = `🚨 EMERGENCY SOS 🚨\nI am in danger and need help immediately! Track my LIVE moving location here:\n${trackingLink}`;
-        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+        
+        let targetPhone = "";
+        if (user && user.emergencyContact) {
+            targetPhone = user.emergencyContact.replace(/\D/g, ''); // Extract only digits
+        }
+        
+        const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`;
         
         window.open(whatsappUrl, '_blank');
         alert(`EMERGENCY SOS ACTIVATED.\n\nLive tracking link generated: ${trackingLink}\n\nPlease send the auto-generated WhatsApp message to your emergency contacts.`);

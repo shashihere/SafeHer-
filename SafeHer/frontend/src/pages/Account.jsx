@@ -19,6 +19,8 @@ const Account = () => {
 
     // Preference Update States
     const [filterUpdating, setFilterUpdating] = useState(false);
+    const [emergencyContact, setEmergencyContact] = useState(user?.emergencyContact || '');
+    const [contactUpdating, setContactUpdating] = useState(false);
 
     // Delete Account States
     const [isDeleting, setIsDeleting] = useState(false);
@@ -76,6 +78,24 @@ const Account = () => {
             alert('Could not update AI preferences.');
         } finally {
             setFilterUpdating(false);
+        }
+    };
+
+    const handleContactUpdate = async (e) => {
+        e.preventDefault();
+        setContactUpdating(true);
+        try {
+            const { data } = await axios.put(`${API_URL}/api/auth/preferences`, 
+                { emergencyContact },
+                { headers: { Authorization: `Bearer ${user.token}` } }
+            );
+            setUser(data);
+            localStorage.setItem('user', JSON.stringify(data));
+            alert('Emergency Contact updated successfully.');
+        } catch (error) {
+            alert('Could not update emergency contact.');
+        } finally {
+            setContactUpdating(false);
         }
     };
 
@@ -238,6 +258,29 @@ const Account = () => {
                                                     <div className={`w-4 h-4 rounded-full transition-transform ${user?.strictAIFilter ? 'bg-white translate-x-6' : 'bg-gray-400'}`}></div>
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        <div className="border border-slate-200 p-6 mt-4">
+                                            <h3 className="font-bold text-lg mb-2">Primary Emergency Contact</h3>
+                                            <p className="text-sm text-slate-600 mb-4">
+                                                Enter the phone number (with country code, e.g., 919876543210) of your most trusted contact. SOS messages will route directly to them via WhatsApp.
+                                            </p>
+                                            <form onSubmit={handleContactUpdate} className="flex flex-col sm:flex-row gap-4">
+                                                <input 
+                                                    type="text" 
+                                                    placeholder="e.g. 919876543210"
+                                                    value={emergencyContact}
+                                                    onChange={(e) => setEmergencyContact(e.target.value)}
+                                                    className="flex-grow border border-slate-300 px-4 py-3 focus:outline-none focus:border-blue-600 font-mono"
+                                                />
+                                                <button 
+                                                    type="submit" 
+                                                    disabled={contactUpdating}
+                                                    className="bg-blue-600 text-white font-bold uppercase tracking-widest text-xs px-6 py-3 hover:bg-blue-700 transition-colors disabled:opacity-50 whitespace-nowrap"
+                                                >
+                                                    {contactUpdating ? 'Saving...' : 'Save Contact'}
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                     <p className="text-xs text-slate-600 mt-6 mt-4 italic">

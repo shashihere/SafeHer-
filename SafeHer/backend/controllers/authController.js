@@ -34,7 +34,7 @@ const loginUser = async (req, res) => {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
         if (user && (await bcrypt.compare(password, user.password))) {
-            res.json({ _id: user.id, name: user.name, email: user.email, strictAIFilter: user.strictAIFilter, token: generateToken(user._id) });
+            res.json({ _id: user.id, name: user.name, email: user.email, strictAIFilter: user.strictAIFilter, emergencyContact: user.emergencyContact, token: generateToken(user._id) });
         } else {
             res.status(400).json({ message: 'Invalid credentials' });
         }
@@ -64,11 +64,12 @@ const updatePassword = async (req, res) => {
 const updatePreferences = async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
-        const { strictAIFilter } = req.body;
+        const { strictAIFilter, emergencyContact } = req.body;
         if (user) {
-            user.strictAIFilter = strictAIFilter;
+            if (strictAIFilter !== undefined) user.strictAIFilter = strictAIFilter;
+            if (emergencyContact !== undefined) user.emergencyContact = emergencyContact;
             await user.save();
-            res.json({ _id: user.id, name: user.name, email: user.email, strictAIFilter: user.strictAIFilter, token: generateToken(user._id) });
+            res.json({ _id: user.id, name: user.name, email: user.email, strictAIFilter: user.strictAIFilter, emergencyContact: user.emergencyContact, token: generateToken(user._id) });
         } else {
             res.status(404).json({ message: 'User not found' });
         }
