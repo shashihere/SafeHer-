@@ -1,21 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  body {
-    @apply bg-[#fcfcfc] text-[#1d1d1d] font-sans antialiased selection:bg-blue-600 selection:text-white;
-  }
+body {
+  background-color: #fcfcfc;
+  color: #1d1d1d;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@layer utilities {
-  .soft-shadow {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  }
-  
-  .soft-shadow-lg {
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-  }
+::selection {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.soft-shadow {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.soft-shadow-lg {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
 }
